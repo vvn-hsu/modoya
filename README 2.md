@@ -1,2 +1,0 @@
-# modoya
-Modoya is a research project exploring a furniture rental platform for people seeking short-term access to furniture. It addresses the high upfront costs, logistical hassles, and disposal issues of traditional ownership, while focusing on users’ needs for style, convenience, and flexibility.
