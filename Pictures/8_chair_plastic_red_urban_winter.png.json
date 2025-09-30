@@ -1,0 +1,13 @@
+{
+  "row_id": 8,
+  "category": "Chair",
+  "material": "Plastic",
+  "color": "Red",
+  "location": "Urban",
+  "season": "Winter",
+  "prompt": "A Red Plastic Chair, photorealistic, featuring sleek contemporary finish with matte metal or concrete-inspired details on the furniture, cool desaturated tones and plush fabrics on seating surfaces, product-style photo on a clean white background, studio lighting, high detail, high resolution.",
+  "size": "1024x1024",
+  "model": "gpt-image-1",
+  "file": "Pictures\\8_chair_plastic_red_urban_winter.png",
+  "estimated_cost_usd": 0.02
+}
