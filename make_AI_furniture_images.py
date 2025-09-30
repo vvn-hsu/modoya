@@ -185,4 +185,5 @@ if __name__ == "__main__":
         # insert image path into img column of dataframe
         df.at[idx, 'img'] = os.path.basename(image_path)
         # save updated dataframe 
-        df.to_csv("furniture_table_with_images.csv", index=False)   
+        df.to_csv("furniture_table_with_images.csv", index=False) 
+        break # test one row only
