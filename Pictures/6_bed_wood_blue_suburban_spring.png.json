@@ -1,0 +1,13 @@
+{
+  "row_id": 6,
+  "category": "Bed",
+  "material": "Wood",
+  "color": "Blue",
+  "location": "Suburban",
+  "season": "Spring",
+  "prompt": "A Blue Wood Bed, photorealistic, featuring classic home-style finish with soft upholstery and comfortable proportions, light, fresh color palette and lightweight fabrics applied to the furniture, product-style photo on a clean white background, studio lighting, high detail, high resolution.",
+  "size": "1024x1024",
+  "model": "gpt-image-1",
+  "file": "Pictures\\6_bed_wood_blue_suburban_spring.png",
+  "estimated_cost_usd": 0.02
+}

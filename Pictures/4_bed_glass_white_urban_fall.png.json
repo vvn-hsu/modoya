@@ -1,0 +1,13 @@
+{
+  "row_id": 4,
+  "category": "Bed",
+  "material": "Glass",
+  "color": "White",
+  "location": "Urban",
+  "season": "Fall",
+  "prompt": "A White Glass Bed, photorealistic, featuring sleek contemporary finish with matte metal or concrete-inspired details on the furniture, warm, muted tones and textured upholstery on the furniture, product-style photo on a clean white background, studio lighting, high detail, high resolution.",
+  "size": "1024x1024",
+  "model": "gpt-image-1",
+  "file": "Pictures\\4_bed_glass_white_urban_fall.png",
+  "estimated_cost_usd": 0.02
+}

@@ -1,0 +1,13 @@
+{
+  "row_id": 5,
+  "category": "Chair",
+  "material": "Metal",
+  "color": "Green",
+  "location": "Urban",
+  "season": "Spring",
+  "prompt": "A Green Metal Chair, photorealistic, featuring sleek contemporary finish with matte metal or concrete-inspired details on the furniture, light, fresh color palette and lightweight fabrics applied to the furniture, product-style photo on a clean white background, studio lighting, high detail, high resolution.",
+  "size": "1024x1024",
+  "model": "gpt-image-1",
+  "file": "Pictures\\5_chair_metal_green_urban_spring.png",
+  "estimated_cost_usd": 0.02
+}
