@@ -2,6 +2,7 @@ import os
 import base64
 import json
 import re
+import pandas as pd
 from keys import OpenAI_key
 from openai import OpenAI
 
@@ -41,9 +42,9 @@ def estimate_image_cost(model, size, n=1, price_map=None):
 ALLOWED_LOCATIONS = {"rural", "urban", "suburban"}
 ALLOWED_SEASONS = {"spring", "summer", "autumn", "winter"}  # accept 'fall' -> 'autumn'
 
-def prompt_from_params(category, material, color,
-                       location=None, season=None,
-                       style="photorealistic"):
+def prompt_from_params(category, material, color, series=None, style=None,
+                       location=None, season=None):
+    #(category, material, color, location=None, season=None, style="photorealistic")
     """
     Build a prompt that includes optional location and season to influence the
     furniture's appearance only (no props, staging, or background elements).
@@ -78,13 +79,16 @@ def prompt_from_params(category, material, color,
             sea_phrase = "warm, muted tones and textured upholstery on the furniture"
         elif sea_norm == "winter":
             sea_phrase = "cool desaturated tones and plush fabrics on seating surfaces"
+    
+    full_category = f"{series} {category}" if series and pd.notna(series) else category
+    final_style = style if style and pd.notna(style) else "photorealistic"
 
     extras = ", ".join([p for p in (loc_phrase, sea_phrase) if p])
     extras_part = f", featuring {extras}" if extras else ""
     return (
         #f"A {color} {material} {category}, {style}{extras_part}, product-style photo on a clean white background, "
         #"studio lighting, high detail, high resolution."
-        f"A {color} {material} {category}, {style}{extras_part}, commercial product photography, on a seamless light gray background, "
+        f"A {color} {material} {full_category}, {final_style}{extras_part}, commercial product photography, on a seamless light gray background, "
         "with soft studio lighting and subtle shadows, high detail, high resolution."
     )
 
