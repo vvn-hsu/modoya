@@ -10,8 +10,8 @@ price,cost,sales,profit_margin,inventory,discount_percentage,delivery_days,categ
 104.9172057,80.09549513,44,23.65837937,91,21.48446337,9,Chair,,,Plastic,Red,Urban,Winter,Online,286.6430254,8_chair_plastic_red_urban_winter.png
 166.4509917,89.12483286,10,46.45581144,56,3.101340216,4,Bed,,,Wood,Blue,Urban,Summer,Online,4207.972705,9_bed_wood_blue_urban_summer.png
 348.135028,241.9716424,17,30.49488761,49,5.419880967,1,Swirl chair,,,Fabric,Yellow,Suburban,Fall,Retail,5613.495147,10_swirl_chair_fabric_yellow_suburban_fall.png
-319.0549905,168.7566682,13,47.10734099,103,17.89973676,5,Chair,Wassily Lounge Chair,Bauhaus style,Feather,Black,Suburban,Winter,Online,4736.892708,
-464.8434058,410.0133052,34,11.79539171,83,18.14405286,9,Table,,,Glass,White,Suburban,Summer,Retail,12645.56475,
+319.0549905,168.7566682,13,47.10734099,103,17.89973676,5,Chair,Wassily Lounge Chair,Bauhaus style,Feather,Black,Suburban,Winter,Online,4736.892708,11_chair_feather_black_suburban_winter.png
+464.8434058,410.0133052,34,11.79539171,83,18.14405286,9,Chair,Wassily Lounge Chair,Bauhaus style,Polished chrome frame and black leather,,Suburban,,Retail,12645.56475,
 113.4159012,67.25038159,10,40.70462708,119,4.23328945,9,Desk,,,Plastic,Brown,Rural,Winter,Online,372.0315388,
 83.54778966,68.62557772,6,17.86069027,129,5.378887058,5,Chair,,,Glass,Black,Rural,Fall,Retail,3497.517513,
 494.0991215,430.7018667,8,12.83087785,147,6.772892246,5,Chair,,,Plastic,Black,Rural,Fall,Retail,-3213.388677,
