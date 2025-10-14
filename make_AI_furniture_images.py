@@ -79,7 +79,6 @@ def prompt_from_params(category, material, color, series=None, style=None,
             sea_phrase = "warm, muted tones and textured upholstery on the furniture"
         elif sea_norm == "winter":
             sea_phrase = "cool desaturated tones and plush fabrics on seating surfaces"
-        else ""
     
     full_category = f"{series} {category}" if series and pd.notna(series) else category
     final_style = style if style and pd.notna(style) else "photorealistic"
