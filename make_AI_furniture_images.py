@@ -82,8 +82,10 @@ def prompt_from_params(category, material, color,
     extras = ", ".join([p for p in (loc_phrase, sea_phrase) if p])
     extras_part = f", featuring {extras}" if extras else ""
     return (
-        f"A {color} {material} {category}, {style}{extras_part}, product-style photo on a clean white background, "
-        "studio lighting, high detail, high resolution."
+        #f"A {color} {material} {category}, {style}{extras_part}, product-style photo on a clean white background, "
+        #"studio lighting, high detail, high resolution."
+        f"A {color} {material} {category}, {style}{extras_part}, commercial product photography, on a seamless light gray background, "
+        "with soft studio lighting and subtle shadows, high detail, high resolution."
     )
 
 def _safe(s):
