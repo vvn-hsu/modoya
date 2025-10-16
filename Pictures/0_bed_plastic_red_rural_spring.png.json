@@ -1,0 +1,13 @@
+{
+  "row_id": 0,
+  "category": "Bed",
+  "material": "Plastic",
+  "color": "Red",
+  "location": "Rural",
+  "season": "Spring",
+  "prompt": "A Red Plastic Bed, photorealistic, featuring rustic finish with visible wood grain and subtly distressed details on the furniture, light, fresh color palette and lightweight fabrics applied to the furniture, product-style photo on a clean white background, studio lighting, high detail, high resolution.",
+  "size": "1024x1024",
+  "model": "gpt-image-1",
+  "file": "Pictures\\0_bed_plastic_red_rural_spring.png",
+  "estimated_cost_usd": 0.02
+}
