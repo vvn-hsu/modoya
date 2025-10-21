@@ -88,6 +88,7 @@ def prompt_from_params(category, material, color, series=None, style=None,
     return (
         #f"A {color} {material} {category}, {style}{extras_part}, product-style photo on a clean white background, "
         #"studio lighting, high detail, high resolution."
+        #f"You are a furniture designer."
         f"A {color} {material} {full_category}, {final_style}{extras_part}, commercial product photography, on a seamless light gray background, "
         "with soft studio lighting and subtle shadows, high detail, high resolution."
     )
@@ -106,10 +107,17 @@ def generate_and_save_image(row_id, category, material, color, location=None, se
         raise ValueError(f"size must be one of {sorted(ALLOWED_SIZES)}")
 
     prompt = prompt_from_params(category, material, color, location=location, season=season, style=style)
+    #resp = client.images.generate(
+    #    model=model,
+    #    prompt=prompt,
+    #    size=size
+    #)
     resp = client.images.generate(
-        model=model,
-        prompt=prompt,
-        size=size
+        model="dall-e-3",
+        prompt="Your are a furniture designer. <rest of prompt>.",
+        size="1024x1024",
+        quality="standard",
+        n=1
     )
     b64 = resp.data[0].b64_json
     image_bytes = base64.b64decode(b64)
