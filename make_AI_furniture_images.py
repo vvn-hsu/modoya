@@ -112,6 +112,7 @@ def generate_and_save_image(row_id, category, material, color, location=None, se
     #    prompt=prompt,
     #    size=size
     #)
+    print(f"DEBUG: Prompt for row {idx} is: {prompt}")
     resp = client.images.generate(
         model="dall-e-3",
         prompt="Your are a furniture designer. <rest of prompt>.",
