@@ -55,7 +55,7 @@ def prompt_from_params(category, material, color, series=None, style=None, attri
     sea_phrase = ""
 
     if location:
-        loc_norm = location.strip().lower()
+        loc_norm = str(location).strip().lower()
         if loc_norm not in ALLOWED_LOCATIONS:
             raise ValueError(f"location must be one of {sorted(ALLOWED_LOCATIONS)}")
         if loc_norm == "rural":
@@ -182,9 +182,9 @@ if __name__ == "__main__":
         image_path, meta = generate_and_save_image(
             row_id=idx,
             category=row['category'],
-            series=row.get('series'),
-            style=row.get('style'),
-            attributes=row.get('attributes'),
+            #series=row.get('series'),
+            #style=row.get('style'),
+            #attributes=row.get('attributes'),
             material=row['material'],
             color=row['color'],
             location=row.get('location'),
