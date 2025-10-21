@@ -168,6 +168,9 @@ if __name__ == "__main__":
     import pandas as pd
     df = pd.read_csv("furniture_table_with_images.csv")
 
+    GENERATION_LIMIT = 100 # max number of images to generate in one run
+    generated_count = 0
+
     # iterate over rows and generate images
     for idx, row in df.iterrows():
         # skip if img column is already populated
@@ -203,4 +206,8 @@ if __name__ == "__main__":
         df.at[idx, 'img'] = os.path.basename(image_path)
         # save updated dataframe 
         df.to_csv("furniture_table_with_images.csv", index=False) 
-        break # test one row only
+        #break # test one row only
+        generated_count += 1
+        if generated_count >= GENERATION_LIMIT:
+            print(f"Reached generation limit of {GENERATION_LIMIT}, stopping.")
+            break
