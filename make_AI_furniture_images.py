@@ -42,7 +42,7 @@ def estimate_image_cost(model, size, n=1, price_map=None):
 ALLOWED_LOCATIONS = {"rural", "urban", "suburban"}
 ALLOWED_SEASONS = {"spring", "summer", "autumn", "winter"}  # accept 'fall' -> 'autumn'
 
-def prompt_from_params(category, material, color, series=None, style=None,
+def prompt_from_params(category, material, color, series=None, style=None, attributes=None,
                        location=None, season=None):
     #(category, material, color, location=None, season=None, style="photorealistic")
     """
@@ -82,7 +82,7 @@ def prompt_from_params(category, material, color, series=None, style=None,
     
     full_category = f"{series} {category}" if series and pd.notna(series) else category
     final_style = style if style and pd.notna(style) else "photorealistic"
-
+    attributes_part = f", {attributes}" if attributes and pd.notna(attributes) else ""
     extras = ", ".join([p for p in (loc_phrase, sea_phrase) if p])
     extras_part = f", featuring {extras}" if extras else ""
     return (
@@ -90,7 +90,7 @@ def prompt_from_params(category, material, color, series=None, style=None,
         #"studio lighting, high detail, high resolution."
         #f"You are a furniture designer."
         f"A {color} {material} {full_category}, {final_style}{extras_part}, commercial product photography, on a seamless light gray background, "
-        "with soft studio lighting and subtle shadows, high detail, high resolution."
+        f"with soft studio lighting and subtle shadows{attributes_part}, high detail, high resolution."
     )
 
 def _safe(s):
@@ -179,6 +179,9 @@ if __name__ == "__main__":
         image_path, meta = generate_and_save_image(
             row_id=idx,
             category=row['category'],
+            series=row.get('series'),
+            style=row.get('style'),
+            attributes=row.get('attributes'),
             material=row['material'],
             color=row['color'],
             location=row.get('location'),
