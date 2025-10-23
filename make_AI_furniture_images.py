@@ -42,7 +42,7 @@ def estimate_image_cost(model, size, n=1, price_map=None):
 ALLOWED_LOCATIONS = {"rural", "urban", "suburban"}
 ALLOWED_SEASONS = {"spring", "summer", "autumn", "winter"}  # accept 'fall' -> 'autumn'
 
-def prompt_from_params(category, material, color, series=None, style=None,
+def prompt_from_params(category, material, color, series=None, style=None, attributes=None,
                        location=None, season=None):
     #(category, material, color, location=None, season=None, style="photorealistic")
     """
@@ -55,7 +55,7 @@ def prompt_from_params(category, material, color, series=None, style=None,
     sea_phrase = ""
 
     if location:
-        loc_norm = location.strip().lower()
+        loc_norm = str(location).strip().lower()
         if loc_norm not in ALLOWED_LOCATIONS:
             raise ValueError(f"location must be one of {sorted(ALLOWED_LOCATIONS)}")
         if loc_norm == "rural":
@@ -82,14 +82,15 @@ def prompt_from_params(category, material, color, series=None, style=None,
     
     full_category = f"{series} {category}" if series and pd.notna(series) else category
     final_style = style if style and pd.notna(style) else "photorealistic"
-
+    attributes_part = f", {attributes}" if attributes and pd.notna(attributes) else ""
     extras = ", ".join([p for p in (loc_phrase, sea_phrase) if p])
     extras_part = f", featuring {extras}" if extras else ""
     return (
         #f"A {color} {material} {category}, {style}{extras_part}, product-style photo on a clean white background, "
         #"studio lighting, high detail, high resolution."
+        #f"You are a furniture designer."
         f"A {color} {material} {full_category}, {final_style}{extras_part}, commercial product photography, on a seamless light gray background, "
-        "with soft studio lighting and subtle shadows, high detail, high resolution."
+        f"with soft studio lighting and subtle shadows{attributes_part}, high detail, high resolution."
     )
 
 def _safe(s):
@@ -106,10 +107,18 @@ def generate_and_save_image(row_id, category, material, color, location=None, se
         raise ValueError(f"size must be one of {sorted(ALLOWED_SIZES)}")
 
     prompt = prompt_from_params(category, material, color, location=location, season=season, style=style)
+    #resp = client.images.generate(
+    #    model=model,
+    #    prompt=prompt,
+    #    size=size
+    #)
+    print(f"DEBUG: Prompt for row {idx} is: {prompt}")
     resp = client.images.generate(
-        model=model,
-        prompt=prompt,
-        size=size
+        model="dall-e-3",
+        prompt="Your are a furniture designer. <rest of prompt>.",
+        size="1024x1024",
+        quality="standard",
+        n=1
     )
     b64 = resp.data[0].b64_json
     image_bytes = base64.b64decode(b64)
@@ -160,6 +169,9 @@ if __name__ == "__main__":
     import pandas as pd
     df = pd.read_csv("furniture_table_with_images.csv")
 
+    GENERATION_LIMIT = 100 # max number of images to generate in one run
+    generated_count = 0
+
     # iterate over rows and generate images
     for idx, row in df.iterrows():
         # skip if img column is already populated
@@ -171,6 +183,9 @@ if __name__ == "__main__":
         image_path, meta = generate_and_save_image(
             row_id=idx,
             category=row['category'],
+            #series=row.get('series'),
+            #style=row.get('style'),
+            #attributes=row.get('attributes'),
             material=row['material'],
             color=row['color'],
             location=row.get('location'),
@@ -192,4 +207,8 @@ if __name__ == "__main__":
         df.at[idx, 'img'] = os.path.basename(image_path)
         # save updated dataframe 
         df.to_csv("furniture_table_with_images.csv", index=False) 
-        break # test one row only
+        #break # test one row only
+        generated_count += 1
+        if generated_count >= GENERATION_LIMIT:
+            print(f"Reached generation limit of {GENERATION_LIMIT}, stopping.")
+            break
