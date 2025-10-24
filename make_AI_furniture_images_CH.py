@@ -4,8 +4,8 @@ import re
 import pandas as pd
 import requests
 from openai import OpenAI
+from keys import OpenAI_key
 
-OpenAI_key = "sk-Gm8B-Xqp3iCm-1vPSLkKKdctdW_gGf2lsDcR4Ym-ihT3BlbkFJJPjuVZ_Y8vUWzFy3zL1aOoWpSohvnCA6p2LZcwgN8A"
 # Use OPENAI_API_KEY env var (do not hardcode)
 client = OpenAI(api_key=OpenAI_key)
 
