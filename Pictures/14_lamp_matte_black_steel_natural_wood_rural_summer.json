@@ -1,0 +1,16 @@
+{
+  "row_id": 14,
+  "category": "Lamp",
+  "series": "Desk Lamp",
+  "style": "Japandi",
+  "material": "Matte Black Steel",
+  "color": "Natural Wood",
+  "attributes": "Plush",
+  "location": "rural",
+  "season": "summer",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Natural Wood Matte Black Steel Desk Lamp Lamp, Japandi style, featuring rustic finish with visible wood grain and subtly distressed details on the furniture, bright warm accents and breathable materials used on the furniture, Plush. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\14_lamp_matte_black_steel_natural_wood_rural_summer.png",
+  "json_file": "Pictures\\14_lamp_matte_black_steel_natural_wood_rural_summer.json"
+}

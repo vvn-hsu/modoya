@@ -1,0 +1,16 @@
+{
+  "row_id": 5,
+  "category": "Storage",
+  "series": "Cabinet",
+  "style": "Industrial",
+  "material": "Matte Black Steel",
+  "color": "Navy Blue",
+  "attributes": "Textured",
+  "location": "suburban",
+  "season": "autumn",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Navy Blue Matte Black Steel Cabinet Storage, Industrial style, featuring classic home-style finish with soft upholstery and comfortable proportions, warm, muted tones and textured upholstery on the furniture, Textured. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\5_storage_matte_black_steel_navy_blue_suburban_autumn.png",
+  "json_file": "Pictures\\5_storage_matte_black_steel_navy_blue_suburban_autumn.json"
+}

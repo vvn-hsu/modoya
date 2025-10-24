@@ -1,0 +1,16 @@
+{
+  "row_id": 41,
+  "category": "Storage",
+  "series": "Dresser",
+  "style": "Scandinavian",
+  "material": "Walnut Wood",
+  "color": "Walnut Brown",
+  "attributes": "Matte finish",
+  "location": "urban",
+  "season": "autumn",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Walnut Brown Walnut Wood Dresser Storage, Scandinavian style, featuring sleek contemporary finish with matte metal or concrete-inspired details on the furniture, warm, muted tones and textured upholstery on the furniture, Matte finish. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\41_storage_walnut_wood_walnut_brown_urban_autumn.png",
+  "json_file": "Pictures\\41_storage_walnut_wood_walnut_brown_urban_autumn.json"
+}

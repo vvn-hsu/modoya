@@ -1,0 +1,16 @@
+{
+  "row_id": 88,
+  "category": "Sofa",
+  "series": "Sectional Sofa",
+  "style": "Scandinavian",
+  "material": "Boucl\u00e9 Fabric",
+  "color": "Beige",
+  "attributes": "Geometric",
+  "location": "rural",
+  "season": "summer",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Beige Boucl\u00e9 Fabric Sectional Sofa Sofa, Scandinavian style, featuring rustic finish with visible wood grain and subtly distressed details on the furniture, bright warm accents and breathable materials used on the furniture, Geometric. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\88_sofa_boucl_fabric_beige_rural_summer.png",
+  "json_file": "Pictures\\88_sofa_boucl_fabric_beige_rural_summer.json"
+}

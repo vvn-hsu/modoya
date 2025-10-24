@@ -1,0 +1,16 @@
+{
+  "row_id": 77,
+  "category": "Sofa",
+  "series": "LC2 Sofa",
+  "style": "Farmhouse",
+  "material": "Vegan Leather",
+  "color": "Light Gray",
+  "attributes": "Modular",
+  "location": "rural",
+  "season": "autumn",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Light Gray Vegan Leather LC2 Sofa Sofa, Farmhouse style, featuring rustic finish with visible wood grain and subtly distressed details on the furniture, warm, muted tones and textured upholstery on the furniture, Modular. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\77_sofa_vegan_leather_light_gray_rural_autumn.png",
+  "json_file": "Pictures\\77_sofa_vegan_leather_light_gray_rural_autumn.json"
+}

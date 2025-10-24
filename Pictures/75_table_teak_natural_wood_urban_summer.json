@@ -1,0 +1,16 @@
+{
+  "row_id": 75,
+  "category": "Table",
+  "series": "Parsons Table",
+  "style": "Minimalist",
+  "material": "Teak",
+  "color": "Natural Wood",
+  "attributes": "Airy",
+  "location": "urban",
+  "season": "summer",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Natural Wood Teak Parsons Table Table, Minimalist style, featuring sleek contemporary finish with matte metal or concrete-inspired details on the furniture, bright warm accents and breathable materials used on the furniture, Airy. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\75_table_teak_natural_wood_urban_summer.png",
+  "json_file": "Pictures\\75_table_teak_natural_wood_urban_summer.json"
+}

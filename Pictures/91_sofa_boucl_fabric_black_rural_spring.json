@@ -1,0 +1,16 @@
+{
+  "row_id": 91,
+  "category": "Sofa",
+  "series": "Noguchi Freeform Sofa",
+  "style": "Traditional",
+  "material": "Boucl\u00e9 Fabric",
+  "color": "Black",
+  "attributes": "Soft",
+  "location": "rural",
+  "season": "spring",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Black Boucl\u00e9 Fabric Noguchi Freeform Sofa Sofa, Traditional style, featuring rustic finish with visible wood grain and subtly distressed details on the furniture, light, fresh color palette and lightweight fabrics applied to the furniture, Soft. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\91_sofa_boucl_fabric_black_rural_spring.png",
+  "json_file": "Pictures\\91_sofa_boucl_fabric_black_rural_spring.json"
+}
