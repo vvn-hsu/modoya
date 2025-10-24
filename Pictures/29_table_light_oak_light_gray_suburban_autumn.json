@@ -1,0 +1,16 @@
+{
+  "row_id": 29,
+  "category": "Table",
+  "series": "Parsons Table",
+  "style": "Japandi",
+  "material": "Light Oak",
+  "color": "Light Gray",
+  "attributes": "Textured",
+  "location": "suburban",
+  "season": "autumn",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Light Gray Light Oak Parsons Table Table, Japandi style, featuring classic home-style finish with soft upholstery and comfortable proportions, warm, muted tones and textured upholstery on the furniture, Textured. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\29_table_light_oak_light_gray_suburban_autumn.png",
+  "json_file": "Pictures\\29_table_light_oak_light_gray_suburban_autumn.json"
+}

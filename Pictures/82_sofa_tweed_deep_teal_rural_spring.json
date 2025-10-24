@@ -1,0 +1,16 @@
+{
+  "row_id": 82,
+  "category": "Sofa",
+  "series": "Loveseat",
+  "style": "Japandi",
+  "material": "Tweed",
+  "color": "Deep Teal",
+  "attributes": "Airy",
+  "location": "rural",
+  "season": "spring",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Deep Teal Tweed Loveseat Sofa, Japandi style, featuring rustic finish with visible wood grain and subtly distressed details on the furniture, light, fresh color palette and lightweight fabrics applied to the furniture, Airy. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\82_sofa_tweed_deep_teal_rural_spring.png",
+  "json_file": "Pictures\\82_sofa_tweed_deep_teal_rural_spring.json"
+}

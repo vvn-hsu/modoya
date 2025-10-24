@@ -1,0 +1,16 @@
+{
+  "row_id": 97,
+  "category": "Table",
+  "series": "Dining Table",
+  "style": "Farmhouse",
+  "material": "Walnut Wood",
+  "color": "White",
+  "attributes": "Textured",
+  "location": "suburban",
+  "season": "spring",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a White Walnut Wood Dining Table Table, Farmhouse style, featuring classic home-style finish with soft upholstery and comfortable proportions, light, fresh color palette and lightweight fabrics applied to the furniture, Textured. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\97_table_walnut_wood_white_suburban_spring.png",
+  "json_file": "Pictures\\97_table_walnut_wood_white_suburban_spring.json"
+}

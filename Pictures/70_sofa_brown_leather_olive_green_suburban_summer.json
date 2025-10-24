@@ -1,0 +1,16 @@
+{
+  "row_id": 70,
+  "category": "Sofa",
+  "series": "Chesterfield Sofa",
+  "style": "Traditional",
+  "material": "Brown Leather",
+  "color": "Olive Green",
+  "attributes": "Organic shape",
+  "location": "suburban",
+  "season": "summer",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Olive Green Brown Leather Chesterfield Sofa Sofa, Traditional style, featuring classic home-style finish with soft upholstery and comfortable proportions, bright warm accents and breathable materials used on the furniture, Organic shape. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\70_sofa_brown_leather_olive_green_suburban_summer.png",
+  "json_file": "Pictures\\70_sofa_brown_leather_olive_green_suburban_summer.json"
+}

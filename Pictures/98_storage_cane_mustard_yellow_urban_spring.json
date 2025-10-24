@@ -1,0 +1,16 @@
+{
+  "row_id": 98,
+  "category": "Storage",
+  "series": "Cabinet",
+  "style": "Bauhaus",
+  "material": "Cane",
+  "color": "Mustard Yellow",
+  "attributes": "Airy",
+  "location": "urban",
+  "season": "spring",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Mustard Yellow Cane Cabinet Storage, Bauhaus style, featuring sleek contemporary finish with matte metal or concrete-inspired details on the furniture, light, fresh color palette and lightweight fabrics applied to the furniture, Airy. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\98_storage_cane_mustard_yellow_urban_spring.png",
+  "json_file": "Pictures\\98_storage_cane_mustard_yellow_urban_spring.json"
+}

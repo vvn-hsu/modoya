@@ -1,0 +1,16 @@
+{
+  "row_id": 92,
+  "category": "Storage",
+  "series": "Sideboard",
+  "style": "Minimalist",
+  "material": "Teak",
+  "color": "Light Gray",
+  "attributes": "Organic shape",
+  "location": "rural",
+  "season": "spring",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Light Gray Teak Sideboard Storage, Minimalist style, featuring rustic finish with visible wood grain and subtly distressed details on the furniture, light, fresh color palette and lightweight fabrics applied to the furniture, Organic shape. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\92_storage_teak_light_gray_rural_spring.png",
+  "json_file": "Pictures\\92_storage_teak_light_gray_rural_spring.json"
+}

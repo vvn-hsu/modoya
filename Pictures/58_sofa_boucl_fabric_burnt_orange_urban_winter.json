@@ -1,0 +1,16 @@
+{
+  "row_id": 58,
+  "category": "Sofa",
+  "series": "Loveseat",
+  "style": "Retro",
+  "material": "Boucl\u00e9 Fabric",
+  "color": "Burnt Orange",
+  "attributes": "High-gloss",
+  "location": "urban",
+  "season": "winter",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Burnt Orange Boucl\u00e9 Fabric Loveseat Sofa, Retro style, featuring sleek contemporary finish with matte metal or concrete-inspired details on the furniture, cool desaturated tones and plush fabrics on seating surfaces, High-gloss. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\58_sofa_boucl_fabric_burnt_orange_urban_winter.png",
+  "json_file": "Pictures\\58_sofa_boucl_fabric_burnt_orange_urban_winter.json"
+}
