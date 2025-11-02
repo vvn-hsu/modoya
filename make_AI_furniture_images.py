@@ -120,7 +120,17 @@ def generate_and_save_image(row_id, category, material, color, location=None, se
         quality="standard",
         n=1
     )
+    if not resp.data or not hasattr(resp.data[0], 'b64_json'):
+        print(f"ERROR: API response for row {row_id} did not contain image data.")
+        raise RuntimeError(f"OpenAI API failed to return image data for row {row_id}.")
+        
     b64 = resp.data[0].b64_json
+    
+    if b64 is None:
+        print(f"ERROR: API response for row {row_id} returned 'None' for base64 data.")
+        raise RuntimeError(f"OpenAI API returned None for base64 data for row {row_id}.")
+
+    #b64 = resp.data[0].b64_json
     image_bytes = base64.b64decode(b64)
 
     # Ensure output folder exists (out_folder is treated as a folder)
