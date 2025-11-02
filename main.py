@@ -2,6 +2,7 @@ import os
 import json
 import random
 import sys
+from module import * 
 FOLDER_PATH = "Pictures"
 
 if __name__ == "__main__":
