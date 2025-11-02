@@ -1,0 +1,16 @@
+{
+  "row_id": 6,
+  "category": "Sofa",
+  "series": "Loveseat",
+  "style": "Wabi-Sabi",
+  "material": "Suede",
+  "color": "Black",
+  "attributes": "Curvy",
+  "location": "rural",
+  "season": "summer",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Black Suede Loveseat Sofa, Wabi-Sabi style, featuring rustic finish with visible wood grain and subtly distressed details on the furniture, bright warm accents and breathable materials used on the furniture, Curvy. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\6_sofa_suede_black_rural_summer.png",
+  "json_file": "Pictures\\6_sofa_suede_black_rural_summer.json"
+}

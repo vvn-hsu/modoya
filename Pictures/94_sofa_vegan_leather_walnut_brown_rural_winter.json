@@ -1,0 +1,16 @@
+{
+  "row_id": 94,
+  "category": "Sofa",
+  "series": "Chesterfield Sofa",
+  "style": "Retro",
+  "material": "Vegan Leather",
+  "color": "Walnut Brown",
+  "attributes": "Matte finish",
+  "location": "rural",
+  "season": "winter",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Walnut Brown Vegan Leather Chesterfield Sofa Sofa, Retro style, featuring rustic finish with visible wood grain and subtly distressed details on the furniture, cool desaturated tones and plush fabrics on seating surfaces, Matte finish. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\94_sofa_vegan_leather_walnut_brown_rural_winter.png",
+  "json_file": "Pictures\\94_sofa_vegan_leather_walnut_brown_rural_winter.json"
+}

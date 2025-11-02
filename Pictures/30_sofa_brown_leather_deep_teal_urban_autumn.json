@@ -1,0 +1,16 @@
+{
+  "row_id": 30,
+  "category": "Sofa",
+  "series": "Togo Sofa",
+  "style": "Minimalist",
+  "material": "Brown Leather",
+  "color": "Deep Teal",
+  "attributes": "Textured",
+  "location": "urban",
+  "season": "autumn",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Deep Teal Brown Leather Togo Sofa Sofa, Minimalist style, featuring sleek contemporary finish with matte metal or concrete-inspired details on the furniture, warm, muted tones and textured upholstery on the furniture, Textured. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\30_sofa_brown_leather_deep_teal_urban_autumn.png",
+  "json_file": "Pictures\\30_sofa_brown_leather_deep_teal_urban_autumn.json"
+}

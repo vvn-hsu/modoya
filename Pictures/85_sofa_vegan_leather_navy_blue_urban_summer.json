@@ -1,0 +1,16 @@
+{
+  "row_id": 85,
+  "category": "Sofa",
+  "series": "Loveseat",
+  "style": "Coastal",
+  "material": "Vegan Leather",
+  "color": "Navy Blue",
+  "attributes": "Elegant",
+  "location": "urban",
+  "season": "summer",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Navy Blue Vegan Leather Loveseat Sofa, Coastal style, featuring sleek contemporary finish with matte metal or concrete-inspired details on the furniture, bright warm accents and breathable materials used on the furniture, Elegant. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\85_sofa_vegan_leather_navy_blue_urban_summer.png",
+  "json_file": "Pictures\\85_sofa_vegan_leather_navy_blue_urban_summer.json"
+}

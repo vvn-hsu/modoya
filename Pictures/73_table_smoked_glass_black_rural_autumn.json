@@ -1,0 +1,16 @@
+{
+  "row_id": 73,
+  "category": "Table",
+  "series": "Dining Table",
+  "style": "Minimalist",
+  "material": "Smoked Glass",
+  "color": "Black",
+  "attributes": "Soft",
+  "location": "rural",
+  "season": "autumn",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Black Smoked Glass Dining Table Table, Minimalist style, featuring rustic finish with visible wood grain and subtly distressed details on the furniture, warm, muted tones and textured upholstery on the furniture, Soft. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\73_table_smoked_glass_black_rural_autumn.png",
+  "json_file": "Pictures\\73_table_smoked_glass_black_rural_autumn.json"
+}

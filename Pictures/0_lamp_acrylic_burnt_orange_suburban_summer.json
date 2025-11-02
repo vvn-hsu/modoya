@@ -1,0 +1,16 @@
+{
+  "row_id": 0,
+  "category": "Lamp",
+  "series": "Floor Lamp",
+  "style": "Wabi-Sabi",
+  "material": "Acrylic",
+  "color": "Burnt Orange",
+  "attributes": "Matte finish",
+  "location": "suburban",
+  "season": "summer",
+  "prompt": "Product photography of a Burnt Orange Acrylic Floor Lamp Lamp, Wabi-Sabi style, featuring classic home-style finish with soft upholstery and comfortable proportions, bright warm accents and breathable materials used on the furniture, Matte finish. Clean white studio background, professional lighting, high resolution, minimalist composition. Remove all text, remove all words, remove all letters, remove all typography, remove all branding, remove all labels completely from the image. A single piece of Pure furniture only, no graphic design elements.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "size": "1024x1024",
+  "model": "dall-e-3",
+  "image_file": "Pictures\\0_lamp_acrylic_burnt_orange_suburban_summer.png",
+  "json_file": "Pictures\\0_lamp_acrylic_burnt_orange_suburban_summer.json"
+}
