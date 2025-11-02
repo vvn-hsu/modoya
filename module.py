@@ -70,25 +70,6 @@ def calculate_price(item_metadata):
         "adjustment": adjustment
     }
 
-def get_available_options(items):
-    """
-    Extracts all unique values for key attributes for display to the user.
-    (Assumes this function is also in module.py)
-    """
-    options = {
-        'style': set(),
-        'color': set(),
-        'season': set(),
-        'category': set()
-    }
-    for item in items:
-        metadata = item['metadata']
-        options['style'].add(metadata.get('style', 'N/A'))
-        options['color'].add(metadata.get('color', 'N/A'))
-        options['season'].add(metadata.get('season', 'N/A'))
-        options['category'].add(metadata.get('category', 'N/A'))
-    return {k: sorted(list(v)) for k, v in options.items()}
-
 def place_order(item, price_details):
     metadata = item['metadata']
     price = price_details['price']
@@ -111,6 +92,23 @@ def place_order(item, price_details):
         print("\nOrder cancelled by user.\n")
         return False
 
+def get_available_options(items):
+    """
+    Extracts all unique values for key attributes for display to the user.
+    """
+    options = {
+        'style': set(),
+        'color': set(),
+        'season': set(),
+        'category': set()
+    }
+    for item in items:
+        metadata = item['metadata']
+        options['style'].add(metadata.get('style', 'N/A'))
+        options['color'].add(metadata.get('color', 'N/A'))
+        options['season'].add(metadata.get('season', 'N/A'))
+        options['category'].add(metadata.get('category', 'N/A'))
+    return {k: sorted(list(v)) for k, v in options.items()}
 
 def display_recommendations(recommendations):
     if not recommendations:
