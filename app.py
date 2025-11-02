@@ -67,12 +67,19 @@ def add_to_cart(item_id):
 
 def get_full_cart_details():
     cart_items_details = []
+    
     if 'cart' not in session:
+        session['cart'] = {}
         return []
 
     for item_id in list(session['cart'].keys()):
         cart_item_data = session['cart'].get(item_id)
-        if not cart_item_data: continue
+        
+        if not isinstance(cart_item_data, dict):
+            print(f"DEBUG: Removing invalid cart item ID: {item_id}")
+            del session['cart'][item_id]
+            session.modified = True
+            continue 
 
         item = get_item_by_id(ALL_FURNITURE_ITEMS, item_id)
 
@@ -105,9 +112,8 @@ def get_full_cart_details():
                 'total_cost': total_cost
             })
         else:
-            if item_id in session['cart']:
-                del session['cart'][item_id] 
-                session.modified = True
+            del session['cart'][item_id] 
+            session.modified = True
     
     return cart_items_details
 
