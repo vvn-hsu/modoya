@@ -28,10 +28,6 @@ def get_all_items(folder):
     return items
 
 def filter_furniture(items, category=None, style=None, color=None, season=None):
-    """
-    Filters the list of furniture items based on multiple criteria. (Case-insensitive)
-    Returns: A new list of filtered item dictionaries.
-    """
     filtered_items = items
 
     if category:
@@ -48,13 +44,29 @@ def filter_furniture(items, category=None, style=None, color=None, season=None):
 
     return filtered_items
 
+def calculate_rent(item_metadata):
+    base_rent_map = {
+        "Sofa": 60, "Chair": 40, "Storage": 35, "Lamp": 20
+    }
+    
+    base_rent = base_rent_map.get(item_metadata.get('category'), 25)
+    
+    adjustment = 0
+    if item_metadata.get('material') in ['Velvet', 'Leather', 'Marble']:
+        adjustment += 15
+    if item_metadata.get('style') in ['Mid-Century Modern', 'Art Deco']:
+        adjustment += 10
 
-def calculate_price(item_metadata):
-    price_map = {
+    monthly_rent = base_rent + adjustment
+    
+    return monthly_rent
+
+def calculate_buyout_price(item_metadata):
+    buyout_map = {
         "Sofa": 1200, "Chair": 800, "Storage": 700, "Lamp": 350
     }
     
-    base_price = price_map.get(item_metadata.get('category'), 500)
+    base_buyout_price = buyout_map.get(item_metadata.get('category'), 500)
     
     adjustment = 0
     if item_metadata.get('material') in ['Velvet', 'Leather', 'Marble']:
@@ -62,40 +74,11 @@ def calculate_price(item_metadata):
     if item_metadata.get('style') in ['Mid-Century Modern', 'Art Deco']:
         adjustment += 150
 
-    final_price = base_price + adjustment
+    final_buyout_price = base_buyout_price + adjustment
     
-    return {
-        "price": final_price,
-        "base": base_price,
-        "adjustment": adjustment
-    }
-
-def place_order(item, price_details):
-    metadata = item['metadata']
-    price = price_details['price']
-    
-    print("\n========================================")
-    print(f"CONFIRMATION: You are about to order the following item:")
-    print(f"   Item: {metadata['series']} ({metadata['style']})")
-    print(f"   Price: ${price:.2f}")
-    
-    user_confirm = input("Confirm order (Type 'yes' to proceed): ").strip().lower()
-
-    if user_confirm == 'yes':
-        print("\nORDER PLACED SUCCESSFULLY!")
-        print(f"Order ID: {hash(metadata['row_id'])}")
-        print(f"Total Charged: ${price:.2f}")
-        print(f"Delivery: Estimated 5-7 business days.")
-        print("========================================\n")
-        return True
-    else:
-        print("\nOrder cancelled by user.\n")
-        return False
+    return final_buyout_price
 
 def get_available_options(items):
-    """
-    Extracts all unique values for key attributes for display to the user.
-    """
     options = {
         'style': set(),
         'color': set(),
@@ -110,26 +93,64 @@ def get_available_options(items):
         options['category'].add(metadata.get('category', 'N/A'))
     return {k: sorted(list(v)) for k, v in options.items()}
 
-def display_recommendations(recommendations):
+def place_order(item, rental_details, order_type="RENT"):
+    metadata = item['metadata']
+    duration = rental_details.get('duration', 0)
+    monthly_rent = rental_details.get('monthly_rent', 0)
+    buyout_price = rental_details.get('buyout_price', 0)
+
+    print("\n========================================")
+    print(f"CONFIRMATION: You are about to proceed with the following:")
+    print(f"   Item: {metadata['series']} ({metadata['style']})")
+    
+    if order_type == "RENT":
+        total_cost = monthly_rent * duration
+        print(f"   Action: RENT for {duration} months")
+        print(f"   Monthly Rent: ${monthly_rent:.2f}")
+        print(f"   Total Rental Fee: ${total_cost:.2f} (Pre-paid)")
+        
+    elif order_type == "BUY":
+        total_cost = buyout_price
+        print(f"   Action: BUYOUT")
+        print(f"   Total Buyout Price: ${total_cost:.2f}")
+
+    user_confirm = input("Confirm order (Type 'yes' to proceed): ").strip().lower()
+
+    if user_confirm == 'yes':
+        print("\nORDER PLACED SUCCESSFULLY!")
+        print(f"Order Type: {order_type}")
+        print(f"Order ID: {hash(metadata['row_id'])}")
+        print(f"Total Charged: ${total_cost:.2f}")
+        print(f"Delivery: Estimated 5-7 business days.")
+        print("========================================\n")
+        return True
+    else:
+        print("\nOrder cancelled by user.\n")
+        return False
+
+def display_recommendations(recommendations, duration):
     if not recommendations:
         print("Sorry, no furniture items match your criteria.")
         return
 
     print(f"\nFound {len(recommendations)} items matching your preferences.")
     
-    print("--- AVAILABLE ITEMS FOR ORDER ---")
+    print("--- AVAILABLE ITEMS FOR RENTAL/PURCHASE ---")
     
     display_limit = 5
     selectable_items = recommendations[:display_limit]
     
     for i, item in enumerate(selectable_items):
-        price_details = calculate_price(item['metadata'])
+        monthly_rent = calculate_rent(item['metadata'])
+        buyout_price = calculate_buyout_price(item['metadata'])
+        total_rental_cost = monthly_rent * duration
         
-        print(f"[{i+1}] Item: {item['metadata']['series']} | Style: {item['metadata']['style']} | Price: ${price_details['price']:.2f}")
+        print(f"[{i+1}] Item: {item['metadata']['series']} | Style: {item['metadata']['style']}")
+        print(f"      Monthly Rent: ${monthly_rent:.2f} | Total Rent ({duration}M): ${total_rental_cost:.2f} | Buyout Price: ${buyout_price:.2f}")
         
-    print("---------------------------------")
+    print("---------------------------------------------")
     
-    selection = input(f"Enter the number of the item you want to order (1-{min(len(recommendations), display_limit)}), or type '0' to exit: ").strip()
+    selection = input(f"Enter the number of the item you want to proceed with (1-{min(len(recommendations), display_limit)}), or type '0' to exit: ").strip()
 
     try:
         selection_index = int(selection)
@@ -139,8 +160,20 @@ def display_recommendations(recommendations):
 
         if 1 <= selection_index <= len(selectable_items):
             selected_item = selectable_items[selection_index - 1]
-            selected_price = calculate_price(selected_item['metadata'])
-            place_order(selected_item, selected_price)
+            
+            rental_details = {
+                "duration": duration,
+                "monthly_rent": calculate_rent(selected_item['metadata']),
+                "buyout_price": calculate_buyout_price(selected_item['metadata'])
+            }
+            
+            action = input("Select action (Type 'RENT' or 'BUY'): ").strip().upper()
+            
+            if action in ["RENT", "BUY"]:
+                place_order(selected_item, rental_details, order_type=action)
+            else:
+                print("Invalid action. Please enter 'RENT' or 'BUY'.")
+
         else:
             print("Invalid selection number. Please try again.")
 

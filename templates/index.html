@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modoya Furniture Rental Platform</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .furniture-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .item { border: 1px solid #ddd; padding: 15px; border-radius: 8px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); }
+        .item img { width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px; }
+        .item h3 { margin-top: 0; font-size: 1.2em; }
+        .price-tag { font-weight: bold; color: #007bff; margin-bottom: 10px; }
+        .buyout-tag { font-size: 0.9em; color: #6c757d; }
+        .add-btn { background-color: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; text-decoration: none; }
+        .cart-link { background-color: #ffc107; padding: 5px 10px; border-radius: 5px; text-decoration: none; color: #343a40; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Modoya Furniture Rental and Buyout</h1>
+        <a href="{{ url_for('view_cart') }}" class="cart-link">Cart ({{ cart_item_count }})</a>
+    </div>
+
+    <h2>All Furniture Items ({{ items|length }} items)</h2>
+    <div class="furniture-grid">
+        {% for item in items %}
+        <div class="item">
+            <img src="{{ item.image_url }}" alt="{{ item.metadata.series }}">
+            <h3>{{ item.metadata.series }}</h3>
+            <p>Style: {{ item.metadata.style }}</p>
+            <p>Color: {{ item.metadata.color }}</p>
+            
+            <p class="price-tag">Monthly Rent: ${{ item.monthly_rent }}</p>
+            <p class="buyout-tag">Buyout Price: ${{ item.buyout_price }}</p>
+            
+            <a href="{{ url_for('add_to_cart', item_id=item.id) }}" class="add-btn">Add to Cart</a> 
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
