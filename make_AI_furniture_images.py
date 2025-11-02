@@ -179,7 +179,7 @@ if __name__ == "__main__":
     import pandas as pd
     df = pd.read_csv("furniture_table_with_images.csv")
 
-    GENERATION_LIMIT = 100 # max number of images to generate in one run
+    GENERATION_LIMIT = 1 # max number of images to generate in one run
     generated_count = 0
 
     # iterate over rows and generate images
