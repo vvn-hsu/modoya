@@ -19,7 +19,7 @@ def get_all_items(folder):
     items = []
     metadata_list = load_metadata(folder)
     for data in metadata_list:
-        img_file = data["image_file"] 
+        img_file = data.get("image_file") 
         
         items.append({
             "image_path": img_file,
@@ -31,16 +31,16 @@ def filter_furniture(items, category=None, style=None, color=None, season=None):
     filtered_items = items
 
     if category:
-        filtered_items = [item for item in filtered_items if item['metadata']['category'].lower() == category.lower()]
+        filtered_items = [item for item in filtered_items if item['metadata'].get('category', '').lower() == category.lower()]
     
     if style:
-        filtered_items = [item for item in filtered_items if item['metadata']['style'].lower() == style.lower()]
+        filtered_items = [item for item in filtered_items if item['metadata'].get('style', '').lower() == style.lower()]
     
     if color:
-        filtered_items = [item for item in filtered_items if item['metadata']['color'].lower() == color.lower()]
+        filtered_items = [item for item in filtered_items if item['metadata'].get('color', '').lower() == color.lower()]
         
     if season:
-        filtered_items = [item for item in filtered_items if item['metadata']['season'].lower() == season.lower()]
+        filtered_items = [item for item in filtered_items if item['metadata'].get('season', '').lower() == season.lower()]
 
     return filtered_items
 
@@ -92,6 +92,13 @@ def get_available_options(items):
         options['season'].add(metadata.get('season', 'N/A'))
         options['category'].add(metadata.get('category', 'N/A'))
     return {k: sorted(list(v)) for k, v in options.items()}
+
+def get_item_by_id(items, item_id):
+    """Retrieves a single item from the list by its row_id."""
+    for item in items:
+        if str(item['metadata'].get('row_id')) == str(item_id):
+            return item
+    return None
 
 def place_order(item, rental_details, order_type="RENT"):
     metadata = item['metadata']
