@@ -267,6 +267,20 @@
             margin-bottom: 8px;
             color: #333;
         }
+        
+        .match-reason {
+            padding: 4px 0 8px 0;
+            margin: 0;
+            font-size: 0.9em;
+            color: #6200EE;
+            font-weight: 500; 
+        }
+        .match-reason strong {
+            color: #333;
+            background-color: #f1f3f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
 
         #recommended-furniture-results {
             grid-template-columns: repeat(4, 1fr);
@@ -364,8 +378,8 @@
                 <div id="key-elements-results" class="key-elements-tags">
                 </div>
                 
-                <h3>Top AI Insights</h3>
-                <ul id="ai-insights-results" class="insights-list">
+                <h3>Design Recommendations</h3>
+                <ul id="design-recommendations-results" class="insights-list">
                 </ul>
 
                 <h3>Recommended for You</h3>
@@ -383,11 +397,10 @@
             
             let analyzerHasResults = false;
             
-            // 更新為四角星的 SVG
             const originalIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sparkle">
                 <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/>
             </svg>`;
-            const resultsIcon = originalIcon; // 結果頁也使用相同的圖示
+            const resultsIcon = originalIcon;
 
             const openBtn = document.getElementById('open-analyzer-btn');
             const closeBtn = document.getElementById('close-analyzer-btn');
@@ -540,10 +553,10 @@
                     });
                 }
 
-                const insightsContainer = document.getElementById('ai-insights-results');
+                const insightsContainer = document.getElementById('design-recommendations-results');
                 insightsContainer.innerHTML = '';
-                if (results.aiInsights) {
-                    results.aiInsights.forEach(text => {
+                if (results.designRecommendations) {
+                    results.designRecommendations.forEach(text => {
                         insightsContainer.innerHTML += `<li>${text}</li>`;
                     });
                 }
@@ -552,11 +565,18 @@
                 furnitureContainer.innerHTML = '';
                 if (results.recommendations && results.recommendations.length > 0) {
                     results.recommendations.forEach(item => {
+                        
+                        let matchReasonHtml = '';
+                        if (item.match_reason) {
+                            matchReasonHtml = `<p class="match-reason">Matches Key Element: <strong>${item.match_reason}</strong></p>`;
+                        }
+                        
                         furnitureContainer.innerHTML += `
                             <div class="item">
                                 <img src="${item.image_url}" alt="${item.series}">
                                 <h3>${item.series}</h3>
                                 <p>Style: ${item.style}</p>
+                                ${matchReasonHtml}
                                 <p class="price-tag">Monthly Rent: $${item.monthly_rent}</p>
                                 <p class="buyout-tag">Buyout Price: $${item.buyout_price}</p>
                                 <a href="/add_to_cart/${item.id}" class="add-btn">Add to Cart</a> 

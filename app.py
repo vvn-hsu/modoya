@@ -38,7 +38,7 @@ def encode_image(image_file):
         print(f"Error encoding image: {e}")
         return None
 
-def format_recommendations(items_list):
+def format_recommendations(items_list, match_reason=""):
     items_for_render = []
     sample_size = min(len(items_list), 4)
     recommended_items = random.sample(items_list, sample_size)
@@ -52,7 +52,8 @@ def format_recommendations(items_list):
             'style': item['metadata']['style'],
             'image_url': url_for('serve_pictures', filename=filename_only),
             'monthly_rent': "%.2f" % calculate_rent(item['metadata']),
-            'buyout_price': "%.2f" % calculate_buyout_price(item['metadata'])
+            'buyout_price': "%.2f" % calculate_buyout_price(item['metadata']),
+            'match_reason': match_reason
         })
     return items_for_render
 
@@ -62,22 +63,23 @@ three images provided by the user and return a JSON object that
 summarizes their style.
 
 You MUST respond with ONLY a valid JSON object in the following format.
-Do not include any text, markdown, or explanations before or after the JSON.
+
+- For 'styleDNA', list ONLY the top 1-3 most relevant styles. Do not list more than 3.
+- For 'keyElements', list 4-6 important design elements.
+- For 'designRecommendations', list 2-3 actionable design recommendations.
 
 {
   "styleDNA": [
-    {"name": "Style 1", "percentage": 85},
-    {"name": "Style 2", "percentage": 70},
-    {"name": "Style 3", "percentage": 40},
-    {"name": "Style 4", "percentage": 25}
+    {"name": "Minimalist", "percentage": 85},
+    {"name": "Scandinavian", "percentage": 75}
   ],
   "keyElements": [
-    "Element 1", "Element 2", "Element 3", "Element 4", "Element 5", "Element 6"
+    "Neutral Color Palette", "Natural Light", "Wood Accents", "Clean Lines", "Functional Decor"
   ],
-  "aiInsights": [
-    "Insight 1 (e.g., You prefer spaces with clean lines and natural materials.)",
-    "Insight 2 (e.g., Your style blends the warmth of wood with modern, dark accents.)",
-    "Insight 3 (e.g., Consider adding a statement lamp to create a focal point.)"
+  "designRecommendations": [
+    "Consider adding textured elements like a plush rug or cushions to enhance warmth.",
+    "Introduce a statement floor lamp in a corner to create a focal point.",
+    "Balance the wood tones with cool, neutral-colored textiles like a gray sofa."
   ]
 }
 """
@@ -312,7 +314,7 @@ def analyze_style():
 
         recommended_items_data = filter_furniture(ALL_FURNITURE_ITEMS, style=top_style)
         
-        formatted_recommendations = format_recommendations(recommended_items_data)
+        formatted_recommendations = format_recommendations(recommended_items_data, top_style)
 
         final_response = {
             **ai_json_response,
