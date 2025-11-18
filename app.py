@@ -193,6 +193,34 @@ def view_cart():
                            cart_items=cart_items_details,
                            cart_total=cart_total)
 
+@app.route('/api/add_to_cart/<item_id>', methods=['POST'])
+def api_add_to_cart(item_id):
+    item = get_item_by_id(ALL_FURNITURE_ITEMS, item_id)
+    if not item:
+        return jsonify({"success": False, "error": "Item not found"}), 404
+
+    duration = 12
+    if 'cart' not in session:
+        session['cart'] = {}
+    
+    session['cart'][item_id] = {
+        'duration': duration,
+        'order_type': 'RENT' 
+    }
+    session.modified = True
+    
+    cart_items_details = get_full_cart_details()
+    cart_preview = cart_items_details[:3]
+    cart_item_count = len(cart_items_details)
+    
+    return jsonify({
+        "success": True,
+        "message": f"Added {item['metadata']['series']} to cart.",
+        "cart_item_count": cart_item_count,
+        "cart_preview": cart_preview
+    })
+
+
 @app.route('/update_cart/<item_id>', methods=['POST'])
 def update_cart(item_id):
     if item_id not in session.get('cart', {}):

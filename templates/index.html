@@ -285,6 +285,89 @@
         #recommended-furniture-results {
             grid-template-columns: repeat(4, 1fr);
         }
+        
+        #mini-cart-overlay {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 320px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 2000;
+            display: none;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+        .mini-cart-header {
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .mini-cart-header h4 {
+            margin: 0;
+            color: #28a745;
+        }
+        .mini-cart-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+        .mini-cart-list {
+            padding: 10px 15px;
+            max-height: 240px;
+            overflow-y: auto;
+        }
+        .mini-cart-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        .mini-cart-item:last-child {
+            border-bottom: none;
+        }
+        .mini-cart-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .mini-cart-item-info {
+            flex-grow: 1;
+            font-size: 0.9em;
+        }
+        .mini-cart-item-info p {
+            margin: 0;
+            font-weight: bold;
+        }
+        .mini-cart-item-info span {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        .mini-cart-footer {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eee;
+            text-align: center;
+        }
+        .mini-cart-footer .btn {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -305,7 +388,7 @@
             <p class="price-tag">Monthly Rent: ${{ item.monthly_rent }}</p>
             <p class="buyout-tag">Buyout Price: ${{ item.buyout_price }}</p>
             
-            <a href="{{ url_for('add_to_cart', item_id=item.id) }}" class="add-btn">Add to Cart</a> 
+            <a href="#" class="add-btn ajax-add-to-cart" data-item-id="{{ item.id }}">Add to Cart</a> 
         </div>
         {% endfor %}
     </div>
@@ -391,6 +474,18 @@
             </div>
         </div>
     </div>
+    
+    <div id="mini-cart-overlay">
+        <div class="mini-cart-header">
+            <h4 id="mini-cart-message">✓ Added to Cart!</h4>
+            <button class="mini-cart-close" onclick="document.getElementById('mini-cart-overlay').style.display='none'">&times;</button>
+        </div>
+        <div class="mini-cart-list" id="mini-cart-list">
+            </div>
+        <div class="mini-cart-footer">
+            <a href="{{ url_for('view_cart') }}" class="btn">View Full Cart</a>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -412,12 +507,27 @@
             const resultsScreen = document.getElementById('results-screen');
             const analyzeBtn = document.getElementById('analyze-style-btn');
             const uploadPrompt = document.getElementById('upload-prompt-text');
+            
+            const headerCartLink = document.querySelector('.cart-link');
 
             const uploadedFiles = {
                 file1: null,
                 file2: null,
                 file3: null
             };
+            
+            try {
+                const storedResults = sessionStorage.getItem('analyzerResults');
+                if (storedResults) {
+                    const results = JSON.parse(storedResults);
+                    populateResults(results);
+                    uploadScreen.style.display = 'none';
+                    resultsScreen.style.display = 'block';
+                }
+            } catch (e) {
+                console.error("Could not load stored analyzer results:", e);
+                sessionStorage.removeItem('analyzerResults');
+            }
 
             openBtn.addEventListener('click', () => {
                 if (analyzerHasResults) {
@@ -501,7 +611,9 @@
                     if (results.error) {
                          throw new Error(`AI error: ${results.error}`);
                     }
-
+                    
+                    sessionStorage.setItem('analyzerResults', JSON.stringify(results));
+                    
                     populateResults(results);
                     uploadScreen.style.display = 'none';
                     resultsScreen.style.display = 'block';
@@ -579,7 +691,7 @@
                                 ${matchReasonHtml}
                                 <p class="price-tag">Monthly Rent: $${item.monthly_rent}</p>
                                 <p class="buyout-tag">Buyout Price: $${item.buyout_price}</p>
-                                <a href="/add_to_cart/${item.id}" class="add-btn">Add to Cart</a> 
+                                <a href="#" class="add-btn ajax-add-to-cart" data-item-id="${item.id}">Add to Cart</a> 
                             </div>
                         `;
                     });
@@ -592,6 +704,8 @@
                 analyzerHasResults = false;
                 openBtn.innerHTML = originalIcon;
                 analyzerBtnLabel.textContent = 'Find Your Style!';
+                
+                sessionStorage.removeItem('analyzerResults');
                 
                 uploadedFiles.file1 = null;
                 uploadedFiles.file2 = null;
@@ -615,6 +729,90 @@
                 resultsScreen.style.display = 'none';
                 analyzeBtn.textContent = 'Analyze My Style';
             }
+            
+            document.body.addEventListener('click', async (e) => {
+                if (!e.target.classList.contains('ajax-add-to-cart')) {
+                    return;
+                }
+                
+                e.preventDefault();
+                const button = e.target;
+                const itemId = button.dataset.itemId;
+                
+                if (button.disabled) return;
+                
+                const originalText = button.textContent;
+                button.textContent = 'Adding...';
+                button.disabled = true;
+
+                try {
+                    const response = await fetch(`/api/add_to_cart/${itemId}`, {
+                        method: 'POST'
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Server responded with an error.');
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        headerCartLink.textContent = `Cart (${data.cart_item_count})`;
+                        showMiniCart(data.cart_preview, data.message);
+                        
+                        button.textContent = 'Added!';
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                            button.disabled = false;
+                        }, 2000);
+                    } else {
+                        throw new Error(data.error || 'Failed to add item.');
+                    }
+                    
+                } catch (error) {
+                    console.error("Failed to add to cart:", error);
+                    alert("Error: Could not add item to cart.");
+                    button.textContent = originalText;
+                    button.disabled = false;
+                }
+            });
+            
+            let miniCartTimeout;
+            function showMiniCart(cartPreview, message) {
+                const overlay = document.getElementById('mini-cart-overlay');
+                const list = document.getElementById('mini-cart-list');
+                const messageEl = document.getElementById('mini-cart-message');
+                
+                messageEl.textContent = `✓ ${message}`;
+                list.innerHTML = '';
+                
+                if (!cartPreview || cartPreview.length === 0) {
+                    list.innerHTML = '<p style="padding: 10px 0; text-align: center; color: #6c757d;">Your cart is empty.</p>';
+                } else {
+                    cartPreview.forEach(item => {
+                        list.innerHTML += `
+                            <div class="mini-cart-item">
+                                <img src="${item.image_url}" alt="${item.series}">
+                                <div class="mini-cart-item-info">
+                                    <p>${item.series}</p>
+                                    <span>${item.order_type === 'RENT' ? 'Rent' : 'Buy'}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                overlay.style.display = 'block';
+                
+                if (miniCartTimeout) {
+                    clearTimeout(miniCartTimeout);
+                }
+                
+                miniCartTimeout = setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 4000);
+            }
+
         });
     </script>
 </body>
