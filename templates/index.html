@@ -15,6 +15,262 @@
         .buyout-tag { font-size: 0.9em; color: #6c757d; }
         .add-btn { background-color: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; text-decoration: none; }
         .cart-link { background-color: #ffc107; padding: 5px 10px; border-radius: 5px; text-decoration: none; color: #343a40; font-weight: bold; }
+
+        .analyzer-btn-wrapper {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            text-align: center;
+        }
+
+        #open-analyzer-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8a2be2, #6a5acd); 
+            color: white;
+            border: none;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s, background 0.2s;
+            margin: 0 auto 5px auto;
+        }
+        #open-analyzer-btn:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #7b1ed1, #5a4bbf);
+        }
+        .analyzer-btn-text {
+            color: #333;
+            font-size: 0.85em;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+        }
+
+        #open-analyzer-btn svg {
+            width: 28px;
+            height: 28px;
+            stroke-width: 2.5;
+        }
+
+        #analyzer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+        .analyzer-modal {
+            background-color: white;
+            padding: 20px 40px 40px 40px;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .analyzer-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #aaa;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .analyzer-close-btn:hover {
+            color: #333;
+        }
+
+        .analyzer-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .analyzer-header h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .analyzer-subtitle {
+            text-align: center;
+            font-size: 1.1em;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        .analyzer-subtitle-small {
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .upload-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .upload-box {
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+            color: #888;
+            transition: background-color 0.2s, border-color 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .upload-box:hover {
+            background-color: #f0f0f0;
+            border-color: #aaa;
+        }
+        .file-input {
+            display: none;
+        }
+        .upload-preview {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .tips-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 10px 20px 10px 40px;
+            margin-top: 25px;
+            position: relative;
+        }
+        .tips-box::before {
+            content: '💡';
+            position: absolute;
+            left: 15px;
+            top: 18px;
+            font-size: 1.2em;
+        }
+        .tips-box h3 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .tips-box ul {
+            font-size: 0.9em;
+            color: #555;
+            padding-left: 0;
+            list-style-position: inside;
+        }
+
+        .analyzer-cta-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: white;
+            background-color: #6200EE;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 25px;
+            transition: background-color 0.2s;
+        }
+        .analyzer-cta-btn:hover:not(:disabled) {
+            background-color: #5100C0;
+        }
+        .analyzer-cta-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .upload-grid-small {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .upload-grid-small img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        #results-screen h3 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .dna-item { margin-bottom: 10px; }
+        .dna-label { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 5px; }
+        .progress-bar {
+            width: 100%;
+            height: 15px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-bar-inner {
+            height: 100%;
+            background-color: #6200EE;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .key-elements-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .key-elements-tags span {
+            background-color: #f1f3f5;
+            color: #495057;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .insights-list {
+            list-style-type: '✓';
+            padding-left: 25px;
+        }
+        .insights-list li {
+            padding-left: 10px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        #recommended-furniture-results {
+            grid-template-columns: repeat(4, 1fr);
+        }
     </style>
 </head>
 <body>
@@ -39,5 +295,307 @@
         </div>
         {% endfor %}
     </div>
+
+    <div class="analyzer-btn-wrapper">
+        <button id="open-analyzer-btn" title="Find Your Style!">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sparkle">
+                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/>
+            </svg>
+        </button>
+        <span class="analyzer-btn-text" id="analyzer-btn-label">Find Your Style!</span>
+    </div>
+
+    <div id="analyzer-overlay">
+        <div class="analyzer-modal">
+            <button id="close-analyzer-btn" class="analyzer-close-btn">&times;</button>
+            
+            <div id="upload-screen">
+                <div class="analyzer-header">
+                    <h2>Decor Style Analyzer</h2>
+                </div>
+                <p class="analyzer-subtitle">Upload 3 photos of places you love, and our AI will analyze your design preferences to reveal your unique decor style.</p>
+                
+                <div class="upload-grid">
+                    <div class="upload-box" onclick="document.getElementById('file-1').click()">
+                        <input type="file" id="file-1" class="file-input" accept="image/*">
+                        <span id="text-1">Photo 1<br><small>Drop image or click to upload</small></span>
+                        <img id="preview-1" class="upload-preview">
+                    </div>
+                    <div class="upload-box" onclick="document.getElementById('file-2').click()">
+                        <input type="file" id="file-2" class="file-input" accept="image/*">
+                        <span id="text-2">Photo 2<br><small>Drop image or click to upload</small></span>
+                        <img id="preview-2" class="upload-preview">
+                    </div>
+                    <div class="upload-box" onclick="document.getElementById('file-3').click()">
+                        <input type="file" id="file-3" class="file-input" accept="image/*">
+                        <span id="text-3">Photo 3<br><small>Drop image or click to upload</small></span>
+                        <img id="preview-3" class="upload-preview">
+                    </div>
+                </div>
+                
+                <div class="tips-box">
+                    <h3>Tips for Best Results</h3>
+                    <ul>
+                        <li>Choose photos of interior spaces that you find inspiring</li>
+                        <li>Include a variety of rooms or design elements</li>
+                        <li>Ensure photos are well-lit and show clear design details</li>
+                        <li>You can upload living rooms, bedrooms, cafes, or any space you love</li>
+                    </ul>
+                </div>
+                
+                <button id="analyze-style-btn" class="analyzer-cta-btn" disabled>Analyze My Style</button>
+                <p id="upload-prompt-text" class="analyzer-subtitle-small">Upload all 3 photos to continue</p>
+            </div>
+
+            <div id="results-screen" style="display: none;">
+                <div class="analyzer-header">
+                    <h2>Decor Style Analyzer</h2>
+                </div>
+                
+                <h3>Your Uploaded Images</h3>
+                <div id="uploaded-images-preview" class="upload-grid-small">
+                </div>
+
+                <h3>Your Style DNA</h3>
+                <div id="style-dna-results">
+                </div>
+
+                <h3>Key Elements</h3>
+                <div id="key-elements-results" class="key-elements-tags">
+                </div>
+                
+                <h3>Top AI Insights</h3>
+                <ul id="ai-insights-results" class="insights-list">
+                </ul>
+
+                <h3>Recommended for You</h3>
+                <div id="recommended-furniture-results" class="furniture-grid">
+                </div>
+                
+                <button id="reset-analyzer-btn" class="analyzer-cta-btn" style="background-color: #6c757d; margin-top: 15px;">Start New Analysis</button>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            let analyzerHasResults = false;
+            
+            // 更新為四角星的 SVG
+            const originalIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sparkle">
+                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/>
+            </svg>`;
+            const resultsIcon = originalIcon; // 結果頁也使用相同的圖示
+
+            const openBtn = document.getElementById('open-analyzer-btn');
+            const closeBtn = document.getElementById('close-analyzer-btn');
+            const overlay = document.getElementById('analyzer-overlay');
+            const resetBtn = document.getElementById('reset-analyzer-btn');
+            const analyzerBtnLabel = document.getElementById('analyzer-btn-label');
+
+            const uploadScreen = document.getElementById('upload-screen');
+            const resultsScreen = document.getElementById('results-screen');
+            const analyzeBtn = document.getElementById('analyze-style-btn');
+            const uploadPrompt = document.getElementById('upload-prompt-text');
+
+            const uploadedFiles = {
+                file1: null,
+                file2: null,
+                file3: null
+            };
+
+            openBtn.addEventListener('click', () => {
+                if (analyzerHasResults) {
+                    uploadScreen.style.display = 'none';
+                    resultsScreen.style.display = 'block';
+                } else {
+                    uploadScreen.style.display = 'block';
+                    resultsScreen.style.display = 'none';
+                }
+                overlay.style.display = 'flex';
+            });
+
+            closeBtn.addEventListener('click', () => {
+                overlay.style.display = 'none';
+            });
+            
+            resetBtn.addEventListener('click', () => {
+                resetAnalyzer();
+                resultsScreen.style.display = 'none';
+                uploadScreen.style.display = 'block';
+                overlay.scrollTop = 0;
+            });
+
+
+            function setupUploader(inputId, textId, previewId, fileKey) {
+                const input = document.getElementById(inputId);
+                
+                input.addEventListener('change', (event) => {
+                    const file = event.target.files[0];
+                    if (!file) return;
+
+                    uploadedFiles[fileKey] = file;
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        document.getElementById(previewId).src = e.target.result;
+                        document.getElementById(previewId).style.display = 'block';
+                        document.getElementById(textId).style.display = 'none';
+                    };
+                    reader.readAsDataURL(file);
+                    
+                    checkFilesUploaded();
+                });
+            }
+
+            setupUploader('file-1', 'text-1', 'preview-1', 'file1');
+            setupUploader('file-2', 'text-2', 'preview-2', 'file2');
+            setupUploader('file-3', 'text-3', 'preview-3', 'file3');
+
+            function checkFilesUploaded() {
+                if (uploadedFiles.file1 && uploadedFiles.file2 && uploadedFiles.file3) {
+                    analyzeBtn.disabled = false;
+                    uploadPrompt.style.display = 'none';
+                } else {
+                    analyzeBtn.disabled = true;
+                    uploadPrompt.style.display = 'block';
+                }
+            }
+
+            analyzeBtn.addEventListener('click', async () => {
+                analyzeBtn.disabled = true;
+                analyzeBtn.textContent = 'Analyzing...';
+
+                const formData = new FormData();
+                formData.append('image1', uploadedFiles.file1);
+                formData.append('image2', uploadedFiles.file2);
+                formData.append('image3', uploadedFiles.file3);
+
+                try {
+                    const response = await fetch("{{ url_for('analyze_style') }}", {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const results = await response.json();
+                    
+                    if (results.error) {
+                         throw new Error(`AI error: ${results.error}`);
+                    }
+
+                    populateResults(results);
+                    uploadScreen.style.display = 'none';
+                    resultsScreen.style.display = 'block';
+                    overlay.scrollTop = 0;
+
+                } catch (error) {
+                    console.error('Error analyzing style:', error);
+                    alert('An error occurred during analysis. Please try again.\n' + error.message);
+                    analyzeBtn.disabled = false;
+                    analyzeBtn.textContent = 'Analyze My Style';
+                }
+            });
+
+            function populateResults(results) {
+                analyzerHasResults = true;
+                openBtn.innerHTML = resultsIcon;
+                analyzerBtnLabel.textContent = 'View My Style';
+
+                const previewContainer = document.getElementById('uploaded-images-preview');
+                previewContainer.innerHTML = `
+                    <img src="${document.getElementById('preview-1').src}" alt="Uploaded 1">
+                    <img src="${document.getElementById('preview-2').src}" alt="Uploaded 2">
+                    <img src="${document.getElementById('preview-3').src}" alt="Uploaded 3">
+                `;
+
+                const dnaContainer = document.getElementById('style-dna-results');
+                dnaContainer.innerHTML = '';
+                if (results.styleDNA) {
+                    results.styleDNA.forEach(style => {
+                        dnaContainer.innerHTML += `
+                            <div class="dna-item">
+                                <div class="dna-label">
+                                    <span>${style.name}</span>
+                                    <span>${style.percentage}%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-bar-inner" style="width: ${style.percentage}%;"></div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                const elementsContainer = document.getElementById('key-elements-results');
+                elementsContainer.innerHTML = '';
+                if (results.keyElements) {
+                    results.keyElements.forEach(el => {
+                        elementsContainer.innerHTML += `<span>${el}</span>`;
+                    });
+                }
+
+                const insightsContainer = document.getElementById('ai-insights-results');
+                insightsContainer.innerHTML = '';
+                if (results.aiInsights) {
+                    results.aiInsights.forEach(text => {
+                        insightsContainer.innerHTML += `<li>${text}</li>`;
+                    });
+                }
+
+                const furnitureContainer = document.getElementById('recommended-furniture-results');
+                furnitureContainer.innerHTML = '';
+                if (results.recommendations && results.recommendations.length > 0) {
+                    results.recommendations.forEach(item => {
+                        furnitureContainer.innerHTML += `
+                            <div class="item">
+                                <img src="${item.image_url}" alt="${item.series}">
+                                <h3>${item.series}</h3>
+                                <p>Style: ${item.style}</p>
+                                <p class="price-tag">Monthly Rent: $${item.monthly_rent}</p>
+                                <p class="buyout-tag">Buyout Price: $${item.buyout_price}</p>
+                                <a href="/add_to_cart/${item.id}" class="add-btn">Add to Cart</a> 
+                            </div>
+                        `;
+                    });
+                } else {
+                     furnitureContainer.innerHTML = "<p>Sorry, no specific recommendations match this style currently. Check out all our items!</p>";
+                }
+            }
+
+            function resetAnalyzer() {
+                analyzerHasResults = false;
+                openBtn.innerHTML = originalIcon;
+                analyzerBtnLabel.textContent = 'Find Your Style!';
+                
+                uploadedFiles.file1 = null;
+                uploadedFiles.file2 = null;
+                uploadedFiles.file3 = null;
+                
+                document.getElementById('file-1').value = null;
+                document.getElementById('file-2').value = null;
+                document.getElementById('file-3').value = null;
+                
+                document.getElementById('preview-1').style.display = 'none';
+                document.getElementById('preview-2').style.display = 'none';
+                document.getElementById('preview-3').style.display = 'none';
+                
+                document.getElementById('text-1').style.display = 'block';
+                document.getElementById('text-2').style.display = 'block';
+                document.getElementById('text-3').style.display = 'block';
+                
+                checkFilesUploaded();
+                
+                uploadScreen.style.display = 'block';
+                resultsScreen.style.display = 'none';
+                analyzeBtn.textContent = 'Analyze My Style';
+            }
+        });
+    </script>
 </body>
 </html>
