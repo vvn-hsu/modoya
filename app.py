@@ -133,17 +133,18 @@ def add_to_cart(item_id):
     return redirect(url_for('view_cart'))
 
 def get_full_cart_details():
-    cart_items_details = []
+    rent_items = []
+    buy_items = []
+    rent_total = 0
+    buy_total = 0
     
     if 'cart' not in session:
         session['cart'] = {}
-        return []
 
     for item_id in list(session['cart'].keys()):
         cart_item_data = session['cart'].get(item_id)
         
         if not isinstance(cart_item_data, dict):
-            print(f"DEBUG: Removing invalid cart item ID: {item_id}")
             del session['cart'][item_id]
             session.modified = True
             continue 
@@ -160,14 +161,7 @@ def get_full_cart_details():
             duration = int(cart_item_data.get('duration', 12)) 
             order_type = cart_item_data.get('order_type', 'RENT') 
 
-            if order_type == 'RENT':
-                total_cost = monthly_rent * duration
-            elif order_type == 'BUY':
-                total_cost = buyout_price
-            else:
-                total_cost = 0 
-
-            cart_items_details.append({
+            item_details = {
                 'id': item_id,
                 'series': item['metadata']['series'],
                 'style': item['metadata']['style'],
@@ -176,22 +170,40 @@ def get_full_cart_details():
                 'buyout_price': buyout_price,
                 'duration': duration,
                 'order_type': order_type,
-                'total_cost': total_cost
-            })
+                'total_cost': 0
+            }
+
+            if order_type == 'RENT':
+                total_cost = monthly_rent * duration
+                item_details['total_cost'] = total_cost
+                rent_total += total_cost
+                rent_items.append(item_details)
+            elif order_type == 'BUY':
+                total_cost = buyout_price
+                item_details['total_cost'] = total_cost
+                buy_total += total_cost
+                buy_items.append(item_details)
         else:
             del session['cart'][item_id] 
             session.modified = True
     
-    return cart_items_details
+    return {
+        "rent_items": rent_items,
+        "buy_items": buy_items,
+        "rent_total": rent_total,
+        "buy_total": buy_total
+    }
 
 @app.route('/cart')
 def view_cart():
-    cart_items_details = get_full_cart_details()
-    cart_total = sum(item['total_cost'] for item in cart_items_details)
-
-    return render_template('cart.html', 
-                           cart_items=cart_items_details,
-                           cart_total=cart_total)
+    cart_data = get_full_cart_details()
+    return render_template(
+        'cart.html', 
+        rent_items=cart_data['rent_items'],
+        buy_items=cart_data['buy_items'],
+        rent_total=cart_data['rent_total'],
+        buy_total=cart_data['buy_total']
+    )
 
 @app.route('/api/add_to_cart/<item_id>', methods=['POST'])
 def api_add_to_cart(item_id):
@@ -209,9 +221,11 @@ def api_add_to_cart(item_id):
     }
     session.modified = True
     
-    cart_items_details = get_full_cart_details()
-    cart_preview = cart_items_details[:3]
-    cart_item_count = len(cart_items_details)
+    cart_data = get_full_cart_details()
+    all_items = cart_data['rent_items'] + cart_data['buy_items']
+    
+    cart_preview = all_items[:3]
+    cart_item_count = len(all_items)
     
     return jsonify({
         "success": True,
@@ -247,18 +261,44 @@ def update_cart(item_id):
 
 @app.route('/checkout', methods=['POST'])
 def checkout():
-    if not session.get('cart'):
+    cart_type = request.form.get('cart_type')
+
+    if not session.get('cart') or not cart_type:
         return redirect(url_for('view_cart'))
 
-    cart_details = get_full_cart_details()
-    cart_total = sum(item['total_cost'] for item in cart_details)
+    all_cart_data = get_full_cart_details()
+    
+    items_to_checkout = []
+    items_to_keep = []
+    cart_total = 0
+
+    if cart_type == 'RENT':
+        items_to_checkout = all_cart_data['rent_items']
+        items_to_keep = all_cart_data['buy_items']
+        cart_total = all_cart_data['rent_total']
+    elif cart_type == 'BUY':
+        items_to_checkout = all_cart_data['buy_items']
+        items_to_keep = all_cart_data['rent_items']
+        cart_total = all_cart_data['buy_total']
+    else:
+        return redirect(url_for('view_cart'))
+
+    if not items_to_checkout:
+        return redirect(url_for('view_cart'))
 
     order_id = abs(hash(f"{time.time()}{random.randint(1, 1000)}")) 
     
-    session['cart'] = {}
+    new_session_cart = {}
+    for item in items_to_keep:
+        item_id = str(item['id'])
+        if item_id in session['cart']:
+            new_session_cart[item_id] = session['cart'][item_id]
+    
+    session['cart'] = new_session_cart
     session.modified = True
     
     return render_template('checkout_complete.html', order_id=order_id, cart_total=cart_total)
+
 
 @app.route('/checkout_complete')
 def checkout_complete():

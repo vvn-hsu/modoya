@@ -29,15 +29,20 @@
         .btn-rent { background-color: #28a745; color: white; }
         .btn-buy { background-color: #ffc107; color: #343a40; }
         .summary { 
-            border: 2px solid #007bff; 
             padding: 20px; 
             border-radius: 8px; 
             margin-top: 30px; 
-            background-color: #e9f7ff;
             text-align: right;
         }
-        .total-cost { font-size: 1.5em; font-weight: bold; color: #007bff; margin-top: 10px; }
-        .checkout-btn { background-color: #28a745; color: white; width: 100%; margin-top: 15px; font-size: 1.2em; }
+        .summary-rent { border: 2px solid #28a745; background-color: #f0fff4; }
+        .summary-buy { border: 2px solid #ffc107; background-color: #fffaf0; }
+        .total-cost { font-size: 1.5em; font-weight: bold; margin-top: 10px; }
+        .total-rent { color: #28a745; }
+        .total-buy { color: #dfa600; }
+        .checkout-btn { color: white; width: 100%; margin-top: 15px; font-size: 1.2em; }
+        .checkout-rent { background-color: #28a745; }
+        .checkout-buy { background-color: #ffc107; color: #343a40; }
+        .cart-section { margin-bottom: 40px; }
     </style>
 </head>
 <body>
@@ -46,8 +51,16 @@
         <a href="{{ url_for('index') }}" class="btn" style="background-color: #6c757d; color: white;">Continue Shopping</a>
     </div>
 
-    {% if cart_items %}
-        {% for item in cart_items %}
+    {% if not rent_items and not buy_items %}
+        <p>Your cart is empty. Please add items from the <a href="{{ url_for('index') }}">product page</a>.</p>
+    {% endif %}
+
+    {% if rent_items %}
+    <div class="cart-section">
+        <h2 style="color: #28a745;">Rental Items ({{ rent_items|length }})</h2>
+        <hr>
+        
+        {% for item in rent_items %}
         <div class="cart-item">
             <img src="{{ item.image_url }}" alt="{{ item.series }}" class="item-image">
             
@@ -57,12 +70,7 @@
                 <p>Buyout Price: ${{ "%.2f"|format(item.buyout_price) }}</p>
                 <p>
                     <span style="font-size: 1.1em; font-weight: bold;">
-                        Current Action: 
-                        {% if item.order_type == 'RENT' %}
-                            <span style="color: green;">RENT ({{ item.duration }} months)</span>
-                        {% else %}
-                            <span style="color: goldenrod;">BUY</span>
-                        {% endif %}
+                        Current Action: <span style="color: green;">RENT ({{ item.duration }} months)</span>
                     </span>
                 </p>
                 <p style="font-size: 1.2em; font-weight: bold; color: #007bff;">
@@ -80,10 +88,10 @@
                 
                 <div class="control-row" style="justify-content: space-between;">
                     <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" style="flex-grow: 1;">
-                        <button type="submit" name="action" value="set_rent" class="btn btn-rent" style="width: 100%;" {% if item.order_type == 'RENT' %}disabled{% endif %}>Switch to RENT</button>
+                        <button type="submit" name="action" value="set_rent" class="btn btn-rent" style="width: 100%;" disabled>Set as RENT</button>
                     </form>
                     <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" style="flex-grow: 1;">
-                        <button type="submit" name="action" value="set_buy" class="btn btn-buy" style="width: 100%;" {% if item.order_type == 'BUY' %}disabled{% endif %}>Switch to BUY</button>
+                        <button type="submit" name="action" value="set_buy" class="btn btn-buy" style="width: 100%;">Switch to BUY</button>
                     </form>
                 </div>
 
@@ -94,17 +102,70 @@
         </div>
         {% endfor %}
 
-        <div class="summary">
-            <h2>Cart Summary</h2>
-            <div class="total-cost">Total Cost: ${{ "%.2f"|format(cart_total) }}</div>
+        <div class="summary summary-rent">
+            <h2>Rental Summary</h2>
+            <div class="total-cost total-rent">Total Rental Cost: ${{ "%.2f"|format(rent_total) }}</div>
             
             <form action="{{ url_for('checkout') }}" method="POST">
-                <button type="submit" class="btn checkout-btn">Proceed to Checkout</button>
+                <input type="hidden" name="cart_type" value="RENT">
+                <button type="submit" class="btn checkout-btn checkout-rent">Checkout Rental Items</button>
             </form>
         </div>
+    </div>
+    {% endif %}
 
-    {% else %}
-        <p>Your cart is empty. Please add items from the <a href="{{ url_for('index') }}">product page</a>.</p>
+
+    {% if buy_items %}
+    <div class="cart-section">
+        <h2 style="color: #dfa600;">Buyout Items ({{ buy_items|length }})</h2>
+        <hr>
+        
+        {% for item in buy_items %}
+        <div class="cart-item">
+            <img src="{{ item.image_url }}" alt="{{ item.series }}" class="item-image">
+            
+            <div class="item-info">
+                <h3>{{ item.series }} ({{ item.style }})</h3>
+                <p>Monthly Rent: ${{ "%.2f"|format(item.monthly_rent) }}</p>
+                <p>Buyout Price: ${{ "%.2f"|format(item.buyout_price) }}</p>
+                <p>
+                    <span style="font-size: 1.1em; font-weight: bold;">
+                        Current Action: <span style="color: goldenrod;">BUY</span>
+                    </span>
+                </p>
+                <p style="font-size: 1.2em; font-weight: bold; color: #007bff;">
+                    Subtotal: ${{ "%.2f"|format(item.total_cost) }}
+                </p>
+            </div>
+            
+            <div class="item-controls">
+                
+                <div class="control-row" style="justify-content: space-between;">
+                    <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" style="flex-grow: 1;">
+                        <button type="submit" name="action" value="set_rent" class="btn btn-rent" style="width: 100%;">Switch to RENT</button>
+                    </form>
+                    <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" style="flex-grow: 1;">
+                        <button type="submit" name="action" value="set_buy" class="btn btn-buy" style="width: 100%;" disabled>Set as BUY</button>
+                    </form>
+                </div>
+
+                <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" style="margin-top: 10px;">
+                    <button type="submit" name="action" value="remove" class="btn btn-remove" style="width: 100%;">Remove Item</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="summary summary-buy">
+            <h2>Buyout Summary</h2>
+            <div class="total-cost total-buy">Total Buyout Cost: ${{ "%.2f"|format(buy_total) }}</div>
+            
+            <form action="{{ url_for('checkout') }}" method="POST">
+                <input type="hidden" name="cart_type" value="BUY">
+                <button type="submit" class="btn checkout-btn checkout-buy">Checkout Buyout Items</button>
+            </form>
+        </div>
+    </div>
     {% endif %}
     
 </body>
