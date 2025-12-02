@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Orders | Modoya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-primary: #111111;
+            --text-secondary: #757575;
+            --accent-purple: #6200EE;
+        }
+
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: #f9fafb; 
+            color: var(--text-primary); 
+            margin: 0; 
+            padding: 40px; 
+        }
+        
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        /* Header Style Match */
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 60px; 
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: #000;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .nav-item:hover { color: #000; }
+
+        .highlight-text {
+            color: var(--accent-purple);
+            font-weight: 700;
+        }
+        
+        /* Order Cards */
+        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+
+        .order-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); margin-bottom: 24px; }
+        .order-header { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 16px; margin-bottom: 16px; }
+        .order-id { font-weight: 700; font-size: 18px; }
+        .order-date { color: #666; font-size: 14px; margin-top: 4px; }
+        
+        .order-status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #e0f2f1; color: #00897b; }
+        
+        .order-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 12px; margin-top: 16px; }
+        .order-item img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; background: #f0f0f0; border: 1px solid #eee; }
+        
+        .order-footer { margin-top: 20px; text-align: right; font-weight: 700; font-size: 18px; border-top: 1px solid #f9f9f9; padding-top: 16px;}
+        
+        .empty-state { text-align: center; padding: 80px 0; color: #888; }
+        .btn { background: #111; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; margin-top: 16px; font-weight: 600; }
+        .btn:hover { background: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="{{ url_for('index') }}" class="logo">modoya</a>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="nav-item highlight-text">Style Analyzer</a>
+                <a href="{{ url_for('view_orders') }}" class="nav-item" style="color:#000; font-weight:700;">Orders</a>
+                <a href="{{ url_for('view_cart') }}" class="nav-item">Cart</a>
+            </div>
+        </div>
+
+        <div class="page-title">Your Order History</div>
+
+        {% if not orders %}
+            <div class="empty-state">
+                <p>You haven't placed any orders yet.</p>
+                <a href="{{ url_for('index') }}" class="btn">Start Shopping</a>
+            </div>
+        {% else %}
+            {% for order in orders %}
+            <div class="order-card">
+                <div class="order-header">
+                    <div>
+                        <div class="order-id">Order #{{ order.id }}</div>
+                        <div class="order-date">{{ order.date }}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="order-status">Processing</span>
+                        <div style="margin-top:5px; font-size:13px; color:#888; font-weight: 500;">
+                            {% if order.type == 'BUY' %}
+                                Buyout Order
+                            {% else %}
+                                Rental Order
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-items">
+                    {% for item in order['items'] %}
+                    <div class="order-item" title="{{ item.series }}">
+                        <img src="{{ item.image_url }}" alt="{{ item.series }}">
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="order-footer">
+                    Total: ${{ "%.2f"|format(order.total) }}
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>

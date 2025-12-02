@@ -3,3 +3,6 @@ git add .
 git commit -m "comment"
 git push origin main
 python make_AI_furniture_images.py 
+
+
+lsof -i :5000

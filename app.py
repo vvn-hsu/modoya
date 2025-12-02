@@ -6,6 +6,7 @@ import time
 import base64
 import io
 import json
+from datetime import datetime
 from openai import OpenAI
 import keys
 
@@ -17,8 +18,6 @@ app.secret_key = 'your_super_secret_key_for_modoya'
 try:
     client = OpenAI(api_key=keys.OpenAI_key)
 except AttributeError:
-    print("Error: 'OpenAI_key' not found in keys.py.")
-    print("Please make sure your keys.py file has: OpenAI_key = 'sk-...'")
     sys.exit(1)
 
 FOLDER_PATH = "Pictures"
@@ -26,7 +25,6 @@ FOLDER_PATH = "Pictures"
 try:
     ALL_FURNITURE_ITEMS = get_all_items(FOLDER_PATH)
 except FileNotFoundError:
-    print(f"Error: Could not find data in folder '{FOLDER_PATH}'. Check FOLDER_PATH in app.py")
     sys.exit(1)
 
 def encode_image(image_file):
@@ -35,7 +33,6 @@ def encode_image(image_file):
         b64_string = base64.b64encode(img_bytes).decode('utf-8')
         return b64_string
     except Exception as e:
-        print(f"Error encoding image: {e}")
         return None
 
 def format_recommendations(items_list, match_reason=""):
@@ -50,6 +47,7 @@ def format_recommendations(items_list, match_reason=""):
             'id': item['metadata']['row_id'],
             'series': item['metadata']['series'],
             'style': item['metadata']['style'],
+            'category': item['metadata'].get('category', 'Furniture'),
             'image_url': url_for('serve_pictures', filename=filename_only),
             'monthly_rent': "%.2f" % calculate_rent(item['metadata']),
             'buyout_price': "%.2f" % calculate_buyout_price(item['metadata']),
@@ -63,10 +61,6 @@ three images provided by the user and return a JSON object that
 summarizes their style.
 
 You MUST respond with ONLY a valid JSON object in the following format.
-
-- For 'styleDNA', list ONLY the top 1-3 most relevant styles. Do not list more than 3.
-- For 'keyElements', list 4-6 important design elements.
-- For 'designRecommendations', list 2-3 actionable design recommendations.
 
 {
   "styleDNA": [
@@ -95,7 +89,6 @@ def index():
 
     items_for_render = []
     for item in ALL_FURNITURE_ITEMS:
-        
         img_url_path = item['image_path'].replace('\\', '/') 
         filename_only = img_url_path.split('/')[-1]
         
@@ -114,6 +107,12 @@ def index():
                            items=items_for_render,
                            cart_item_count=cart_item_count)
 
+@app.route('/orders')
+def view_orders():
+    orders = session.get('orders', [])
+    orders.sort(key=lambda x: x['timestamp'], reverse=True)
+    return render_template('orders.html', orders=orders)
+
 @app.route('/add_to_cart/<item_id>', methods=['GET'])
 def add_to_cart(item_id):
     item = get_item_by_id(ALL_FURNITURE_ITEMS, item_id)
@@ -121,7 +120,6 @@ def add_to_cart(item_id):
         return redirect(url_for('index'))
 
     duration = 12
-    
     if 'cart' not in session:
         session['cart'] = {}
     
@@ -165,6 +163,7 @@ def get_full_cart_details():
                 'id': item_id,
                 'series': item['metadata']['series'],
                 'style': item['metadata']['style'],
+                'category': item['metadata'].get('category', 'Furniture'),
                 'image_url': image_url,
                 'monthly_rent': monthly_rent,
                 'buyout_price': buyout_price,
@@ -211,13 +210,17 @@ def api_add_to_cart(item_id):
     if not item:
         return jsonify({"success": False, "error": "Item not found"}), 404
 
+    order_type = request.args.get('type', 'RENT').upper()
+    if order_type not in ['RENT', 'BUY']:
+        order_type = 'RENT'
+
     duration = 12
     if 'cart' not in session:
         session['cart'] = {}
     
     session['cart'][item_id] = {
         'duration': duration,
-        'order_type': 'RENT' 
+        'order_type': order_type 
     }
     session.modified = True
     
@@ -227,13 +230,14 @@ def api_add_to_cart(item_id):
     cart_preview = all_items[:3]
     cart_item_count = len(all_items)
     
+    message = f"Added {item['metadata']['series']} to cart ({'Buyout' if order_type == 'BUY' else 'Rental'})."
+
     return jsonify({
         "success": True,
-        "message": f"Added {item['metadata']['series']} to cart.",
+        "message": message,
         "cart_item_count": cart_item_count,
         "cart_preview": cart_preview
     })
-
 
 @app.route('/update_cart/<item_id>', methods=['POST'])
 def update_cart(item_id):
@@ -288,6 +292,20 @@ def checkout():
 
     order_id = abs(hash(f"{time.time()}{random.randint(1, 1000)}")) 
     
+    new_order = {
+        'id': order_id,
+        'date': datetime.now().strftime("%Y-%m-%d %H:%M"),
+        'timestamp': time.time(),
+        'items': items_to_checkout,
+        'total': cart_total,
+        'type': cart_type
+    }
+    
+    if 'orders' not in session:
+        session['orders'] = []
+    
+    session['orders'].append(new_order)
+    
     new_session_cart = {}
     for item in items_to_keep:
         item_id = str(item['id'])
@@ -298,7 +316,6 @@ def checkout():
     session.modified = True
     
     return render_template('checkout_complete.html', order_id=order_id, cart_total=cart_total)
-
 
 @app.route('/checkout_complete')
 def checkout_complete():
@@ -362,7 +379,6 @@ def analyze_style():
     ]
 
     try:
-        print("DEBUG: Calling OpenAI API (gpt-4o)...")
         response = client.chat.completions.create(
             model="gpt-4o",
             messages=messages_payload,
@@ -372,14 +388,11 @@ def analyze_style():
         
         ai_response_content = response.choices[0].message.content
         ai_json_response = json.loads(ai_response_content)
-        print("DEBUG: Received AI JSON response.")
 
         top_style = "Modern"
         if ai_json_response.get("styleDNA") and len(ai_json_response["styleDNA"]) > 0:
             top_style = ai_json_response["styleDNA"][0].get("name", "Modern")
         
-        print(f"DEBUG: AI identified top style: {top_style}. Filtering local items...")
-
         recommended_items_data = filter_furniture(ALL_FURNITURE_ITEMS, style=top_style)
         
         formatted_recommendations = format_recommendations(recommended_items_data, top_style)
@@ -392,7 +405,6 @@ def analyze_style():
         return jsonify(final_response)
 
     except Exception as e:
-        print(f"Error calling OpenAI API or processing response: {e}")
         return jsonify({"error": f"AI analysis failed: {str(e)}"}), 500
 
 if __name__ == '__main__':
