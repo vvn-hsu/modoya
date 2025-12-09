@@ -2,7 +2,7 @@ source venv/bin/activate
 git add .
 git commit -m "comment"
 git push origin main
-python make_AI_furniture_images.py 
+python main.py 
 
 
 lsof -i :5000
