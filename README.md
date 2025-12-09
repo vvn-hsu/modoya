@@ -14,7 +14,7 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
 * **Dynamic Cart:** Real-time updates for rental duration and order types.
 * **Order Tracking:** View rental and purchase history with generated order IDs.
 
-### AI Style Analyzer
+#### AI Style Analyzer
 Upload three reference photos of interior spaces you love, and our AI will analyze your aesthetic preferences.
 ![Style Analyzer Page](docs/demo_image/findstyle1.jpg)
 
