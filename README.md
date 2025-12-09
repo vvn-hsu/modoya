@@ -26,7 +26,7 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/vivhsu/modoya.git](https://github.com/vivhsu/modoya.git)
+    git clone https://github.com/vvn-hsu/modoya.git
     cd modoya
     ```
 
@@ -68,4 +68,4 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
 
 ## License
 
-Created by Viv Hsu for HCI 584 at Iowa State University.
+Created by Vivian Hsu for HCI 584 at Iowa State University.
