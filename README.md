@@ -26,7 +26,7 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/your-username/modoya.git](https://github.com/your-username/modoya.git)
+    git clone [https://github.com/vivhsu/modoya.git](https://github.com/vivhsu/modoya.git)
     cd modoya
     ```
 
