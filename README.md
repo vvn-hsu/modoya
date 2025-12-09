@@ -1,24 +1,30 @@
 # Modoya - Furniture Rental & Buyout Platform
 
-**HCI 584 Final Project**
+**HCI 584 Final Project - Fall 2025**
 
 Modoya is a web-based furniture platform that offers flexible ownership options. Users can choose to rent high-quality furniture for a monthly fee or purchase items outright ("buyout"). The platform features an AI-powered **Style Analyzer**, which uses the OpenAI API to analyze user-uploaded room photos and recommend furniture that matches their personal interior design style.
 
-## ✨ Features
+![Modoya Homepage Screenshot]( 這裡填入圖片路徑: 例如 docs/images/homepage.png )
+> **建議圖片 1：首頁截圖**
+> *這裡放一張網站首頁（index.html）的完整截圖，最好能看到 Banner 和下面的家具列表，讓這份文件一打開就很有視覺衝擊力。*
 
-* **Flexible Ownership:** Toggle between "Rent" (monthly payments) and "Buy" (one-time purchase) options.
-* **AI Style Analyzer:** Upload 3 photos of your space, and our AI (powered by GPT-4o) will analyze your "Style DNA" and recommend matching furniture from our catalog.
-* **Dynamic Cart System:** Real-time cart updates, mini-cart preview, and duration adjustments for rentals.
-* **Order Management:** View past rental and buyout history.
-* **Responsive Design:** Clean, modern interface optimized for desktop and tablet usage.
+## ✨ Key Features
+
+* **Flexible Ownership:** Seamlessly toggle between "Rent" (monthly payments) and "Buy" (one-time purchase) options for every item.
+* **AI Style Analyzer:** Upload 3 photos of your space, and our AI (powered by GPT-4o) will analyze your "Style DNA" and recommend matching furniture.
+* **Dynamic Cart:** Real-time updates for rental duration and order types.
+* **Order Tracking:** View rental and purchase history with generated order IDs.
+
+![Style Analyzer Feature]( 這裡填入圖片路徑: 例如 docs/images/analyzer_result.png )
+> **建議圖片 2：AI 風格分析結果**
+> *這裡建議放「Style Analyzer」分析完成後的畫面（彈跳視窗顯示 Style DNA 長條圖和推薦家具的那一頁）。這是你專案最酷的技術亮點，一定要秀出來。*
 
 ## 🛠️ Prerequisites
 
-Before you begin, ensure you have the following installed:
-* [cite_start]**Python 3.8+** [cite: 126]
-* **OpenAI API Key** (Required for the Style Analyzer feature)
+* Python 3.8+
+* OpenAI API Key (Required for Style Analyzer)
 
-## 📦 Installation
+## 📦 Installation & Setup
 
 1.  **Clone the repository**
     ```bash
@@ -27,50 +33,41 @@ Before you begin, ensure you have the following installed:
     ```
 
 2.  **Install Dependencies**
-    [cite_start]Install the required Python packages using `requirements.txt`[cite: 52]:
     ```bash
     pip install -r requirements.txt
     ```
 
-3.  **Setup Configuration (Important)**
-    This project requires an API key to run. For security reasons, the key file is not included in the repository.
-    
-    * Create a new file named `keys.py` in the root directory.
-    * Add your OpenAI API key inside it like this:
+3.  **Configure API Key**
+    For security reasons, the API key is not included in the repository. You must create a configuration file locally:
+    * Create a file named `keys.py` in the root directory.
+    * Add your OpenAI API key:
         ```python
         # keys.py
         OpenAI_key = "sk-your-actual-api-key-here"
         ```
-    * *Note: `keys.py` is included in `.gitignore` to prevent accidental upload.*
 
-## 🚀 Usage
+## 🚀 How to Run
 
-1.  **Run the Application**
-    Execute the main script from your terminal:
+1.  Start the Flask server:
     ```bash
     python main.py
     ```
-    *Note: The main entry point is `main.py`, not `run_cli.py` or `generate_csv_data.py`.* [cite: 29]
 
-2.  **Access the Website**
-    Open your web browser and navigate to:
-    ```
-    [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
-    ```
+2.  Open your browser and navigate to:
+    `http://127.0.0.1:5000/`
+
+![Cart and Checkout]( 這裡填入圖片路徑: 例如 docs/images/cart_checkout.png )
+> **建議圖片 3：購物車或結帳畫面**
+> *這裡可以放購物車頁面（顯示 Rent/Buy 不同選項）或是結帳完成的 "Order Placed" 畫面，證明你的交易邏輯是會動的。*
 
 ## 📂 Project Structure
 
-[cite_start]Here is a brief overview of the key files[cite: 12, 258]:
-
-* `main.py`: The main Flask application entry point. Handles routing, API calls, and session management.
-* `module.py`: Contains core logic for furniture data loading, filtering, and price calculations (Rent vs. Buyout logic).
-* `templates/`: HTML files for the frontend (Index, Cart, Orders).
-* `Pictures/`: Image assets for the furniture catalog.
-* `requirements.txt`: List of Python dependencies.
+* `main.py`: Main application entry point and Flask routes.
+* `module.py`: Core logic for data handling, filtering, and price calculations.
+* `templates/`: HTML frontend files.
+* `Pictures/`: Furniture image assets.
+* `requirements.txt`: Python dependencies.
 
 ## 📝 License
 
-This project is created for educational purposes for the HCI 584 course at Iowa State University.
-
----
-*Created by Vivian Hsu - Fall 2025*
+Created by Viv Hsu for HCI 584 at Iowa State University.
