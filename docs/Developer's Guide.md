@@ -1,7 +1,9 @@
 # Modoya - Developer's Guide
 
 **Date:** December 2025
+
 **Author:** Vivian Hsu
+
 **Course:** HCI 584
 
 ---
