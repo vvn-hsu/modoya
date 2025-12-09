@@ -7,7 +7,7 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
 ![Modoya Home Page](docs/demo_image/home1.jpg)
 ![Modoya Home Page](docs/demo_image/home2.jpg)
 
-## ✨ Key Features
+## Key Features
 
 * **Flexible Ownership:** Seamlessly toggle between "Rent" (monthly payments) and "Buy" (one-time purchase) options for every item.
 * **AI Style Analyzer:** Upload 3 photos of your space, and our AI (powered by GPT-4o) will analyze your "Style DNA" and recommend matching furniture.
@@ -17,12 +17,12 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
 ![Style Analyzer Page](docs/demo_image/findstyle1.jpg)
 ![Style Analyzer Page](docs/demo_image/findstyle2.jpg)
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 * Python 3.8+
 * OpenAI API Key (Required for Style Analyzer)
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 1.  **Clone the repository**
     ```bash
@@ -44,7 +44,7 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
         OpenAI_key = "sk-your-actual-api-key-here"
         ```
 
-## 🚀 How to Run
+## How to Run
 
 1.  Start the Flask server:
     ```bash
@@ -58,7 +58,7 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
 ![Cart Page](docs/demo_image/cart.jpg)
 ![Order History Page](docs/demo_image/order.jpg)
 
-## 📂 Project Structure
+## Project Structure
 
 * `main.py`: Main application entry point and Flask routes.
 * `module.py`: Core logic for data handling, filtering, and price calculations.
@@ -66,6 +66,6 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
 * `Pictures/`: Furniture image assets.
 * `requirements.txt`: Python dependencies.
 
-## 📝 License
+## License
 
 Created by Viv Hsu for HCI 584 at Iowa State University.
