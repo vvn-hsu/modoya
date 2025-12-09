@@ -16,6 +16,8 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
 
 ![Style Analyzer Page](docs/demo_image/findstyle1.jpg)
 ![Style Analyzer Page](docs/demo_image/findstyle2.jpg)
+![Cart Page](docs/demo_image/cart.jpg)
+![Order History Page](docs/demo_image/order.jpg)
 
 ## Prerequisites
 
@@ -53,10 +55,6 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
 
 2.  Open your browser and navigate to:
     `http://127.0.0.1:5000/`
-
-
-![Cart Page](docs/demo_image/cart.jpg)
-![Order History Page](docs/demo_image/order.jpg)
 
 ## Project Structure
 
