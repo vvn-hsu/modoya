@@ -436,10 +436,6 @@
 
             const openOverlay = () => document.getElementById('analyzer-overlay').style.display = 'flex';
             document.getElementById('open-analyzer-btn').onclick = openOverlay;
-            document.getElementById('header-style-analyzer-btn').onclick = (e) => {
-                e.preventDefault();
-                openOverlay();
-            };
             
             document.getElementById('close-analyzer-btn').onclick = () => document.getElementById('analyzer-overlay').style.display = 'none';
 
