@@ -4,6 +4,15 @@ import random
 from PIL import Image
 
 def load_metadata(folder):
+    """
+    Loads JSON metadata files from the specified folder.
+    
+    Args:
+        folder (str): Path to the directory containing JSON files.
+        
+    Returns:
+        list: A list of dictionaries containing the loaded metadata.
+    """
     data_list = []
     for file in os.listdir(folder):
         if file.endswith(".json"):
@@ -13,9 +22,27 @@ def load_metadata(folder):
     return data_list
 
 def load_image(file_path):
+    """
+    Opens an image file using PIL.
+    
+    Args:
+        file_path (str): Path to the image file.
+        
+    Returns:
+        Image: A PIL Image object.
+    """
     return Image.open(file_path)
 
 def get_all_items(folder):
+    """
+    Aggregates all furniture items (images and metadata) from the folder.
+    
+    Args:
+        folder (str): Directory containing the assets.
+        
+    Returns:
+        list: A list of dictionaries, each containing 'image_path' and 'metadata'.
+    """
     items = []
     metadata_list = load_metadata(folder)
     for data in metadata_list:
@@ -28,6 +55,19 @@ def get_all_items(folder):
     return items
 
 def filter_furniture(items, category=None, style=None, color=None, season=None):
+    """
+    Filters furniture items based on provided criteria.
+    
+    Args:
+        items (list): The list of furniture items.
+        category (str, optional): Filter by category.
+        style (str, optional): Filter by style.
+        color (str, optional): Filter by color.
+        season (str, optional): Filter by season.
+        
+    Returns:
+        list: A filtered list of furniture items.
+    """
     filtered_items = items
 
     if category:
@@ -45,6 +85,15 @@ def filter_furniture(items, category=None, style=None, color=None, season=None):
     return filtered_items
 
 def calculate_rent(item_metadata):
+    """
+    Calculates the monthly rental price based on item category, material, and style.
+    
+    Args:
+        item_metadata (dict): Metadata dictionary of the item.
+        
+    Returns:
+        float: Calculated monthly rent.
+    """
     base_rent_map = {
         "Sofa": 60, "Chair": 40, "Storage": 35, "Lamp": 20
     }
@@ -62,6 +111,15 @@ def calculate_rent(item_metadata):
     return monthly_rent
 
 def calculate_buyout_price(item_metadata):
+    """
+    Calculates the total buyout price based on item category, material, and style.
+    
+    Args:
+        item_metadata (dict): Metadata dictionary of the item.
+        
+    Returns:
+        float: Calculated buyout price.
+    """
     buyout_map = {
         "Sofa": 1200, "Chair": 800, "Storage": 700, "Lamp": 350
     }
@@ -79,6 +137,9 @@ def calculate_buyout_price(item_metadata):
     return final_buyout_price
 
 def get_available_options(items):
+    """
+    Extracts all unique filter options (style, color, season, category) from items.
+    """
     options = {
         'style': set(),
         'color': set(),
@@ -100,7 +161,11 @@ def get_item_by_id(items, item_id):
             return item
     return None
 
+# The following functions (place_order, display_recommendations) 
+# appear to be CLI-related but are kept for compatibility.
+
 def place_order(item, rental_details, order_type="RENT"):
+    """Handles the CLI logic for placing an order."""
     metadata = item['metadata']
     duration = rental_details.get('duration', 0)
     monthly_rent = rental_details.get('monthly_rent', 0)
@@ -136,6 +201,7 @@ def place_order(item, rental_details, order_type="RENT"):
         return False
 
 def display_recommendations(recommendations, duration):
+    """Displays recommended items in the CLI."""
     if not recommendations:
         print("Sorry, no furniture items match your criteria.")
         return
