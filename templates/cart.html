@@ -70,11 +70,12 @@
                 <div class="item-details">
                     <h3>{{ item.series }}</h3>
                     <p>{{ item.style }}</p>
-                    <p style="margin-top:6px; font-weight:600;">${{ item.monthly_rent }}/mo × {{ item.duration }} mo</p>
+                    <p style="margin-top:6px; font-weight:600;">${{ item.monthly_rent }}/mo × {{ item.duration }} Months</p>
                 </div>
                 <div class="controls">
-                    <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" style="display:flex; gap:8px;">
+                    <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" style="display:flex; gap:8px; align-items: center;">
                         <input type="number" name="duration" value="{{ item.duration }}" min="1">
+                        <span style="font-size: 14px; color: #555;">months</span>
                         <button type="submit" name="action" value="update_duration" class="btn btn-update">Update</button>
                     </form>
                     <div class="action-row">
