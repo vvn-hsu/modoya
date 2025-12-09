@@ -63,21 +63,35 @@ OpenAI_key = "sk-your-actual-api-key-here"
 
 Upon launching, you will see the featured furniture collection. You can toggle between viewing Rental prices (monthly) and Buyout prices.
 
+![Modoya Home Page](docs/demo_image/home2.jpg)
+
+
 ### 2\. AI Style Analyzer
 
 Click the "Find My Style" button. Upload three reference photos of interior spaces you love, and our AI (powered by GPT-4o) will analyze your aesthetic preferences.
+
+![Style Analyzer Page](docs/demo_image/findstyle1.jpg)
 
 ### 3\. Analysis & Recommendations
 
 The AI will generate your personalized "Style DNA" breakdown and curate a list of furniture from our catalog that matches your specific taste.
 
+![Style Analyzer Page](docs/demo_image/findstyle2.jpg)
+
+
 ### 4\. Dynamic Cart Management
 
-Add items to your cart. The system separates rental and buyout items to prevent confusion. You can easily switch between "Rent" and "Buy" modes for any item and customize your rental duration (e.g., 6 months vs 12 months).
+Add items to your cart. The system separates rental and buyout items to prevent confusion. You can easily switch between "Rent" and "Buy" modes for any item and customize your rental duration.
+
+![Cart Page](docs/demo_image/cart.jpg)
+
 
 ### 5\. Order Confirmation
 
 Once you proceed to checkout, your order is confirmed with a unique transaction ID. You can view your order history in the "Orders" tab.
+
+![Order History Page](docs/demo_image/order.jpg)
+
 
 -----
 
