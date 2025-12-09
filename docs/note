@@ -6,3 +6,5 @@ python make_AI_furniture_images.py
 
 
 lsof -i :5000
+
+<a href="{{ url_for('index') }}" class="nav-item highlight-text">Style Analyzer</a>
