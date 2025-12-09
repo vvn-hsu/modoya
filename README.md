@@ -4,8 +4,8 @@
 
 Modoya is a web-based furniture platform that offers flexible ownership options. Users can choose to rent high-quality furniture for a monthly fee or purchase items outright ("buyout"). The platform features an AI-powered **Style Analyzer**, which uses the OpenAI API to analyze user-uploaded room photos and recommend furniture that matches their personal interior design style.
 
-![Modoya Home Page](docs/demo_image/home1.png)
-![Modoya Home Page](docs/demo_image/home2.png)
+![Modoya Home Page](docs/demo_image/home1.jpg)
+![Modoya Home Page](docs/demo_image/home2.jpg)
 
 ## ✨ Key Features
 
@@ -14,8 +14,8 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
 * **Dynamic Cart:** Real-time updates for rental duration and order types.
 * **Order Tracking:** View rental and purchase history with generated order IDs.
 
-![Style Analyzer Page](docs/demo_image/findstyle1.png)
-![Style Analyzer Page](docs/demo_image/findstyle2.png)
+![Style Analyzer Page](docs/demo_image/findstyle1.jpg)
+![Style Analyzer Page](docs/demo_image/findstyle2.jpg)
 
 ## 🛠️ Prerequisites
 
@@ -55,8 +55,8 @@ Modoya is a web-based furniture platform that offers flexible ownership options.
     `http://127.0.0.1:5000/`
 
 
-![Cart Page](docs/demo_image/cart.png)
-![Order History Page](docs/demo_image/order.png)
+![Cart Page](docs/demo_image/cart.jpg)
+![Order History Page](docs/demo_image/order.jpg)
 
 ## 📂 Project Structure
 
