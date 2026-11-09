@@ -7,20 +7,14 @@ import base64
 import io
 import json
 from datetime import datetime
-from openai import OpenAI
-import keys
 
 from module import get_all_items, filter_furniture, calculate_rent, calculate_buyout_price, get_item_by_id
 
 app = Flask(__name__)
-app.secret_key = 'your_super_secret_key_for_modoya' 
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-only-secret-key-for-modoya')
 
-try:
-    client = OpenAI(api_key=keys.OpenAI_key)
-except AttributeError:
-    sys.exit(1)
-
-FOLDER_PATH = "Pictures"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FOLDER_PATH = os.path.join(BASE_DIR, "Pictures")
 
 try:
     ALL_FURNITURE_ITEMS = get_all_items(FOLDER_PATH)
@@ -55,28 +49,22 @@ def format_recommendations(items_list, match_reason=""):
         })
     return items_for_render
 
-AI_SYSTEM_PROMPT = """
-You are a professional interior design assistant. Your goal is to analyze
-three images provided by the user and return a JSON object that
-summarizes their style.
-
-You MUST respond with ONLY a valid JSON object in the following format.
-
-{
-  "styleDNA": [
-    {"name": "Minimalist", "percentage": 85},
-    {"name": "Scandinavian", "percentage": 75}
-  ],
-  "keyElements": [
-    "Neutral Color Palette", "Natural Light", "Wood Accents", "Clean Lines", "Functional Decor"
-  ],
-  "designRecommendations": [
-    "Consider adding textured elements like a plush rug or cushions to enhance warmth.",
-    "Introduce a statement floor lamp in a corner to create a focal point.",
-    "Balance the wood tones with cool, neutral-colored textiles like a gray sofa."
-  ]
+# Fixed Style Analyzer result (no AI call). Every upload gets this same analysis.
+FIXED_STYLE_RESULT = {
+    "styleDNA": [
+        {"name": "Japandi", "percentage": 82},
+        {"name": "Scandinavian", "percentage": 74},
+        {"name": "Minimalist", "percentage": 61}
+    ],
+    "keyElements": [
+        "Neutral Color Palette", "Natural Light", "Wood Accents", "Clean Lines", "Functional Decor"
+    ],
+    "designRecommendations": [
+        "Consider adding textured elements like a plush rug or cushions to enhance warmth.",
+        "Introduce a statement floor lamp in a corner to create a focal point.",
+        "Balance the wood tones with cool, neutral-colored textiles like a gray sofa."
+    ]
 }
-"""
 
 @app.route('/Pictures/<path:filename>')
 def serve_pictures(filename):
@@ -343,69 +331,14 @@ def analyze_style():
     if not file1 or not file2 or not file3:
         return jsonify({"error": "Missing one or more images"}), 400
 
-    b64_image1 = encode_image(file1)
-    b64_image2 = encode_image(file2)
-    b64_image3 = encode_image(file3)
-    
-    if not all([b64_image1, b64_image2, b64_image3]):
-        return jsonify({"error": "Failed to process images"}), 500
+    top_style = FIXED_STYLE_RESULT["styleDNA"][0]["name"]
+    recommended_items_data = filter_furniture(ALL_FURNITURE_ITEMS, style=top_style)
+    formatted_recommendations = format_recommendations(recommended_items_data, top_style)
 
-    messages_payload = [
-        {
-            "role": "system",
-            "content": AI_SYSTEM_PROMPT
-        },
-        {
-            "role": "user",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Please analyze these three interior design images and return the JSON object describing my style preferences."
-                },
-                {
-                    "type": "image_url",
-                    "image_url": { "url": f"data:image/jpeg;base64,{b64_image1}" }
-                },
-                {
-                    "type": "image_url",
-                    "image_url": { "url": f"data:image/jpeg;base64,{b64_image2}" }
-                },
-                {
-                    "type": "image_url",
-                    "image_url": { "url": f"data:image/jpeg;base64,{b64_image3}" }
-                }
-            ]
-        }
-    ]
-
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=messages_payload,
-            response_format={"type": "json_object"},
-            max_tokens=1024
-        )
-        
-        ai_response_content = response.choices[0].message.content
-        ai_json_response = json.loads(ai_response_content)
-
-        top_style = "Modern"
-        if ai_json_response.get("styleDNA") and len(ai_json_response["styleDNA"]) > 0:
-            top_style = ai_json_response["styleDNA"][0].get("name", "Modern")
-        
-        recommended_items_data = filter_furniture(ALL_FURNITURE_ITEMS, style=top_style)
-        
-        formatted_recommendations = format_recommendations(recommended_items_data, top_style)
-
-        final_response = {
-            **ai_json_response,
-            "recommendations": formatted_recommendations
-        }
-        
-        return jsonify(final_response)
-
-    except Exception as e:
-        return jsonify({"error": f"AI analysis failed: {str(e)}"}), 500
+    return jsonify({
+        **FIXED_STYLE_RESULT,
+        "recommendations": formatted_recommendations
+    })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=os.environ.get('FLASK_DEBUG') == '1')

@@ -1,7 +1,6 @@
 import os
 import json
 import random
-from PIL import Image
 
 def load_metadata(folder):
     """
@@ -31,6 +30,7 @@ def load_image(file_path):
     Returns:
         Image: A PIL Image object.
     """
+    from PIL import Image
     return Image.open(file_path)
 
 def get_all_items(folder):
