@@ -4,7 +4,7 @@
   "series": "Saarinen Tulip Table",
   "style": "Industrial",
   "material": "Light Oak",
-  "color": "Off-white",
+  "color": "Pale Oak",
   "attributes": "Modular",
   "location": "rural",
   "season": "summer",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\95_table_light_oak_off_white_rural_summer.png",
-  "json_file": "Pictures\\95_table_light_oak_off_white_rural_summer.json"
+  "json_file": "Pictures\\95_table_light_oak_off_white_rural_summer.json",
+  "name": "Oval Pedestal Table — Pale Oak",
+  "type": "dining_round",
+  "description": "A wide pale oak oval top on a sculpted pedestal base. Industrial style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 55,
+    "d": 42,
+    "h": 29
+  },
+  "stock": 9,
+  "monthly_rent": 21,
+  "buyout_price": 439
 }

@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "TV Stand",
   "style": "Traditional",
-  "material": "Matte Black Steel",
+  "material": "Carved Wood",
   "color": "Black",
   "attributes": "Vintage look",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\22_storage_matte_black_steel_black_rural_winter.png",
-  "json_file": "Pictures\\22_storage_matte_black_steel_black_rural_winter.json"
+  "json_file": "Pictures\\22_storage_matte_black_steel_black_rural_winter.json",
+  "name": "Carved TV Stand — Black",
+  "type": "tv_stand",
+  "description": "A heavy black media console with carved panel doors and an open center shelf. Traditional style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 60,
+    "d": 16,
+    "h": 23
+  },
+  "stock": 9,
+  "monthly_rent": 38,
+  "buyout_price": 719
 }

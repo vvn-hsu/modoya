@@ -4,7 +4,7 @@
   "series": "Noguchi Coffee Table",
   "style": "Mid-Century Modern",
   "material": "Light Oak",
-  "color": "Emerald Green",
+  "color": "Natural Oak",
   "attributes": "Playful",
   "location": "suburban",
   "season": "winter",
@@ -12,5 +12,22 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\9_table_light_oak_emerald_green_suburban_winter.png",
-  "json_file": "Pictures\\9_table_light_oak_emerald_green_suburban_winter.json"
+  "json_file": "Pictures\\9_table_light_oak_emerald_green_suburban_winter.json",
+  "name": "Round Coffee Table — Light Oak",
+  "type": "round_coffee",
+  "description": "A wide oval oak top with a dark rim on splayed oak legs. Sofa shown for styling only. Mid-Century Modern style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 43,
+    "d": 42,
+    "h": 15
+  },
+  "stock": 2,
+  "monthly_rent": 29,
+  "buyout_price": 559,
+  "crop": [
+    0.36,
+    0.5,
+    1.0,
+    0.95
+  ]
 }

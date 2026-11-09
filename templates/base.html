@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Modoya{% endblock %} | Modoya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    {% block styles %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <header class="header">
+        <a href="{{ url_for('index') }}" class="logo">modoya</a>
+        <nav class="nav-links" aria-label="Main">
+            <a href="{{ url_for('index') }}#catalogue" class="nav-item">Shop</a>
+            <button type="button" class="nav-item nav-style-link open-analyzer">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
+                Find My Style
+            </button>
+            <a href="{{ url_for('index') }}#how-it-works" class="nav-item">How it works</a>
+            <a href="{{ url_for('view_orders') }}" class="nav-item {% if request.endpoint == 'view_orders' %}nav-current{% endif %}">Orders</a>
+            <a href="{{ url_for('view_cart') }}" class="cart-badge">Cart ({{ cart_item_count }})</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div>
+                <a href="{{ url_for('index') }}" class="logo footer-logo">modoya</a>
+                <p class="footer-tagline">Rent furniture by the month, keep what you love, return the rest.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <a href="{{ url_for('index') }}#catalogue">Browse collection</a>
+                <button type="button" class="link-button open-analyzer">Find My Style</button>
+                <a href="{{ url_for('view_cart') }}">Cart</a>
+            </div>
+            <div class="footer-col">
+                <h4>Renting</h4>
+                <a href="{{ url_for('index') }}#how-it-works">How renting works</a>
+                <a href="{{ url_for('index') }}#faq">Returns &amp; FAQ</a>
+                <a href="{{ url_for('view_orders') }}">Manage orders</a>
+            </div>
+        </div>
+        <p class="footer-note">Modoya is an HCI 584 class project. Checkout is a demo and no payment is processed.</p>
+    </footer>
+
+    {% include '_analyzer.html' %}
+
+    <div id="mini-cart-overlay" role="status" aria-live="polite">
+        <div class="mini-cart-content">
+            <button type="button" class="mini-cart-close" aria-label="Close">&times;</button>
+            <span class="success-msg">Added to cart</span>
+            <div id="mini-cart-list"></div>
+            <div class="mini-cart-actions">
+                <button type="button" class="keep-shopping-btn">Keep Shopping</button>
+                <a href="{{ url_for('view_cart') }}" class="view-cart-btn">Checkout</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.MODOYA = {
+            analyzeUrl: "{{ url_for('analyze_style') }}",
+            recommendUrl: "{{ url_for('api_style_recommendations') }}",
+            samplePhotos: [
+                "{{ url_for('serve_pictures', filename='banner.jpg') }}",
+                "{{ url_for('serve_pictures', filename='12_table_teak_warm_taupe_suburban_winter.png') }}",
+                "{{ url_for('serve_pictures', filename='64_storage_light_oak_terracotta_urban_winter.png') }}"
+            ]
+        };
+    </script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

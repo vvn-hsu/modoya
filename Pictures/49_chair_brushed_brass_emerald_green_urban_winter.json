@@ -3,7 +3,7 @@
   "category": "Chair",
   "series": "Panton Chair",
   "style": "Minimalist",
-  "material": "Brushed Brass",
+  "material": "Velvet & Brushed Brass",
   "color": "Emerald Green",
   "attributes": "Plush",
   "location": "urban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\49_chair_brushed_brass_emerald_green_urban_winter.png",
-  "json_file": "Pictures\\49_chair_brushed_brass_emerald_green_urban_winter.json"
+  "json_file": "Pictures\\49_chair_brushed_brass_emerald_green_urban_winter.json",
+  "name": "Velvet Accent Chair — Emerald",
+  "type": "accent_chair",
+  "description": "A channel-tufted emerald velvet seat in a thin green frame with brass-tipped legs. Minimalist style. Arrives assembled and ready to use.",
+  "dimensions": {
+    "w": 27,
+    "d": 28,
+    "h": 31
+  },
+  "stock": 3,
+  "monthly_rent": 38,
+  "buyout_price": 729
 }

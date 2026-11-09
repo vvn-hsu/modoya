@@ -3,7 +3,7 @@
   "category": "Lamp",
   "series": "PH Artichoke Lamp",
   "style": "Bauhaus",
-  "material": "Matte Black Steel",
+  "material": "Steel & Copper",
   "color": "Navy Blue",
   "attributes": "Textured",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\59_lamp_matte_black_steel_navy_blue_rural_summer.png",
-  "json_file": "Pictures\\59_lamp_matte_black_steel_navy_blue_rural_summer.json"
+  "json_file": "Pictures\\59_lamp_matte_black_steel_navy_blue_rural_summer.json",
+  "name": "Lantern Table Lamp — Navy & Copper",
+  "type": "table_lamp",
+  "description": "A navy lantern with copper ribs hanging from a steel stand. Bauhaus style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "dimensions": {
+    "w": 14,
+    "d": 14,
+    "h": 25
+  },
+  "stock": 1,
+  "monthly_rent": 23,
+  "buyout_price": 469
 }

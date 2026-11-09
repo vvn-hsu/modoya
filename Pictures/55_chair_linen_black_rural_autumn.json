@@ -3,8 +3,8 @@
   "category": "Chair",
   "series": "Eames Lounge Chair",
   "style": "Bohemian (Bojo)",
-  "material": "Linen",
-  "color": "Black",
+  "material": "Leather & Walnut",
+  "color": "Espresso Brown",
   "attributes": "Playful",
   "location": "rural",
   "season": "autumn",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\55_chair_linen_black_rural_autumn.png",
-  "json_file": "Pictures\\55_chair_linen_black_rural_autumn.json"
+  "json_file": "Pictures\\55_chair_linen_black_rural_autumn.json",
+  "name": "Molded Lounge Chair — Espresso Leather",
+  "type": "lounge_chair",
+  "description": "Deep espresso leather cushions in a curved walnut shell on a swivel base. Bohemian (Bojo) style. Arrives assembled and ready to use.",
+  "dimensions": {
+    "w": 32,
+    "d": 34,
+    "h": 34
+  },
+  "stock": 6,
+  "monthly_rent": 43,
+  "buyout_price": 899
 }

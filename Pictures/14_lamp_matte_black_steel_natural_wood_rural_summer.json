@@ -3,7 +3,7 @@
   "category": "Lamp",
   "series": "Desk Lamp",
   "style": "Japandi",
-  "material": "Matte Black Steel",
+  "material": "Wood & Black Steel",
   "color": "Natural Wood",
   "attributes": "Plush",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\14_lamp_matte_black_steel_natural_wood_rural_summer.png",
-  "json_file": "Pictures\\14_lamp_matte_black_steel_natural_wood_rural_summer.json"
+  "json_file": "Pictures\\14_lamp_matte_black_steel_natural_wood_rural_summer.json",
+  "name": "Spotlight Desk Lamp — Natural Wood",
+  "type": "desk_lamp",
+  "description": "A barrel-shaped wooden spotlight on an adjustable black steel arm and solid wood base. Japandi style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "dimensions": {
+    "w": 8,
+    "d": 17,
+    "h": 20
+  },
+  "stock": 0,
+  "monthly_rent": 18,
+  "buyout_price": 339
 }

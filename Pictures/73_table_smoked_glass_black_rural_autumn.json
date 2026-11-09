@@ -3,7 +3,7 @@
   "category": "Table",
   "series": "Dining Table",
   "style": "Minimalist",
-  "material": "Smoked Glass",
+  "material": "Smoked Glass & Steel",
   "color": "Black",
   "attributes": "Soft",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\73_table_smoked_glass_black_rural_autumn.png",
-  "json_file": "Pictures\\73_table_smoked_glass_black_rural_autumn.json"
+  "json_file": "Pictures\\73_table_smoked_glass_black_rural_autumn.json",
+  "name": "Dining Table — Black Glass",
+  "type": "dining_table",
+  "description": "A black glass top on a heavy black steel frame. Seats six. Minimalist style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 72,
+    "d": 41,
+    "h": 32
+  },
+  "stock": 4,
+  "monthly_rent": 22,
+  "buyout_price": 419
 }

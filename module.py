@@ -86,55 +86,144 @@ def filter_furniture(items, category=None, style=None, color=None, season=None):
 
 def calculate_rent(item_metadata):
     """
-    Calculates the monthly rental price based on item category, material, and style.
-    
+    Returns the monthly rental price of an item.
+
+    Uses the item's own "monthly_rent" from its JSON file. Items added later
+    without that field fall back to a price based on category and material.
+
     Args:
         item_metadata (dict): Metadata dictionary of the item.
-        
+
     Returns:
-        float: Calculated monthly rent.
+        float: Monthly rent.
     """
+    if item_metadata.get('monthly_rent') is not None:
+        return item_metadata['monthly_rent']
+
     base_rent_map = {
-        "Sofa": 60, "Chair": 40, "Storage": 35, "Lamp": 20
+        "Sofa": 60, "Chair": 40, "Storage": 35, "Table": 25, "Lamp": 20
     }
-    
     base_rent = base_rent_map.get(item_metadata.get('category'), 25)
-    
+
     adjustment = 0
-    if item_metadata.get('material') in ['Velvet', 'Leather', 'Marble']:
+    if any(word in item_metadata.get('material', '') for word in ['Velvet', 'Leather', 'Marble']):
         adjustment += 15
     if item_metadata.get('style') in ['Mid-Century Modern', 'Art Deco']:
         adjustment += 10
 
-    monthly_rent = base_rent + adjustment
-    
-    return monthly_rent
+    return base_rent + adjustment
 
 def calculate_buyout_price(item_metadata):
     """
-    Calculates the total buyout price based on item category, material, and style.
-    
+    Returns the buyout (purchase) price of an item.
+
+    Uses the item's own "buyout_price" from its JSON file, with the same kind
+    of fallback as calculate_rent for items that do not have one.
+
     Args:
         item_metadata (dict): Metadata dictionary of the item.
-        
+
     Returns:
-        float: Calculated buyout price.
+        float: Buyout price.
     """
+    if item_metadata.get('buyout_price') is not None:
+        return item_metadata['buyout_price']
+
     buyout_map = {
-        "Sofa": 1200, "Chair": 800, "Storage": 700, "Lamp": 350
+        "Sofa": 1200, "Chair": 800, "Storage": 700, "Table": 500, "Lamp": 350
     }
-    
     base_buyout_price = buyout_map.get(item_metadata.get('category'), 500)
-    
+
     adjustment = 0
-    if item_metadata.get('material') in ['Velvet', 'Leather', 'Marble']:
+    if any(word in item_metadata.get('material', '') for word in ['Velvet', 'Leather', 'Marble']):
         adjustment += 300
     if item_metadata.get('style') in ['Mid-Century Modern', 'Art Deco']:
         adjustment += 150
 
-    final_buyout_price = base_buyout_price + adjustment
-    
-    return final_buyout_price
+    return base_buyout_price + adjustment
+
+# ---------------------------------------------------------------------------
+# Rental terms
+# ---------------------------------------------------------------------------
+
+# (key, length in months, label). Two weeks counts as half a month.
+RENTAL_TERMS = [
+    ("2w", 0.5, "2 weeks"),
+    ("1m", 1, "1 month"),
+    ("3m", 3, "3 months"),
+    ("6m", 6, "6 months"),
+    ("12m", 12, "12 months"),
+    ("18m", 18, "18 months"),
+    ("24m", 24, "24 months"),
+]
+DEFAULT_TERM = "12m"
+_TERM_MONTHS = {key: months for key, months, _ in RENTAL_TERMS}
+_TERM_LABELS = {key: label for key, _, label in RENTAL_TERMS}
+
+def normalize_term(term):
+    """Returns a valid term key. Accepts a key ("6m") or a month count (6)."""
+    if term in _TERM_MONTHS:
+        return term
+    try:
+        months = int(term)
+    except (TypeError, ValueError):
+        return DEFAULT_TERM
+    key = f"{months}m"
+    return key if key in _TERM_MONTHS else DEFAULT_TERM
+
+def term_months(term):
+    return _TERM_MONTHS[normalize_term(term)]
+
+def term_label(term):
+    return _TERM_LABELS[normalize_term(term)]
+
+def rental_total(item_metadata, term):
+    """Total rent for the whole term."""
+    return calculate_rent(item_metadata) * term_months(term)
+
+# ---------------------------------------------------------------------------
+# Product display helpers
+# ---------------------------------------------------------------------------
+
+def product_name(item_metadata):
+    """The unique display name, falling back to the generic series name."""
+    return item_metadata.get('name') or item_metadata.get('series', 'Furniture')
+
+def format_dimensions(item_metadata):
+    """Returns 'W 84 x D 36 x H 33 in (213 x 91 x 84 cm)', or None if missing."""
+    dims = item_metadata.get('dimensions')
+    if not dims:
+        return None
+    w, d, h = dims['w'], dims['d'], dims['h']
+    cm = lambda inches: round(inches * 2.54)
+    return f"W {w} × D {d} × H {h} in ({cm(w)} × {cm(d)} × {cm(h)} cm)"
+
+def stock_status(item_metadata):
+    """Returns (key, label): key is 'in', 'low' or 'out'."""
+    stock = item_metadata.get('stock')
+    if stock is None:
+        return ("in", "In stock")
+    if stock <= 0:
+        return ("out", "Out of stock")
+    if stock <= 2:
+        return ("low", f"Only {stock} left")
+    return ("in", "In stock")
+
+def size_reference(height_in):
+    """A common object of similar height, so the size is easy to picture."""
+    references = [
+        (17, "about the height of a sofa seat (17 in)"),
+        (24, "about the height of a nightstand (24 in)"),
+        (31, "about the height of a dining table (30 in)"),
+        (40, "about the height of a kitchen counter (36 in)"),
+        (60, "about the height of a dresser top to an adult's shoulder"),
+        (70, "a little shorter than an average adult (5 ft 7 in)"),
+        (79, "about the height of an average adult (5 ft 7 in) or a bit taller"),
+    ]
+    for limit, text in references:
+        if height_in <= limit:
+            return text
+    return "about the height of a standard door (80 in)"
 
 def get_available_options(items):
     """

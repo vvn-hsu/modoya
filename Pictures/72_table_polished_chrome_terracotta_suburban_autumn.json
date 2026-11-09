@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\72_table_polished_chrome_terracotta_suburban_autumn.png",
-  "json_file": "Pictures\\72_table_polished_chrome_terracotta_suburban_autumn.json"
+  "json_file": "Pictures\\72_table_polished_chrome_terracotta_suburban_autumn.json",
+  "name": "Chrome Desk & Stool — Terracotta",
+  "type": "desk",
+  "description": "A terracotta top on bent chrome tubes, with a matching stool. Retro style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 49,
+    "d": 24,
+    "h": 29
+  },
+  "stock": 3,
+  "monthly_rent": 27,
+  "buyout_price": 539
 }

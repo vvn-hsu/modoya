@@ -3,8 +3,8 @@
   "category": "Chair",
   "series": "Womb Chair",
   "style": "Art Deco",
-  "material": "Brown Leather",
-  "color": "Natural Wood",
+  "material": "Leather & Walnut",
+  "color": "Cognac Brown",
   "attributes": "Modular",
   "location": "suburban",
   "season": "autumn",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\42_chair_brown_leather_natural_wood_suburban_autumn.png",
-  "json_file": "Pictures\\42_chair_brown_leather_natural_wood_suburban_autumn.json"
+  "json_file": "Pictures\\42_chair_brown_leather_natural_wood_suburban_autumn.json",
+  "name": "Swivel Lounge Chair — Cognac Leather",
+  "type": "accent_chair",
+  "description": "A tufted cognac leather seat in a walnut shell on a four-star swivel base. Art Deco style. Arrives assembled and ready to use.",
+  "dimensions": {
+    "w": 27,
+    "d": 28,
+    "h": 30
+  },
+  "stock": 0,
+  "monthly_rent": 41,
+  "buyout_price": 839
 }

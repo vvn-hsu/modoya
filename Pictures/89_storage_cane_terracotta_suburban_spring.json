@@ -3,8 +3,8 @@
   "category": "Storage",
   "series": "TV Stand",
   "style": "Bohemian (Bojo)",
-  "material": "Cane",
-  "color": "Terracotta",
+  "material": "Cane & Wood",
+  "color": "Natural Cane",
   "attributes": "Modular",
   "location": "suburban",
   "season": "spring",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\89_storage_cane_terracotta_suburban_spring.png",
-  "json_file": "Pictures\\89_storage_cane_terracotta_suburban_spring.json"
+  "json_file": "Pictures\\89_storage_cane_terracotta_suburban_spring.json",
+  "name": "Cane TV Stand — Natural",
+  "type": "tv_stand",
+  "description": "Woven cane door panels on a long natural wood media stand. Bohemian (Bojo) style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 58,
+    "d": 15,
+    "h": 24
+  },
+  "stock": 10,
+  "monthly_rent": 32,
+  "buyout_price": 619
 }

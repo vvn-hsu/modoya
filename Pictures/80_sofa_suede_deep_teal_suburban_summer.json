@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\80_sofa_suede_deep_teal_suburban_summer.png",
-  "json_file": "Pictures\\80_sofa_suede_deep_teal_suburban_summer.json"
+  "json_file": "Pictures\\80_sofa_suede_deep_teal_suburban_summer.json",
+  "name": "Corner Sectional — Deep Teal Suede",
+  "type": "sectional",
+  "description": "A deep teal suede corner sofa with rust and green pillows. Bohemian (Bojo) style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 107,
+    "d": 83,
+    "h": 30
+  },
+  "stock": 9,
+  "monthly_rent": 55,
+  "buyout_price": 1069
 }

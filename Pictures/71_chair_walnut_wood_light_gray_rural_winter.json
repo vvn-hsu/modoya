@@ -3,7 +3,7 @@
   "category": "Chair",
   "series": "Eames Lounge Chair",
   "style": "Wabi-Sabi",
-  "material": "Walnut Wood",
+  "material": "Walnut Wood & Fabric",
   "color": "Light Gray",
   "attributes": "Distressed",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\71_chair_walnut_wood_light_gray_rural_winter.png",
-  "json_file": "Pictures\\71_chair_walnut_wood_light_gray_rural_winter.json"
+  "json_file": "Pictures\\71_chair_walnut_wood_light_gray_rural_winter.json",
+  "name": "Wood Frame Lounge Chair — Light Gray",
+  "type": "lounge_chair",
+  "description": "Light gray cushions resting in an angled walnut frame. Wabi-Sabi style. Arrives assembled and ready to use.",
+  "dimensions": {
+    "w": 33,
+    "d": 35,
+    "h": 33
+  },
+  "stock": 3,
+  "monthly_rent": 39,
+  "buyout_price": 779
 }

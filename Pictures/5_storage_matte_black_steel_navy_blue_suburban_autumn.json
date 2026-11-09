@@ -3,8 +3,8 @@
   "category": "Storage",
   "series": "Cabinet",
   "style": "Industrial",
-  "material": "Matte Black Steel",
-  "color": "Navy Blue",
+  "material": "Steel",
+  "color": "Matte Black",
   "attributes": "Textured",
   "location": "suburban",
   "season": "autumn",
@@ -12,5 +12,22 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\5_storage_matte_black_steel_navy_blue_suburban_autumn.png",
-  "json_file": "Pictures\\5_storage_matte_black_steel_navy_blue_suburban_autumn.json"
+  "json_file": "Pictures\\5_storage_matte_black_steel_navy_blue_suburban_autumn.json",
+  "name": "Armoire — Matte Black Steel",
+  "type": "armoire",
+  "description": "A tall paneled armoire with double doors, drawers below and a powder-coated black finish. Industrial style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 41,
+    "d": 21,
+    "h": 73
+  },
+  "stock": 12,
+  "monthly_rent": 33,
+  "buyout_price": 629,
+  "crop": [
+    0.3,
+    0.08,
+    0.92,
+    0.95
+  ]
 }

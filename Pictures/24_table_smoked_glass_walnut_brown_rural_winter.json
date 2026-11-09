@@ -3,7 +3,7 @@
   "category": "Table",
   "series": "Dining Table",
   "style": "Rustic",
-  "material": "Smoked Glass",
+  "material": "Reclaimed Wood",
   "color": "Walnut Brown",
   "attributes": "Airy",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\24_table_smoked_glass_walnut_brown_rural_winter.png",
-  "json_file": "Pictures\\24_table_smoked_glass_walnut_brown_rural_winter.json"
+  "json_file": "Pictures\\24_table_smoked_glass_walnut_brown_rural_winter.json",
+  "name": "Farmhouse Dining Table — Walnut",
+  "type": "dining_table",
+  "description": "A weathered walnut-toned farmhouse table on thick trestle legs. Chairs not included. Rustic style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 67,
+    "d": 38,
+    "h": 32
+  },
+  "stock": 11,
+  "monthly_rent": 28,
+  "buyout_price": 539
 }

@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "Dresser",
   "style": "Japandi",
-  "material": "Matte Black Steel",
+  "material": "Steel & Wood",
   "color": "Charcoal Gray",
   "attributes": "Vintage look",
   "location": "urban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\76_storage_matte_black_steel_charcoal_gray_urban_winter.png",
-  "json_file": "Pictures\\76_storage_matte_black_steel_charcoal_gray_urban_winter.json"
+  "json_file": "Pictures\\76_storage_matte_black_steel_charcoal_gray_urban_winter.json",
+  "name": "Tall Dresser — Charcoal",
+  "type": "dresser",
+  "description": "Six wide charcoal drawers with bar pulls in a slim black steel frame. Japandi style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 50,
+    "d": 19,
+    "h": 36
+  },
+  "stock": 12,
+  "monthly_rent": 35,
+  "buyout_price": 679
 }

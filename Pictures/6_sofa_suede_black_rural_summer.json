@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\6_sofa_suede_black_rural_summer.png",
-  "json_file": "Pictures\\6_sofa_suede_black_rural_summer.json"
+  "json_file": "Pictures\\6_sofa_suede_black_rural_summer.json",
+  "name": "Curved Loveseat — Black Suede",
+  "type": "loveseat",
+  "description": "A rounded, channel-stitched loveseat in soft black suede on a wooden plinth base. Wabi-Sabi style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 66,
+    "d": 33,
+    "h": 29
+  },
+  "stock": 0,
+  "monthly_rent": 56,
+  "buyout_price": 1179
 }

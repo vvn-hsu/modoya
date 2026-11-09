@@ -3,7 +3,7 @@
   "category": "Chair",
   "series": "Panton Chair",
   "style": "Bohemian (Bojo)",
-  "material": "Light Oak",
+  "material": "Velvet & Light Oak",
   "color": "Burnt Orange",
   "attributes": "Statement piece",
   "location": "suburban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\15_chair_light_oak_burnt_orange_suburban_summer.png",
-  "json_file": "Pictures\\15_chair_light_oak_burnt_orange_suburban_summer.json"
+  "json_file": "Pictures\\15_chair_light_oak_burnt_orange_suburban_summer.json",
+  "name": "Tufted Lounge Chair — Burnt Orange",
+  "type": "accent_chair",
+  "description": "A button-tufted burnt-orange seat and back on a light oak frame. Bohemian (Bojo) style. Arrives assembled and ready to use.",
+  "dimensions": {
+    "w": 28,
+    "d": 30,
+    "h": 32
+  },
+  "stock": 10,
+  "monthly_rent": 43,
+  "buyout_price": 849
 }

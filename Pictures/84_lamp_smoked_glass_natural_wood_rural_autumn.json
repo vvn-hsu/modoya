@@ -3,8 +3,8 @@
   "category": "Lamp",
   "series": "Nesso Table Lamp",
   "style": "Farmhouse",
-  "material": "Smoked Glass",
-  "color": "Natural Wood",
+  "material": "Smoked Glass & Linen",
+  "color": "Smoky Brown",
   "attributes": "Airy",
   "location": "rural",
   "season": "autumn",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\84_lamp_smoked_glass_natural_wood_rural_autumn.png",
-  "json_file": "Pictures\\84_lamp_smoked_glass_natural_wood_rural_autumn.json"
+  "json_file": "Pictures\\84_lamp_smoked_glass_natural_wood_rural_autumn.json",
+  "name": "Table Lamp — Smoked Glass Base",
+  "type": "table_lamp",
+  "description": "A smoked-glass base under a linen shade. Shown on a side table, not included. Farmhouse style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "dimensions": {
+    "w": 15,
+    "d": 14,
+    "h": 23
+  },
+  "stock": 10,
+  "monthly_rent": 16,
+  "buyout_price": 309
 }

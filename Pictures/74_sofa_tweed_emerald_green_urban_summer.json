@@ -3,7 +3,7 @@
   "category": "Sofa",
   "series": "LC2 Sofa",
   "style": "Bohemian (Bojo)",
-  "material": "Tweed",
+  "material": "Velvet",
   "color": "Emerald Green",
   "attributes": "Textured",
   "location": "urban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\74_sofa_tweed_emerald_green_urban_summer.png",
-  "json_file": "Pictures\\74_sofa_tweed_emerald_green_urban_summer.json"
+  "json_file": "Pictures\\74_sofa_tweed_emerald_green_urban_summer.json",
+  "name": "Velvet Sofa — Emerald Green",
+  "type": "sofa",
+  "description": "A long emerald velvet sofa with gold-patterned pillows on slim legs. Bohemian (Bojo) style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 78,
+    "d": 37,
+    "h": 34
+  },
+  "stock": 5,
+  "monthly_rent": 69,
+  "buyout_price": 1349
 }

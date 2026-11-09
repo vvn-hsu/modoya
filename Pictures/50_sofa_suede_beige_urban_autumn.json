@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\50_sofa_suede_beige_urban_autumn.png",
-  "json_file": "Pictures\\50_sofa_suede_beige_urban_autumn.json"
+  "json_file": "Pictures\\50_sofa_suede_beige_urban_autumn.json",
+  "name": "L-Shaped Sectional — Beige Suede",
+  "type": "sectional",
+  "description": "A low, square-armed beige suede sectional on a slim metal base. Bauhaus style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 117,
+    "d": 81,
+    "h": 33
+  },
+  "stock": 4,
+  "monthly_rent": 65,
+  "buyout_price": 1209
 }

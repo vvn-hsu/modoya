@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\10_storage_teak_warm_taupe_suburban_spring.png",
-  "json_file": "Pictures\\10_storage_teak_warm_taupe_suburban_spring.json"
+  "json_file": "Pictures\\10_storage_teak_warm_taupe_suburban_spring.json",
+  "name": "Sideboard — Teak & Taupe",
+  "type": "sideboard",
+  "description": "Slatted teak doors and taupe drawer fronts on tapered legs, mid-century style. Mid-Century Modern style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 62,
+    "d": 18,
+    "h": 32
+  },
+  "stock": 9,
+  "monthly_rent": 34,
+  "buyout_price": 629
 }

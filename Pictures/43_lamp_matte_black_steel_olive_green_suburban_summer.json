@@ -3,7 +3,7 @@
   "category": "Lamp",
   "series": "PH Artichoke Lamp",
   "style": "Rustic",
-  "material": "Matte Black Steel",
+  "material": "Painted Steel",
   "color": "Olive Green",
   "attributes": "High-gloss",
   "location": "suburban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\43_lamp_matte_black_steel_olive_green_suburban_summer.png",
-  "json_file": "Pictures\\43_lamp_matte_black_steel_olive_green_suburban_summer.json"
+  "json_file": "Pictures\\43_lamp_matte_black_steel_olive_green_suburban_summer.json",
+  "name": "Exposed Bulb Table Lamp — Olive",
+  "type": "table_lamp",
+  "description": "A rounded olive-green steel body topped with a bare filament bulb. Rustic style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "dimensions": {
+    "w": 15,
+    "d": 14,
+    "h": 26
+  },
+  "stock": 6,
+  "monthly_rent": 21,
+  "buyout_price": 409
 }

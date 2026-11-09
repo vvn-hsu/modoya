@@ -3,7 +3,7 @@
   "category": "Chair",
   "series": "Egg Chair",
   "style": "Traditional",
-  "material": "Polished Chrome",
+  "material": "Leather & Chrome",
   "color": "Deep Teal",
   "attributes": "High-gloss",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\78_chair_polished_chrome_deep_teal_rural_summer.png",
-  "json_file": "Pictures\\78_chair_polished_chrome_deep_teal_rural_summer.json"
+  "json_file": "Pictures\\78_chair_polished_chrome_deep_teal_rural_summer.json",
+  "name": "Egg Swivel Chair — Teal Leather",
+  "type": "egg_chair",
+  "description": "A glossy teal leather egg shell on a four-star chrome swivel base. Traditional style. Arrives assembled and ready to use.",
+  "dimensions": {
+    "w": 32,
+    "d": 32,
+    "h": 39
+  },
+  "stock": 7,
+  "monthly_rent": 45,
+  "buyout_price": 929
 }

@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\35_storage_bent_plywood_olive_green_urban_winter.png",
-  "json_file": "Pictures\\35_storage_bent_plywood_olive_green_urban_winter.json"
+  "json_file": "Pictures\\35_storage_bent_plywood_olive_green_urban_winter.json",
+  "name": "Bookshelf — Sage Green",
+  "type": "bookshelf",
+  "description": "Rounded sage-green plywood shelving with a soft, curved outer frame. Bauhaus style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 35,
+    "d": 14,
+    "h": 69
+  },
+  "stock": 1,
+  "monthly_rent": 31,
+  "buyout_price": 599
 }

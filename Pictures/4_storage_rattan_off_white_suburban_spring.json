@@ -12,5 +12,22 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\4_storage_rattan_off_white_suburban_spring.png",
-  "json_file": "Pictures\\4_storage_rattan_off_white_suburban_spring.json"
+  "json_file": "Pictures\\4_storage_rattan_off_white_suburban_spring.json",
+  "name": "Rattan Bookshelf — Off-White",
+  "type": "bookshelf",
+  "description": "An airy grid of whitewashed rattan shelves with room for books, baskets and plants. Industrial style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 37,
+    "d": 15,
+    "h": 77
+  },
+  "stock": 11,
+  "monthly_rent": 35,
+  "buyout_price": 729,
+  "crop": [
+    0.48,
+    0.12,
+    1.0,
+    0.92
+  ]
 }

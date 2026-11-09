@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "Sideboard",
   "style": "Minimalist",
-  "material": "Teak",
+  "material": "Oak",
   "color": "Light Gray",
   "attributes": "Organic shape",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\92_storage_teak_light_gray_rural_spring.png",
-  "json_file": "Pictures\\92_storage_teak_light_gray_rural_spring.json"
+  "json_file": "Pictures\\92_storage_teak_light_gray_rural_spring.json",
+  "name": "Sideboard — Whitewashed Oak",
+  "type": "sideboard",
+  "description": "A whitewashed oak sideboard with flush doors and an open base. Minimalist style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 68,
+    "d": 19,
+    "h": 31
+  },
+  "stock": 2,
+  "monthly_rent": 33,
+  "buyout_price": 659
 }

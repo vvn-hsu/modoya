@@ -3,8 +3,8 @@
   "category": "Storage",
   "series": "Cabinet",
   "style": "Coastal",
-  "material": "Walnut Wood",
-  "color": "Beige",
+  "material": "Pine",
+  "color": "Light Natural Wood",
   "attributes": "Textured",
   "location": "suburban",
   "season": "summer",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\40_storage_walnut_wood_beige_suburban_summer.png",
-  "json_file": "Pictures\\40_storage_walnut_wood_beige_suburban_summer.json"
+  "json_file": "Pictures\\40_storage_walnut_wood_beige_suburban_summer.json",
+  "name": "Glass-Door Cabinet — Light Pine",
+  "type": "cabinet",
+  "description": "A country-style pale wood cabinet with glass doors and three drawers below. Coastal style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 43,
+    "d": 19,
+    "h": 44
+  },
+  "stock": 8,
+  "monthly_rent": 40,
+  "buyout_price": 739
 }

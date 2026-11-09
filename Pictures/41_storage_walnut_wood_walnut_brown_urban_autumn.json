@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\41_storage_walnut_wood_walnut_brown_urban_autumn.png",
-  "json_file": "Pictures\\41_storage_walnut_wood_walnut_brown_urban_autumn.json"
+  "json_file": "Pictures\\41_storage_walnut_wood_walnut_brown_urban_autumn.json",
+  "name": "Low Dresser — Walnut",
+  "type": "dresser",
+  "description": "A long, low walnut dresser with six flush drawers on a slim plinth. Scandinavian style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 54,
+    "d": 18,
+    "h": 32
+  },
+  "stock": 0,
+  "monthly_rent": 38,
+  "buyout_price": 769
 }

@@ -1,23 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Order Confirmed</title>
-    <style>
-        body { font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f9fafb; text-align: center; }
-        .card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); max-width: 400px; }
-        h1 { margin-top: 0; color: #10b981; }
-        .amount { font-size: 24px; font-weight: bold; margin: 20px 0; }
-        .btn { display: inline-block; background: #111; color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-top: 20px; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h1>Order Placed!</h1>
-        <p>Thank you. Your furniture is on the way.</p>
-        <p>Order ID: #{{ order_id }}</p>
-        <div class="amount">${{ "%.2f"|format(cart_total) }}</div>
-        <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+{% extends 'base.html' %}
+{% block title %}Order Confirmed{% endblock %}
+{% block body_class %}soft-bg{% endblock %}
+
+{% block styles %}
+<style>
+    .confirm-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); max-width: 560px; margin: 20px auto; text-align: center; }
+    .confirm-card h1 { margin-top: 0; color: var(--rent-color); }
+    .order-ref { font-weight: 600; }
+    .amount { font-size: 28px; font-weight: 800; margin: 16px 0 4px; }
+    .amount-sub { color: #777; font-size: 14px; margin: 0 0 20px; }
+    .confirm-details { text-align: left; background: var(--bg-soft); border-radius: 12px; padding: 16px 20px; font-size: 14px; line-height: 1.7; margin: 20px 0; }
+    .confirm-details strong { display: inline-block; min-width: 96px; color: #555; font-weight: 600; }
+    .confirm-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .confirm-actions .btn { flex: none; padding: 12px 24px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="confirm-card">
+    <h1>Order Placed!</h1>
+    <p>Thank you, {{ order.address.name }}. Your furniture is scheduled for delivery.</p>
+    <p class="order-ref">Order ID: #{{ order.id }}</p>
+    <div class="amount">{{ order.total|money }}</div>
+    <p class="amount-sub">
+        {% if order.type == 'RENT' %}Term total · {{ order.monthly_total|money }}/mo billed monthly{% else %}Total{% endif %}
+    </p>
+
+    <div class="confirm-details">
+        <div><strong>Items</strong>{% for line in order.lines %}{{ line.product.name }}{% if not loop.last %}, {% endif %}{% endfor %}</div>
+        <div><strong>Delivery</strong>{{ order.delivery|nice_date }}, {{ order.window }}</div>
+        <div><strong>Address</strong>{{ order.address.line1 }}{% if order.address.line2 %}, {{ order.address.line2 }}{% endif %}, {{ order.address.city }}, {{ order.address.state }} {{ order.address.zip }}</div>
+        <div><strong>Payment</strong>Card ending {{ order.card_last4 }} (demo, not charged)</div>
     </div>
-</body>
-</html>
+
+    <div class="confirm-actions">
+        <a href="{{ url_for('view_orders') }}#order-{{ order.id }}" class="btn btn-primary">View order</a>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

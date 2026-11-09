@@ -4,7 +4,7 @@
   "series": "Bookshelf",
   "style": "Retro",
   "material": "Walnut Wood",
-  "color": "Charcoal Gray",
+  "color": "Walnut Brown",
   "attributes": "Soft",
   "location": "urban",
   "season": "autumn",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\79_storage_walnut_wood_charcoal_gray_urban_autumn.png",
-  "json_file": "Pictures\\79_storage_walnut_wood_charcoal_gray_urban_autumn.json"
+  "json_file": "Pictures\\79_storage_walnut_wood_charcoal_gray_urban_autumn.json",
+  "name": "Bookshelf — Walnut & Black",
+  "type": "bookshelf",
+  "description": "Walnut open shelving paired with a black paneled cabinet. Chair shown for styling only. Retro style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 38,
+    "d": 14,
+    "h": 76
+  },
+  "stock": 12,
+  "monthly_rent": 30,
+  "buyout_price": 619
 }

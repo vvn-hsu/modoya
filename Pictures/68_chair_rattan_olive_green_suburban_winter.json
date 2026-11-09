@@ -3,7 +3,7 @@
   "category": "Chair",
   "series": "Eames Lounge Chair",
   "style": "Minimalist",
-  "material": "Rattan",
+  "material": "Fabric & Walnut",
   "color": "Olive Green",
   "attributes": "Playful",
   "location": "suburban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\68_chair_rattan_olive_green_suburban_winter.png",
-  "json_file": "Pictures\\68_chair_rattan_olive_green_suburban_winter.json"
+  "json_file": "Pictures\\68_chair_rattan_olive_green_suburban_winter.json",
+  "name": "Tufted Lounge Chair — Olive",
+  "type": "lounge_chair",
+  "description": "Olive button-tufted cushions in a walnut shell on black legs. Minimalist style. Arrives assembled and ready to use.",
+  "dimensions": {
+    "w": 32,
+    "d": 33,
+    "h": 31
+  },
+  "stock": 8,
+  "monthly_rent": 41,
+  "buyout_price": 789
 }

@@ -3,7 +3,7 @@
   "category": "Sofa",
   "series": "LC2 Sofa",
   "style": "Traditional",
-  "material": "Walnut Wood base",
+  "material": "Fabric & Walnut",
   "color": "Burnt Orange",
   "attributes": "Organic shape",
   "location": "suburban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\53_sofa_walnut_wood_base_burnt_orange_suburban_spring.png",
-  "json_file": "Pictures\\53_sofa_walnut_wood_base_burnt_orange_suburban_spring.json"
+  "json_file": "Pictures\\53_sofa_walnut_wood_base_burnt_orange_suburban_spring.json",
+  "name": "Loveseat — Burnt Orange, Walnut Frame",
+  "type": "loveseat",
+  "description": "Plush burnt-orange cushions set in an open walnut frame. Traditional style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 61,
+    "d": 34,
+    "h": 31
+  },
+  "stock": 6,
+  "monthly_rent": 66,
+  "buyout_price": 1249
 }

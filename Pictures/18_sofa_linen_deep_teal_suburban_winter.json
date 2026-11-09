@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\18_sofa_linen_deep_teal_suburban_winter.png",
-  "json_file": "Pictures\\18_sofa_linen_deep_teal_suburban_winter.json"
+  "json_file": "Pictures\\18_sofa_linen_deep_teal_suburban_winter.json",
+  "name": "Box-Frame Sofa — Deep Teal",
+  "type": "sofa",
+  "description": "Square, upright cushions held in a crisp box frame, upholstered in deep teal. Scandinavian style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 82,
+    "d": 37,
+    "h": 31
+  },
+  "stock": 12,
+  "monthly_rent": 55,
+  "buyout_price": 1109
 }

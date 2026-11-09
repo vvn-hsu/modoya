@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\39_storage_rattan_mustard_yellow_suburban_winter.png",
-  "json_file": "Pictures\\39_storage_rattan_mustard_yellow_suburban_winter.json"
+  "json_file": "Pictures\\39_storage_rattan_mustard_yellow_suburban_winter.json",
+  "name": "Rattan Storage Daybed — Mustard",
+  "type": "daybed",
+  "description": "Rattan drawers stacked above a built-in daybed with mustard cushions. Mid-Century Modern style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 83,
+    "d": 34,
+    "h": 64
+  },
+  "stock": 1,
+  "monthly_rent": 31,
+  "buyout_price": 639
 }

@@ -3,8 +3,8 @@
   "category": "Table",
   "series": "Coffee Table",
   "style": "Retro",
-  "material": "Carrara Marble",
-  "color": "Off-white",
+  "material": "Carrara Marble & Steel",
+  "color": "White Marble",
   "attributes": "Playful",
   "location": "urban",
   "season": "winter",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\67_table_carrara_marble_off_white_urban_winter.png",
-  "json_file": "Pictures\\67_table_carrara_marble_off_white_urban_winter.json"
+  "json_file": "Pictures\\67_table_carrara_marble_off_white_urban_winter.json",
+  "name": "Waterfall Side Table — Carrara Marble",
+  "type": "side_table",
+  "description": "A curved Carrara marble waterfall top with a thin steel frame. Retro style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 23,
+    "d": 21,
+    "h": 22
+  },
+  "stock": 7,
+  "monthly_rent": 27,
+  "buyout_price": 549
 }

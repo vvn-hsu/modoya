@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "Cabinet",
   "style": "Japandi",
-  "material": "Cane",
+  "material": "Bamboo & Cane",
   "color": "Natural Wood",
   "attributes": "Matte finish",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\47_storage_cane_natural_wood_rural_summer.png",
-  "json_file": "Pictures\\47_storage_cane_natural_wood_rural_summer.json"
+  "json_file": "Pictures\\47_storage_cane_natural_wood_rural_summer.json",
+  "name": "Cane Cabinet — Natural",
+  "type": "cabinet",
+  "description": "Bamboo-framed doors with woven cane panels and a honey finish. Japandi style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 38,
+    "d": 18,
+    "h": 45
+  },
+  "stock": 10,
+  "monthly_rent": 38,
+  "buyout_price": 719
 }

@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "Bookshelf",
   "style": "Farmhouse",
-  "material": "Bent Plywood",
+  "material": "Whitewashed Wood",
   "color": "Off-white",
   "attributes": "Elegant",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\32_storage_bent_plywood_off_white_rural_winter.png",
-  "json_file": "Pictures\\32_storage_bent_plywood_off_white_rural_winter.json"
+  "json_file": "Pictures\\32_storage_bent_plywood_off_white_rural_winter.json",
+  "name": "Cabinet Bookshelf — Whitewashed Wood",
+  "type": "bookshelf",
+  "description": "Open shelves above and a closed cupboard below in rounded whitewashed wood. Farmhouse style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 35,
+    "d": 13,
+    "h": 76
+  },
+  "stock": 10,
+  "monthly_rent": 33,
+  "buyout_price": 669
 }

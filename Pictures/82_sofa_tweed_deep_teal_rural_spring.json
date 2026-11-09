@@ -3,7 +3,7 @@
   "category": "Sofa",
   "series": "Loveseat",
   "style": "Japandi",
-  "material": "Tweed",
+  "material": "Tweed & Wood",
   "color": "Deep Teal",
   "attributes": "Airy",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\82_sofa_tweed_deep_teal_rural_spring.png",
-  "json_file": "Pictures\\82_sofa_tweed_deep_teal_rural_spring.json"
+  "json_file": "Pictures\\82_sofa_tweed_deep_teal_rural_spring.json",
+  "name": "Loveseat — Deep Teal Tweed",
+  "type": "loveseat",
+  "description": "A deep teal tweed loveseat on a rustic wood base. Japandi style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 58,
+    "d": 32,
+    "h": 34
+  },
+  "stock": 7,
+  "monthly_rent": 61,
+  "buyout_price": 1189
 }

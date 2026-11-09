@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "TV Stand",
   "style": "Rustic",
-  "material": "Matte Black Steel",
+  "material": "Reclaimed Wood & Steel",
   "color": "Burnt Orange",
   "attributes": "Plush",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\25_storage_matte_black_steel_burnt_orange_rural_winter.png",
-  "json_file": "Pictures\\25_storage_matte_black_steel_burnt_orange_rural_winter.json"
+  "json_file": "Pictures\\25_storage_matte_black_steel_burnt_orange_rural_winter.json",
+  "name": "Industrial TV Stand — Burnt Orange",
+  "type": "tv_stand",
+  "description": "Distressed orange-painted wood boxes riveted into a raw black steel frame. Rustic style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 61,
+    "d": 15,
+    "h": 23
+  },
+  "stock": 6,
+  "monthly_rent": 35,
+  "buyout_price": 649
 }

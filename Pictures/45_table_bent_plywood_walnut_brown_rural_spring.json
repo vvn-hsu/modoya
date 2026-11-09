@@ -3,7 +3,7 @@
   "category": "Table",
   "series": "Saarinen Tulip Table",
   "style": "Rustic",
-  "material": "Bent Plywood",
+  "material": "Walnut Veneer",
   "color": "Walnut Brown",
   "attributes": "High-gloss",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\45_table_bent_plywood_walnut_brown_rural_spring.png",
-  "json_file": "Pictures\\45_table_bent_plywood_walnut_brown_rural_spring.json"
+  "json_file": "Pictures\\45_table_bent_plywood_walnut_brown_rural_spring.json",
+  "name": "Oval Pedestal Table — Walnut",
+  "type": "dining_round",
+  "description": "A walnut oval top on a single flared pedestal, seats four. Rustic style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 54,
+    "d": 45,
+    "h": 27
+  },
+  "stock": 9,
+  "monthly_rent": 24,
+  "buyout_price": 439
 }

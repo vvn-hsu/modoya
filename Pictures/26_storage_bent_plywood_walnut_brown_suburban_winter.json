@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "Cabinet",
   "style": "Industrial",
-  "material": "Bent Plywood",
+  "material": "Walnut Veneer",
   "color": "Walnut Brown",
   "attributes": "High-gloss",
   "location": "suburban",
@@ -12,5 +12,22 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\26_storage_bent_plywood_walnut_brown_suburban_winter.png",
-  "json_file": "Pictures\\26_storage_bent_plywood_walnut_brown_suburban_winter.json"
+  "json_file": "Pictures\\26_storage_bent_plywood_walnut_brown_suburban_winter.json",
+  "name": "Cabinet — Walnut",
+  "type": "cabinet",
+  "description": "A curved-front walnut cabinet with bookmatched grain and slim tapered legs. Industrial style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 40,
+    "d": 18,
+    "h": 50
+  },
+  "stock": 6,
+  "monthly_rent": 39,
+  "buyout_price": 739,
+  "crop": [
+    0.38,
+    0.38,
+    0.95,
+    0.92
+  ]
 }

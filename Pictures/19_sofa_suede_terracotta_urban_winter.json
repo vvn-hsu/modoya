@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\19_sofa_suede_terracotta_urban_winter.png",
-  "json_file": "Pictures\\19_sofa_suede_terracotta_urban_winter.json"
+  "json_file": "Pictures\\19_sofa_suede_terracotta_urban_winter.json",
+  "name": "Chesterfield Sofa — Terracotta Suede",
+  "type": "sofa",
+  "description": "Deep button tufting and rolled arms in terracotta suede on a dark metal base. Retro style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 85,
+    "d": 36,
+    "h": 34
+  },
+  "stock": 10,
+  "monthly_rent": 57,
+  "buyout_price": 1129
 }

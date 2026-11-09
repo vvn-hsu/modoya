@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "Cabinet",
   "style": "Bauhaus",
-  "material": "Cane",
+  "material": "Cane & Steel",
   "color": "Mustard Yellow",
   "attributes": "Airy",
   "location": "urban",
@@ -12,5 +12,22 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\98_storage_cane_mustard_yellow_urban_spring.png",
-  "json_file": "Pictures\\98_storage_cane_mustard_yellow_urban_spring.json"
+  "json_file": "Pictures\\98_storage_cane_mustard_yellow_urban_spring.json",
+  "name": "Cane Armoire with Seat — Mustard",
+  "type": "armoire",
+  "description": "A mustard cane armoire with a built-in cushioned seat at its base. Bauhaus style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 43,
+    "d": 22,
+    "h": 76
+  },
+  "stock": 11,
+  "monthly_rent": 31,
+  "buyout_price": 589,
+  "crop": [
+    0.2,
+    0.0,
+    0.8,
+    1.0
+  ]
 }

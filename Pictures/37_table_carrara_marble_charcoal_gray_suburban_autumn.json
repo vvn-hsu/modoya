@@ -3,8 +3,8 @@
   "category": "Table",
   "series": "Coffee Table",
   "style": "Farmhouse",
-  "material": "Carrara Marble",
-  "color": "Charcoal Gray",
+  "material": "Carrara Marble & Steel",
+  "color": "White Marble",
   "attributes": "Matte finish",
   "location": "suburban",
   "season": "autumn",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\37_table_carrara_marble_charcoal_gray_suburban_autumn.png",
-  "json_file": "Pictures\\37_table_carrara_marble_charcoal_gray_suburban_autumn.json"
+  "json_file": "Pictures\\37_table_carrara_marble_charcoal_gray_suburban_autumn.json",
+  "name": "Marble Coffee Table — Black Steel",
+  "type": "coffee_table",
+  "description": "A thick Carrara marble slab on an open black steel base. Sofa shown for styling only. Farmhouse style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 41,
+    "d": 23,
+    "h": 15
+  },
+  "stock": 4,
+  "monthly_rent": 26,
+  "buyout_price": 539
 }

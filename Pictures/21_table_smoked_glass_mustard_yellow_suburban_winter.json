@@ -3,8 +3,8 @@
   "category": "Table",
   "series": "Noguchi Coffee Table",
   "style": "Industrial",
-  "material": "Smoked Glass",
-  "color": "Mustard Yellow",
+  "material": "Smoked Glass & Steel",
+  "color": "Smoky Gray",
   "attributes": "High-gloss",
   "location": "suburban",
   "season": "winter",
@@ -12,5 +12,22 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\21_table_smoked_glass_mustard_yellow_suburban_winter.png",
-  "json_file": "Pictures\\21_table_smoked_glass_mustard_yellow_suburban_winter.json"
+  "json_file": "Pictures\\21_table_smoked_glass_mustard_yellow_suburban_winter.json",
+  "name": "Round Coffee Table — Smoked Glass",
+  "type": "round_coffee",
+  "description": "A round smoked-glass top floating over a thin double steel ring. Sofa shown for styling only. Industrial style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 39,
+    "d": 40,
+    "h": 15
+  },
+  "stock": 11,
+  "monthly_rent": 29,
+  "buyout_price": 559,
+  "crop": [
+    0.12,
+    0.5,
+    0.88,
+    0.86
+  ]
 }

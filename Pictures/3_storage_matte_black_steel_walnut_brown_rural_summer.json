@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "TV Stand",
   "style": "Wabi-Sabi",
-  "material": "Matte Black Steel",
+  "material": "Reclaimed Wood & Black Steel",
   "color": "Walnut Brown",
   "attributes": "Airy",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\3_storage_matte_black_steel_walnut_brown_rural_summer.png",
-  "json_file": "Pictures\\3_storage_matte_black_steel_walnut_brown_rural_summer.json"
+  "json_file": "Pictures\\3_storage_matte_black_steel_walnut_brown_rural_summer.json",
+  "name": "TV Stand — Reclaimed Wood & Steel",
+  "type": "tv_stand",
+  "description": "Rough-sawn wood drawers and an open media shelf held in a black steel frame. Wabi-Sabi style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 60,
+    "d": 15,
+    "h": 21
+  },
+  "stock": 11,
+  "monthly_rent": 32,
+  "buyout_price": 649
 }

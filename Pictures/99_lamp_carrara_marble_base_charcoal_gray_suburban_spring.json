@@ -3,7 +3,7 @@
   "category": "Lamp",
   "series": "Floor Lamp",
   "style": "Art Deco",
-  "material": "Carrara Marble base",
+  "material": "Carrara Marble & Linen",
   "color": "Charcoal Gray",
   "attributes": "Statement piece",
   "location": "suburban",
@@ -12,5 +12,22 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\99_lamp_carrara_marble_base_charcoal_gray_suburban_spring.png",
-  "json_file": "Pictures\\99_lamp_carrara_marble_base_charcoal_gray_suburban_spring.json"
+  "json_file": "Pictures\\99_lamp_carrara_marble_base_charcoal_gray_suburban_spring.json",
+  "name": "Marble Block Table Lamp",
+  "type": "table_lamp",
+  "description": "A marble ball-and-cube base under a pleated charcoal linen shade. Art Deco style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "dimensions": {
+    "w": 14,
+    "d": 13,
+    "h": 22
+  },
+  "stock": 5,
+  "monthly_rent": 25,
+  "buyout_price": 519,
+  "crop": [
+    0.28,
+    0.22,
+    0.76,
+    0.88
+  ]
 }

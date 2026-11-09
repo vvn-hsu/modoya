@@ -3,8 +3,8 @@
   "category": "Table",
   "series": "Parsons Table",
   "style": "Wabi-Sabi",
-  "material": "Smoked Glass",
-  "color": "Beige",
+  "material": "Smoked Glass & Steel",
+  "color": "Smoky Gray",
   "attributes": "Plush",
   "location": "suburban",
   "season": "winter",
@@ -12,5 +12,22 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\28_table_smoked_glass_beige_suburban_winter.png",
-  "json_file": "Pictures\\28_table_smoked_glass_beige_suburban_winter.json"
+  "json_file": "Pictures\\28_table_smoked_glass_beige_suburban_winter.json",
+  "name": "Low Coffee Table — Smoked Glass",
+  "type": "coffee_table",
+  "description": "A low smoked-glass top on a beige steel base. Daybed shown for styling only. Wabi-Sabi style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 44,
+    "d": 24,
+    "h": 17
+  },
+  "stock": 6,
+  "monthly_rent": 22,
+  "buyout_price": 429,
+  "crop": [
+    0.38,
+    0.4,
+    0.92,
+    0.8
+  ]
 }

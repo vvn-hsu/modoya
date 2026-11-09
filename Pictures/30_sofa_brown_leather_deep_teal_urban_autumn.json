@@ -3,7 +3,7 @@
   "category": "Sofa",
   "series": "Togo Sofa",
   "style": "Minimalist",
-  "material": "Brown Leather",
+  "material": "Velvet & Leather",
   "color": "Deep Teal",
   "attributes": "Textured",
   "location": "urban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\30_sofa_brown_leather_deep_teal_urban_autumn.png",
-  "json_file": "Pictures\\30_sofa_brown_leather_deep_teal_urban_autumn.json"
+  "json_file": "Pictures\\30_sofa_brown_leather_deep_teal_urban_autumn.json",
+  "name": "Modular Lounge Sofa — Teal & Brown",
+  "type": "sectional",
+  "description": "Stackable channel-stitched modules in deep teal velvet and brown leather. Minimalist style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 118,
+    "d": 84,
+    "h": 34
+  },
+  "stock": 6,
+  "monthly_rent": 61,
+  "buyout_price": 1219
 }

@@ -3,8 +3,8 @@
   "category": "Sofa",
   "series": "Togo Sofa",
   "style": "Mid-Century Modern",
-  "material": "Linen",
-  "color": "Natural Wood",
+  "material": "Linen & Wood",
+  "color": "Natural Linen",
   "attributes": "Matte finish",
   "location": "urban",
   "season": "winter",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\81_sofa_linen_natural_wood_urban_winter.png",
-  "json_file": "Pictures\\81_sofa_linen_natural_wood_urban_winter.json"
+  "json_file": "Pictures\\81_sofa_linen_natural_wood_urban_winter.json",
+  "name": "Sofa — Natural Linen",
+  "type": "sofa",
+  "description": "Cream linen cushions and pale blue pillows in a curved wooden frame. Mid-Century Modern style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 80,
+    "d": 38,
+    "h": 32
+  },
+  "stock": 12,
+  "monthly_rent": 63,
+  "buyout_price": 1309
 }

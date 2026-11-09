@@ -1,136 +1,199 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Orders | Modoya</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-primary: #111111;
-            --text-secondary: #757575;
-            --accent-purple: #6200EE;
-        }
+{% extends 'base.html' %}
+{% block title %}My Orders{% endblock %}
+{% block body_class %}soft-bg{% endblock %}
 
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            background-color: #f9fafb; 
-            color: var(--text-primary); 
-            margin: 0; 
-            padding: 40px; 
-        }
-        
-        .container { max-width: 1000px; margin: 0 auto; }
-        
-        /* Header Style Match */
-        .header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            margin-bottom: 60px; 
-        }
+{% block styles %}
+<style>
+    .container { max-width: 1000px; margin: 0 auto; }
+    .page-title { font-size: 26px; font-weight: 700; margin: 0 0 24px; }
+    .flash { background: #e7f6ef; color: #0b6b4a; border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; font-size: 14px; font-weight: 500; }
+    .note { color: #888; font-size: 13px; margin: -12px 0 20px; }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 42px;
-            font-weight: 700;
-            color: #000;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
+    .order-card { background: white; border-radius: 14px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); margin-bottom: 24px; scroll-margin-top: 20px; }
+    .order-card:target { outline: 2px solid var(--accent-purple); }
+    .order-header { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-bottom: 1px solid #eee; padding-bottom: 16px; }
+    .order-id { font-weight: 700; font-size: 18px; }
+    .order-date { color: #666; font-size: 14px; margin-top: 4px; }
+    .order-badges { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; }
+    .pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .pill-rent { background: #e7f6ef; color: var(--rent-color); }
+    .pill-buy { background: #fff4e0; color: var(--buy-color); }
+    .pill-status { background: #eef2ff; color: #3949ab; }
+    .pill-cancelled { background: #f1f1f1; color: #777; }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
+    .delivery-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 14px; padding: 14px 0; border-bottom: 1px solid #eee; color: #444; }
+    .delivery-info strong { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #888; margin-bottom: 2px; }
 
-        .nav-item {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            font-size: 16px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .nav-item:hover { color: #000; }
+    .order-line { display: grid; grid-template-columns: 88px 1fr; gap: 18px; padding: 18px 0; border-bottom: 1px solid #f3f3f3; }
+    .order-line img { width: 88px; height: 88px; border-radius: 10px; object-fit: cover; background: #f0f0f0; border: 1px solid #eee; display: block; }
+    .line-name { font-weight: 700; font-size: 16px; text-decoration: none; }
+    .line-name:hover { text-decoration: underline; }
+    .line-facts { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 6px 28px; font-size: 14px; margin: 10px 0; }
+    .line-facts span { color: #888; display: block; font-size: 12px; }
+    .line-status { font-size: 14px; font-weight: 600; }
+    .state-active, .state-scheduled { color: #3949ab; }
+    .state-owned { color: var(--rent-color); }
+    .state-returning { color: var(--buy-color); }
+    .state-cancelled, .state-ended { color: #888; }
 
-        .highlight-text {
-            color: var(--accent-purple);
-            font-weight: 700;
-        }
-        
-        /* Order Cards */
-        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 24px; }
+    .line-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; align-items: flex-start; }
+    .line-actions form { margin: 0; display: flex; gap: 6px; align-items: center; }
+    .line-actions .btn { flex: none; padding: 8px 14px; font-size: 13px; }
+    .line-actions select, .line-actions input[type=date] { padding: 7px 8px; border: 1px solid #ddd; border-radius: 6px; font: inherit; font-size: 13px; }
+    .action-note { font-size: 12px; color: #888; flex-basis: 100%; margin: 2px 0 0; }
+    details.action { position: relative; }
+    details.action summary { list-style: none; }
+    details.action summary::-webkit-details-marker { display: none; }
+    details.action[open] summary { background: #111; color: #fff; }
+    .action-panel { margin-top: 8px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--bg-soft); padding: 10px; border-radius: 8px; font-size: 13px; }
 
-        .order-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); margin-bottom: 24px; }
-        .order-header { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 16px; margin-bottom: 16px; }
-        .order-id { font-weight: 700; font-size: 18px; }
-        .order-date { color: #666; font-size: 14px; margin-top: 4px; }
-        
-        .order-status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #e0f2f1; color: #00897b; }
-        
-        .order-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 12px; margin-top: 16px; }
-        .order-item img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; background: #f0f0f0; border: 1px solid #eee; }
-        
-        .order-footer { margin-top: 20px; text-align: right; font-weight: 700; font-size: 18px; border-top: 1px solid #f9f9f9; padding-top: 16px;}
-        
-        .empty-state { text-align: center; padding: 80px 0; color: #888; }
-        .btn { background: #111; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; margin-top: 16px; font-weight: 600; }
-        .btn:hover { background: #333; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <a href="{{ url_for('index') }}" class="logo">modoya</a>
-            <div class="nav-links">
-                <a href="{{ url_for('view_orders') }}" class="nav-item" style="color:#000; font-weight:700;">Orders</a>
-                <a href="{{ url_for('view_cart') }}" class="nav-item">Cart</a>
+    .order-footer { margin-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .order-total { font-weight: 800; font-size: 18px; text-align: right; }
+    .order-total small { display: block; font-weight: 400; color: #777; font-size: 13px; }
+    .order-footer form { margin: 0; }
+    .order-footer .btn { flex: none; }
+
+    .empty-state { text-align: center; padding: 80px 0; color: #888; background: #fff; border-radius: 14px; }
+    .empty-state .btn { flex: none; display: inline-block; margin-top: 8px; padding: 12px 24px; }
+
+    @media (max-width: 700px) {
+        .order-card { padding: 18px; }
+        .delivery-info { grid-template-columns: 1fr; }
+        .order-line { grid-template-columns: 64px 1fr; gap: 12px; }
+        .order-line img { width: 64px; height: 64px; }
+        .line-facts { grid-template-columns: 1fr 1fr; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">My Orders</h1>
+    {% if message %}<div class="flash" role="status">{{ message }}</div>{% endif %}
+    {% if orders|length >= max_orders %}<p class="note">Showing your {{ max_orders }} most recent orders.</p>{% endif %}
+
+    {% if not orders %}
+    <div class="empty-state">
+        <p>You haven't placed any orders yet.</p>
+        <a href="{{ url_for('index') }}#catalogue" class="btn btn-primary">Start Shopping</a>
+    </div>
+    {% endif %}
+
+    {% for order in orders %}
+    <article class="order-card" id="order-{{ order.id }}">
+        <div class="order-header">
+            <div>
+                <div class="order-id">Order #{{ order.id }}</div>
+                <div class="order-date">Placed {{ order.placed }} · {{ order.lines|length|plural('item') }}</div>
+            </div>
+            <div class="order-badges">
+                <span class="pill {{ 'pill-rent' if order.type == 'RENT' else 'pill-buy' }}">{{ order.type_label }}</span>
+                <span class="pill {{ 'pill-cancelled' if order.cancelled else 'pill-status' }}">{{ order.status }}</span>
             </div>
         </div>
 
-        <div class="page-title">Your Order History</div>
+        <div class="delivery-info">
+            <div><strong>Delivery</strong>{{ order.delivery|nice_date }}{% if order.window %}<br>{{ order.window }}{% endif %}</div>
+            <div><strong>Address</strong>{{ order.address.name }}<br>{{ order.address.line1 }}{% if order.address.line2 %}, {{ order.address.line2 }}{% endif %}<br>{{ order.address.city }}, {{ order.address.state }} {{ order.address.zip }}</div>
+            <div><strong>Payment</strong>Card ending {{ order.card_last4 }}<br>(demo, not charged)</div>
+        </div>
 
-        {% if not orders %}
-            <div class="empty-state">
-                <p>You haven't placed any orders yet.</p>
-                <a href="{{ url_for('index') }}" class="btn">Start Shopping</a>
+        {% for line in order.lines %}
+        <div class="order-line">
+            <a href="{{ line.product.url }}"><img src="{{ line.product.image_url }}" alt=""></a>
+            <div>
+                <a href="{{ line.product.url }}" class="line-name">{{ line.product.name }}</a>
+                <div class="line-facts">
+                    {% if order.type == 'RENT' %}
+                    <div><span>Term</span>{{ line.term_label }}</div>
+                    <div><span>Rental dates</span>{{ line.start|nice_date }} – {{ line.end|nice_date }}</div>
+                    <div><span>Monthly price</span>{{ line.rent|money }}/mo</div>
+                    <div><span>Item total</span>{{ line.total|money }}</div>
+                    {% else %}
+                    <div><span>Buyout price</span>{{ line.buy|money }}</div>
+                    <div><span>Delivery</span>{{ order.delivery|nice_date }}</div>
+                    {% endif %}
+                </div>
+                <div class="line-status state-{{ line.state }}">{{ line.status }}</div>
+
+                {% if not order.cancelled %}
+                <div class="line-actions">
+                    {% if order.type == 'RENT' %}
+                        {% if line.actions.extend %}
+                        <details class="action">
+                            <summary class="btn btn-secondary">Extend</summary>
+                            <form class="action-panel" method="POST" action="{{ url_for('manage_order_item', order_id=order.id, index=line.index, action='extend') }}">
+                                <label for="ext-{{ order.id }}-{{ line.index }}">Add</label>
+                                <select name="months" id="ext-{{ order.id }}-{{ line.index }}">
+                                    {% for m in [1, 3, 6, 12] %}<option value="{{ m }}">{{ m|plural('month') }} (+{{ (line.rent * m)|money }})</option>{% endfor %}
+                                </select>
+                                <button type="submit" class="btn btn-primary">Confirm</button>
+                            </form>
+                        </details>
+                        {% else %}
+                        <button class="btn btn-secondary" disabled>Extend</button>
+                        {% endif %}
+
+                        {% if line.actions.buyout %}
+                        <details class="action">
+                            <summary class="btn btn-secondary">Buy out</summary>
+                            <form class="action-panel" method="POST" action="{{ url_for('manage_order_item', order_id=order.id, index=line.index, action='buyout') }}">
+                                <span>Keep it for <strong>{{ line.buyout_amount|money }}</strong> (buyout price {{ line.buy|money }} minus half the rent paid so far).</span>
+                                <button type="submit" class="btn btn-primary">Confirm buy out</button>
+                            </form>
+                        </details>
+                        {% else %}
+                        <button class="btn btn-secondary" disabled>Buy out</button>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if line.actions['return'] %}
+                    <details class="action">
+                        <summary class="btn btn-secondary">Schedule return</summary>
+                        <form class="action-panel" method="POST" action="{{ url_for('manage_order_item', order_id=order.id, index=line.index, action='return') }}">
+                            <label for="ret-{{ order.id }}-{{ line.index }}">Free pickup on</label>
+                            <input type="date" name="date" id="ret-{{ order.id }}-{{ line.index }}" min="{{ line.actions.return_min }}" max="{{ line.actions.return_max }}" value="{{ line.actions.return_min }}" required>
+                            <button type="submit" class="btn btn-primary">Confirm pickup</button>
+                        </form>
+                    </details>
+                    {% else %}
+                    <button class="btn btn-secondary" disabled>Schedule return</button>
+                    {% endif %}
+
+                    {% if line.state == 'owned' and order.type == 'RENT' %}
+                    <p class="action-note">You own this item now, so rental actions are closed.</p>
+                    {% elif line.state == 'returning' %}
+                    <p class="action-note">A pickup is already scheduled for this item.</p>
+                    {% elif line.state == 'ended' %}
+                    <p class="action-note">This rental has ended.</p>
+                    {% elif order.type == 'BUY' and not line.actions['return'] %}
+                    <p class="action-note">Purchases can be returned within 30 days of delivery.</p>
+                    {% endif %}
+                </div>
+                {% endif %}
             </div>
-        {% else %}
-            {% for order in orders %}
-            <div class="order-card">
-                <div class="order-header">
-                    <div>
-                        <div class="order-id">Order #{{ order.id }}</div>
-                        <div class="order-date">{{ order.date }}</div>
-                    </div>
-                    <div style="text-align: right;">
-                        <span class="order-status">Processing</span>
-                        <div style="margin-top:5px; font-size:13px; color:#888; font-weight: 500;">
-                            {% if order.type == 'BUY' %}
-                                Buyout Order
-                            {% else %}
-                                Rental Order
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="order-items">
-                    {% for item in order['items'] %}
-                    <div class="order-item" title="{{ item.series }}">
-                        <img src="{{ item.image_url }}" alt="{{ item.series }}">
-                    </div>
-                    {% endfor %}
-                </div>
-                
-                <div class="order-footer">
-                    Total: ${{ "%.2f"|format(order.total) }}
-                </div>
+        </div>
+        {% endfor %}
+
+        <div class="order-footer">
+            <div>
+                {% if order.can_cancel %}
+                <form method="POST" action="{{ url_for('cancel_order', order_id=order.id) }}" onsubmit="return confirm('Cancel order #{{ order.id }}?');">
+                    <button type="submit" class="btn btn-danger">Cancel order</button>
+                </form>
+                {% elif order.cancelled %}
+                <span class="action-note">This order was cancelled. Nothing will be delivered or charged.</span>
+                {% else %}
+                <button class="btn btn-secondary" disabled>Cancel order</button>
+                <p class="action-note">Orders can only be cancelled before delivery. Use "Schedule return" instead.</p>
+                {% endif %}
             </div>
-            {% endfor %}
-        {% endif %}
-    </div>
-</body>
-</html>
+            <div class="order-total">
+                {{ order.total|money }}
+                <small>{% if order.type == 'RENT' %}{% if order.monthly_total %}{{ order.monthly_total|money }}/mo · {% endif %}order total{% else %}order total{% endif %}</small>
+            </div>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}

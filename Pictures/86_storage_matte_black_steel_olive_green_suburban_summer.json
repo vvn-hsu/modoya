@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "Bookshelf",
   "style": "Farmhouse",
-  "material": "Matte Black Steel",
+  "material": "Steel",
   "color": "Olive Green",
   "attributes": "Plush",
   "location": "suburban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\86_storage_matte_black_steel_olive_green_suburban_summer.png",
-  "json_file": "Pictures\\86_storage_matte_black_steel_olive_green_suburban_summer.json"
+  "json_file": "Pictures\\86_storage_matte_black_steel_olive_green_suburban_summer.json",
+  "name": "Bookshelf — Olive & Black Steel",
+  "type": "bookshelf",
+  "description": "Black steel shelving with olive storage bins along the bottom. Farmhouse style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 38,
+    "d": 14,
+    "h": 76
+  },
+  "stock": 5,
+  "monthly_rent": 35,
+  "buyout_price": 659
 }

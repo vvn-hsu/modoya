@@ -3,7 +3,7 @@
   "category": "Chair",
   "series": "Eames Lounge Chair",
   "style": "Traditional",
-  "material": "Velvet",
+  "material": "Velvet & Molded Wood",
   "color": "Light Gray",
   "attributes": "Modular",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\7_chair_velvet_light_gray_rural_spring.png",
-  "json_file": "Pictures\\7_chair_velvet_light_gray_rural_spring.json"
+  "json_file": "Pictures\\7_chair_velvet_light_gray_rural_spring.json",
+  "name": "Tufted Lounge Chair — Light Gray Velvet",
+  "type": "lounge_chair",
+  "description": "Button-tufted light gray velvet cushions on a molded wood shell and swivel base. Traditional style. Arrives assembled and ready to use.",
+  "dimensions": {
+    "w": 33,
+    "d": 35,
+    "h": 32
+  },
+  "stock": 7,
+  "monthly_rent": 40,
+  "buyout_price": 769
 }

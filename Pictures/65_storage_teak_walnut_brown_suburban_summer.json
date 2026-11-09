@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "Cabinet",
   "style": "Bauhaus",
-  "material": "Teak",
+  "material": "Teak & Oak",
   "color": "Walnut Brown",
   "attributes": "Modular",
   "location": "suburban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\65_storage_teak_walnut_brown_suburban_summer.png",
-  "json_file": "Pictures\\65_storage_teak_walnut_brown_suburban_summer.json"
+  "json_file": "Pictures\\65_storage_teak_walnut_brown_suburban_summer.json",
+  "name": "Storage Cabinet — Walnut & Oak",
+  "type": "cabinet",
+  "description": "Walnut doors next to open oak cubbies and small drawers. Bauhaus style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 41,
+    "d": 17,
+    "h": 48
+  },
+  "stock": 6,
+  "monthly_rent": 34,
+  "buyout_price": 629
 }

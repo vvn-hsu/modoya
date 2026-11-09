@@ -3,7 +3,7 @@
   "category": "Chair",
   "series": "Barcelona Chair",
   "style": "Bauhaus",
-  "material": "Tweed",
+  "material": "Tweed & Steel",
   "color": "Emerald Green",
   "attributes": "Plush",
   "location": "urban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\83_chair_tweed_emerald_green_urban_winter.png",
-  "json_file": "Pictures\\83_chair_tweed_emerald_green_urban_winter.json"
+  "json_file": "Pictures\\83_chair_tweed_emerald_green_urban_winter.json",
+  "name": "Tufted Steel Armchair — Emerald Tweed",
+  "type": "accent_chair",
+  "description": "Emerald tweed tufted cushions on a polished steel frame. Bauhaus style. Arrives assembled and ready to use.",
+  "dimensions": {
+    "w": 27,
+    "d": 30,
+    "h": 32
+  },
+  "stock": 6,
+  "monthly_rent": 42,
+  "buyout_price": 879
 }

@@ -4,7 +4,7 @@
   "series": "Parsons Table",
   "style": "Japandi",
   "material": "Light Oak",
-  "color": "Light Gray",
+  "color": "Light Oak",
   "attributes": "Textured",
   "location": "suburban",
   "season": "autumn",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\29_table_light_oak_light_gray_suburban_autumn.png",
-  "json_file": "Pictures\\29_table_light_oak_light_gray_suburban_autumn.json"
+  "json_file": "Pictures\\29_table_light_oak_light_gray_suburban_autumn.json",
+  "name": "Parsons Side Table — Light Oak",
+  "type": "side_table",
+  "description": "A simple Parsons-style side table in light oak with a smooth matte finish. Japandi style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 22,
+    "d": 23,
+    "h": 23
+  },
+  "stock": 11,
+  "monthly_rent": 23,
+  "buyout_price": 449
 }

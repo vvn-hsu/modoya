@@ -3,7 +3,7 @@
   "category": "Lamp",
   "series": "Arco Floor Lamp",
   "style": "Japandi",
-  "material": "Smoked Glass",
+  "material": "Steel & Smoked Glass",
   "color": "Navy Blue",
   "attributes": "Playful",
   "location": "suburban",
@@ -12,5 +12,22 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\2_lamp_smoked_glass_navy_blue_suburban_spring.png",
-  "json_file": "Pictures\\2_lamp_smoked_glass_navy_blue_suburban_spring.json"
+  "json_file": "Pictures\\2_lamp_smoked_glass_navy_blue_suburban_spring.json",
+  "name": "Arc Floor Lamp — Navy Glass Shade",
+  "type": "arc_lamp",
+  "description": "A slender black arm curves over a seat and ends in a navy smoked-glass dome. Chair shown for styling only. Japandi style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "dimensions": {
+    "w": 40,
+    "d": 16,
+    "h": 80
+  },
+  "stock": 2,
+  "monthly_rent": 20,
+  "buyout_price": 409,
+  "crop": [
+    0.45,
+    0.0,
+    1.0,
+    1.0
+  ]
 }

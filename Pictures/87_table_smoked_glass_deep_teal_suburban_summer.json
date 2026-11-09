@@ -3,7 +3,7 @@
   "category": "Table",
   "series": "Dining Table",
   "style": "Farmhouse",
-  "material": "Smoked Glass",
+  "material": "Painted Wood",
   "color": "Deep Teal",
   "attributes": "Distressed",
   "location": "suburban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\87_table_smoked_glass_deep_teal_suburban_summer.png",
-  "json_file": "Pictures\\87_table_smoked_glass_deep_teal_suburban_summer.json"
+  "json_file": "Pictures\\87_table_smoked_glass_deep_teal_suburban_summer.json",
+  "name": "Painted Dining Table — Deep Teal",
+  "type": "dining_table",
+  "description": "A deep teal painted table on turned legs. Chairs not included. Farmhouse style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 76,
+    "d": 37,
+    "h": 28
+  },
+  "stock": 6,
+  "monthly_rent": 28,
+  "buyout_price": 569
 }

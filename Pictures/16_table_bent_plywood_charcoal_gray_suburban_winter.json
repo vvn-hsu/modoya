@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\16_table_bent_plywood_charcoal_gray_suburban_winter.png",
-  "json_file": "Pictures\\16_table_bent_plywood_charcoal_gray_suburban_winter.json"
+  "json_file": "Pictures\\16_table_bent_plywood_charcoal_gray_suburban_winter.json",
+  "name": "Desk with Bench Seats — Charcoal",
+  "type": "desk",
+  "description": "A charcoal plywood work table with two built-in cushioned bench seats. Scandinavian style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 49,
+    "d": 25,
+    "h": 29
+  },
+  "stock": 5,
+  "monthly_rent": 23,
+  "buyout_price": 459
 }

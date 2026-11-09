@@ -3,7 +3,7 @@
   "category": "Chair",
   "series": "Wishbone Chair (Y-Chair)",
   "style": "Scandinavian",
-  "material": "Matte Black Steel",
+  "material": "Upholstered Shell & Steel",
   "color": "Mustard Yellow",
   "attributes": "Organic shape",
   "location": "urban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\48_chair_matte_black_steel_mustard_yellow_urban_summer.png",
-  "json_file": "Pictures\\48_chair_matte_black_steel_mustard_yellow_urban_summer.json"
+  "json_file": "Pictures\\48_chair_matte_black_steel_mustard_yellow_urban_summer.json",
+  "name": "Shell Side Chair — Mustard",
+  "type": "dining_chair",
+  "description": "A wing-shaped mustard shell seat on thin black steel legs. Scandinavian style. Arrives assembled and ready to use.",
+  "dimensions": {
+    "w": 20,
+    "d": 21,
+    "h": 28
+  },
+  "stock": 4,
+  "monthly_rent": 40,
+  "buyout_price": 799
 }

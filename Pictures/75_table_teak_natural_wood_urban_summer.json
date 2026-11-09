@@ -4,7 +4,7 @@
   "series": "Parsons Table",
   "style": "Minimalist",
   "material": "Teak",
-  "color": "Natural Wood",
+  "color": "Natural Teak",
   "attributes": "Airy",
   "location": "urban",
   "season": "summer",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\75_table_teak_natural_wood_urban_summer.png",
-  "json_file": "Pictures\\75_table_teak_natural_wood_urban_summer.json"
+  "json_file": "Pictures\\75_table_teak_natural_wood_urban_summer.json",
+  "name": "Square Side Table — Teak",
+  "type": "side_table",
+  "description": "A square teak side table with an open lower frame. Minimalist style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 22,
+    "d": 23,
+    "h": 22
+  },
+  "stock": 0,
+  "monthly_rent": 23,
+  "buyout_price": 459
 }

@@ -3,8 +3,8 @@
   "category": "Lamp",
   "series": "Arco Floor Lamp",
   "style": "Farmhouse",
-  "material": "Matte Black Steel",
-  "color": "Light Gray",
+  "material": "Steel & Fabric",
+  "color": "Beige",
   "attributes": "Geometric",
   "location": "suburban",
   "season": "autumn",
@@ -12,5 +12,22 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\69_lamp_matte_black_steel_light_gray_suburban_autumn.png",
-  "json_file": "Pictures\\69_lamp_matte_black_steel_light_gray_suburban_autumn.json"
+  "json_file": "Pictures\\69_lamp_matte_black_steel_light_gray_suburban_autumn.json",
+  "name": "Tripod Dome Floor Lamp",
+  "type": "floor_lamp",
+  "description": "A large beige dome shade on a black tripod. Armchair shown for styling only. Farmhouse style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "dimensions": {
+    "w": 19,
+    "d": 17,
+    "h": 61
+  },
+  "stock": 10,
+  "monthly_rent": 17,
+  "buyout_price": 339,
+  "crop": [
+    0.2,
+    0.0,
+    0.85,
+    0.85
+  ]
 }

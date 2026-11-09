@@ -4,7 +4,7 @@
   "series": "Floor Lamp",
   "style": "Bauhaus",
   "material": "Copper",
-  "color": "Beige",
+  "color": "Copper",
   "attributes": "Airy",
   "location": "suburban",
   "season": "winter",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\36_lamp_copper_beige_suburban_winter.png",
-  "json_file": "Pictures\\36_lamp_copper_beige_suburban_winter.json"
+  "json_file": "Pictures\\36_lamp_copper_beige_suburban_winter.json",
+  "name": "Copper Floor Lamp",
+  "type": "floor_lamp",
+  "description": "A polished copper cone shade on a thin copper pole and round base. Bauhaus style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "dimensions": {
+    "w": 19,
+    "d": 17,
+    "h": 63
+  },
+  "stock": 4,
+  "monthly_rent": 19,
+  "buyout_price": 359
 }

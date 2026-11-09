@@ -4,7 +4,7 @@
   "series": "Dining Table",
   "style": "Farmhouse",
   "material": "Walnut Wood",
-  "color": "White",
+  "color": "Whitewashed Oak",
   "attributes": "Textured",
   "location": "suburban",
   "season": "spring",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\97_table_walnut_wood_white_suburban_spring.png",
-  "json_file": "Pictures\\97_table_walnut_wood_white_suburban_spring.json"
+  "json_file": "Pictures\\97_table_walnut_wood_white_suburban_spring.json",
+  "name": "Farmhouse Dining Table — White Oak",
+  "type": "dining_table",
+  "description": "A long whitewashed farmhouse table that seats eight. Chairs not included. Farmhouse style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "dimensions": {
+    "w": 77,
+    "d": 40,
+    "h": 30
+  },
+  "stock": 12,
+  "monthly_rent": 28,
+  "buyout_price": 539
 }

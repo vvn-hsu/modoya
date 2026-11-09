@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\85_sofa_vegan_leather_navy_blue_urban_summer.png",
-  "json_file": "Pictures\\85_sofa_vegan_leather_navy_blue_urban_summer.json"
+  "json_file": "Pictures\\85_sofa_vegan_leather_navy_blue_urban_summer.json",
+  "name": "Loveseat — Navy Leather",
+  "type": "loveseat",
+  "description": "Channel-stitched navy vegan leather on a thin black steel base. Coastal style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 58,
+    "d": 32,
+    "h": 31
+  },
+  "stock": 1,
+  "monthly_rent": 68,
+  "buyout_price": 1379
 }

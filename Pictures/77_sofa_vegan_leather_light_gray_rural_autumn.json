@@ -3,7 +3,7 @@
   "category": "Sofa",
   "series": "LC2 Sofa",
   "style": "Farmhouse",
-  "material": "Vegan Leather",
+  "material": "Vegan Leather & Reclaimed Wood",
   "color": "Light Gray",
   "attributes": "Modular",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\77_sofa_vegan_leather_light_gray_rural_autumn.png",
-  "json_file": "Pictures\\77_sofa_vegan_leather_light_gray_rural_autumn.json"
+  "json_file": "Pictures\\77_sofa_vegan_leather_light_gray_rural_autumn.json",
+  "name": "Sectional — Gray Leather, Reclaimed Wood",
+  "type": "sectional",
+  "description": "Soft light gray vegan leather cushions on a low reclaimed wood base. Farmhouse style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 105,
+    "d": 84,
+    "h": 32
+  },
+  "stock": 10,
+  "monthly_rent": 66,
+  "buyout_price": 1249
 }

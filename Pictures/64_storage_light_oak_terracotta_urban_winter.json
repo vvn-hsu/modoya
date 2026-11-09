@@ -4,7 +4,7 @@
   "series": "Bookshelf",
   "style": "Coastal",
   "material": "Light Oak",
-  "color": "Terracotta",
+  "color": "Light Oak",
   "attributes": "Textured",
   "location": "urban",
   "season": "winter",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\64_storage_light_oak_terracotta_urban_winter.png",
-  "json_file": "Pictures\\64_storage_light_oak_terracotta_urban_winter.json"
+  "json_file": "Pictures\\64_storage_light_oak_terracotta_urban_winter.json",
+  "name": "Bookshelf — Light Oak",
+  "type": "bookshelf",
+  "description": "A tall light oak bookcase with open shelves and a closed lower cabinet. Coastal style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 34,
+    "d": 13,
+    "h": 78
+  },
+  "stock": 4,
+  "monthly_rent": 36,
+  "buyout_price": 679
 }

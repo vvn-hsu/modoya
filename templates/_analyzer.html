@@ -1,0 +1,63 @@
+<div id="analyzer-overlay" role="dialog" aria-modal="true" aria-labelledby="analyzer-title">
+    <div class="analyzer-modal">
+        <button type="button" id="close-analyzer-btn" class="analyzer-close-btn" aria-label="Close">&times;</button>
+
+        <div id="upload-screen">
+            <h2 id="analyzer-title" class="analyzer-heading">Style Analyzer</h2>
+            <p class="analyzer-sub">Add 3 photos of rooms you love. We'll describe your style and pick furniture that fits it.</p>
+
+            <div class="upload-grid">
+                {% for n in [1, 2, 3] %}
+                <label class="upload-box" for="file-{{ n }}">
+                    <input type="file" id="file-{{ n }}" class="visually-hidden-input" accept="image/*" data-slot="{{ n }}">
+                    <span id="text-{{ n }}" class="upload-text">+ Photo {{ n }}<small>Click to choose</small></span>
+                    <img id="preview-{{ n }}" class="upload-preview" alt="Photo {{ n }} preview">
+                </label>
+                {% endfor %}
+            </div>
+
+            <button type="button" id="sample-photos-btn" class="link-button sample-link">No photos handy? Use sample photos</button>
+            <p id="analyzer-error" class="form-error" hidden></p>
+            <button type="button" id="analyze-style-btn" class="analyzer-cta-btn" disabled>Analyze Style</button>
+            <p id="analyze-hint" class="analyzer-hint">Add 3 photos to continue.</p>
+        </div>
+
+        <div id="results-screen" hidden>
+            <h2 class="analyzer-heading">Your Style Profile</h2>
+
+            <div class="confidence-row">
+                <div class="confidence-score"><span id="confidence-value">0</span>% match</div>
+                <p id="style-explanation" class="style-explanation"></p>
+            </div>
+
+            <h3 class="analyzer-section">Style mix</h3>
+            <div id="style-dna-results"></div>
+
+            <h3 class="analyzer-section">Key elements</h3>
+            <div id="key-elements-results" class="tag-cloud"></div>
+
+            <h3 class="analyzer-section">Design tips</h3>
+            <ul id="design-recommendations-results" class="design-tips"></ul>
+
+            <details class="calibrate" id="calibrate-panel">
+                <summary>Adjust your results</summary>
+                <p class="calibrate-help">Not quite you? Move the sliders and the picks below update.</p>
+                <div id="calibrate-sliders"></div>
+                <div class="slider-row">
+                    <label for="budget-slider">Max monthly price</label>
+                    <input type="range" id="budget-slider" min="15" max="80" step="5" value="80">
+                    <output id="budget-value">Any</output>
+                </div>
+            </details>
+
+            <h3 class="analyzer-section">Curated for you</h3>
+            <div id="recommended-furniture-results" class="analyzer-picks"></div>
+
+            <h3 class="analyzer-section">People like you also rented</h3>
+            <p class="calibrate-help">Popular with renters whose style mix is close to yours.</p>
+            <div id="people-like-you-results" class="analyzer-picks"></div>
+
+            <button type="button" id="reset-analyzer-btn" class="btn btn-buy analyzer-reset">Start Over</button>
+        </div>
+    </div>
+</div>

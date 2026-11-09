@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\63_sofa_tweed_mustard_yellow_urban_autumn.png",
-  "json_file": "Pictures\\63_sofa_tweed_mustard_yellow_urban_autumn.json"
+  "json_file": "Pictures\\63_sofa_tweed_mustard_yellow_urban_autumn.json",
+  "name": "Tufted Loveseat — Mustard Tweed",
+  "type": "loveseat",
+  "description": "Box-tufted mustard tweed cushions on a polished steel frame. Bauhaus style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 65,
+    "d": 36,
+    "h": 32
+  },
+  "stock": 9,
+  "monthly_rent": 64,
+  "buyout_price": 1279
 }

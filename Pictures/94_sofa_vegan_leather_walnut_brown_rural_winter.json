@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\94_sofa_vegan_leather_walnut_brown_rural_winter.png",
-  "json_file": "Pictures\\94_sofa_vegan_leather_walnut_brown_rural_winter.json"
+  "json_file": "Pictures\\94_sofa_vegan_leather_walnut_brown_rural_winter.json",
+  "name": "Chesterfield Sofa — Walnut Leather",
+  "type": "sofa",
+  "description": "A tufted walnut-brown vegan leather Chesterfield with rolled arms. Retro style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 82,
+    "d": 35,
+    "h": 34
+  },
+  "stock": 2,
+  "monthly_rent": 60,
+  "buyout_price": 1199
 }

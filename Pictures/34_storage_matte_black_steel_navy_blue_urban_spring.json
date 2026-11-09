@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "Dresser",
   "style": "Retro",
-  "material": "Matte Black Steel",
+  "material": "Steel & Lacquer",
   "color": "Navy Blue",
   "attributes": "Soft",
   "location": "urban",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\34_storage_matte_black_steel_navy_blue_urban_spring.png",
-  "json_file": "Pictures\\34_storage_matte_black_steel_navy_blue_urban_spring.json"
+  "json_file": "Pictures\\34_storage_matte_black_steel_navy_blue_urban_spring.json",
+  "name": "Dresser — Navy & Gray",
+  "type": "dresser",
+  "description": "Navy and pale gray drawer fronts with bar pulls on a slim black steel frame. Retro style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 54,
+    "d": 20,
+    "h": 33
+  },
+  "stock": 6,
+  "monthly_rent": 37,
+  "buyout_price": 749
 }

@@ -3,7 +3,7 @@
   "category": "Sofa",
   "series": "Sectional Sofa",
   "style": "Wabi-Sabi",
-  "material": "Black Leather",
+  "material": "Fabric & Reclaimed Wood",
   "color": "White",
   "attributes": "Textured",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\13_sofa_black_leather_white_rural_spring.png",
-  "json_file": "Pictures\\13_sofa_black_leather_white_rural_spring.json"
+  "json_file": "Pictures\\13_sofa_black_leather_white_rural_spring.json",
+  "name": "Sectional Sofa — White & Black, Reclaimed Wood",
+  "type": "sectional",
+  "description": "Thick white seat cushions and black-and-white throw pillows in a reclaimed wood frame. Wabi-Sabi style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 111,
+    "d": 79,
+    "h": 34
+  },
+  "stock": 5,
+  "monthly_rent": 58,
+  "buyout_price": 1149
 }

@@ -3,7 +3,7 @@
   "category": "Sofa",
   "series": "Noguchi Freeform Sofa",
   "style": "Industrial",
-  "material": "Black Leather",
+  "material": "Leather & Wood",
   "color": "Black",
   "attributes": "Modular",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\57_sofa_black_leather_black_rural_summer.png",
-  "json_file": "Pictures\\57_sofa_black_leather_black_rural_summer.json"
+  "json_file": "Pictures\\57_sofa_black_leather_black_rural_summer.json",
+  "name": "Tufted Leather Sofa — Black",
+  "type": "sofa",
+  "description": "Puffy channel-tufted black leather on a solid wood base. Industrial style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 85,
+    "d": 35,
+    "h": 32
+  },
+  "stock": 6,
+  "monthly_rent": 64,
+  "buyout_price": 1339
 }

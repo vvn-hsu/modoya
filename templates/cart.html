@@ -1,142 +1,152 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart</title>
-    <style>
-        body { font-family: -apple-system, sans-serif; background-color: #f9fafb; color: #111; margin: 0; padding: 40px; }
-        .container { max-width: 1000px; margin: 0 auto; }
-        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-        h2 { font-weight: 700; font-size: 24px; margin: 0; }
-        .back-link { color: #666; text-decoration: none; font-size: 14px; font-weight: 500; }
-        
-        .cart-section { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); margin-bottom: 30px; }
-        .section-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
-        
-        .cart-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 20px; padding: 20px 0; border-bottom: 1px solid #f0f0f0; }
-        .cart-item:last-child { border-bottom: none; }
-        
-        .item-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; background: #f0f0f0; }
-        .item-details h3 { font-size: 16px; margin: 0 0 4px 0; }
-        .item-details p { font-size: 14px; color: #666; margin: 0; }
-        
-        .controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-        .action-row { display: flex; gap: 8px; }
-        
-        input[type="number"] { padding: 6px; border: 1px solid #ddd; border-radius: 6px; width: 50px; text-align: center; }
-        
-        .btn { padding: 8px 12px; border-radius: 6px; border: none; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.2s; }
-        .btn-update { background: #f0f0f0; color: #333; }
-        .btn-update:hover { background: #e0e0e0; }
-        .btn-remove { background: #fff0f0; color: #d32f2f; }
-        .btn-remove:hover { background: #ffe0e0; }
-        .btn-switch { background: white; border: 1px solid #ddd; }
-        
-        .summary-box { background: #fafafa; border-radius: 12px; padding: 20px; text-align: right; margin-top: 20px; }
-        .total-price { font-size: 24px; font-weight: 800; margin: 10px 0; }
-        
-        .checkout-btn { background: #111; color: white; border: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; cursor: pointer; width: 100%; margin-top: 10px; }
-        .checkout-btn:hover { background: #333; }
-        
-        .rent-color { color: #10b981; }
-        .buy-color { color: #f59e0b; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h2>Shopping Cart</h2>
-            <a href="{{ url_for('index') }}" class="back-link">← Continue Shopping</a>
-        </div>
+{% extends 'base.html' %}
+{% block title %}Your Cart{% endblock %}
+{% block body_class %}soft-bg{% endblock %}
 
-        {% if not rent_items and not buy_items %}
-            <div style="text-align:center; padding: 60px; color: #888;">
-                <p>Your cart is empty.</p>
-                <a href="{{ url_for('index') }}" class="btn btn-update">Browse Collection</a>
-            </div>
-        {% endif %}
+{% block styles %}
+<style>
+    .container { max-width: 1000px; margin: 0 auto; }
+    .page-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 30px; }
+    .page-head h1 { font-weight: 700; font-size: 26px; margin: 0; }
+    .back-link { color: #666; text-decoration: none; font-size: 14px; font-weight: 500; }
+    .back-link:hover { color: #111; }
 
-        {% if rent_items %}
-        <div class="cart-section">
-            <div class="section-title">
-                <span>Rental Items</span>
-                <span class="rent-color">{{ rent_items|length }} items</span>
-            </div>
-            
-            {% for item in rent_items %}
-            <div class="cart-item">
-                <img src="{{ item.image_url }}" class="item-img">
-                <div class="item-details">
-                    <h3>{{ item.series }}</h3>
-                    <p>{{ item.style }}</p>
-                    <p style="margin-top:6px; font-weight:600;">${{ item.monthly_rent }}/mo × {{ item.duration }} Months</p>
-                </div>
-                <div class="controls">
-                    <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" style="display:flex; gap:8px; align-items: center;">
-                        <input type="number" name="duration" value="{{ item.duration }}" min="1">
-                        <span style="font-size: 14px; color: #555;">months</span>
-                        <button type="submit" name="action" value="update_duration" class="btn btn-update">Update</button>
-                    </form>
-                    <div class="action-row">
-                        <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST">
-                            <button type="submit" name="action" value="set_buy" class="btn btn-switch">Switch to Buy</button>
-                        </form>
-                        <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST">
-                            <button type="submit" name="action" value="remove" class="btn btn-remove">Remove</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+    .cart-section { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.03); margin-bottom: 30px; }
+    .section-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; padding-bottom: 12px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
 
-            <div class="summary-box">
-                <div class="total-price rent-color">${{ "%.2f"|format(rent_total) }}</div>
-                <form action="{{ url_for('checkout') }}" method="POST">
-                    <input type="hidden" name="cart_type" value="RENT">
-                    <button type="submit" class="checkout-btn">Checkout Rentals</button>
-                </form>
-            </div>
-        </div>
-        {% endif %}
+    .cart-item { display: grid; grid-template-columns: 80px 1fr auto; gap: 20px; padding: 20px 0; border-bottom: 1px solid #f0f0f0; }
+    .cart-item:last-of-type { border-bottom: none; }
+    .item-img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; background: #f0f0f0; display: block; }
+    .item-details h3 { font-size: 16px; margin: 0 0 4px 0; }
+    .item-details h3 a { text-decoration: none; }
+    .item-details h3 a:hover { text-decoration: underline; }
+    .item-details p { font-size: 14px; color: #666; margin: 0; }
+    .item-details .line-price { margin-top: 8px; font-weight: 600; color: #111; }
 
-        {% if buy_items %}
-        <div class="cart-section">
-            <div class="section-title">
-                <span>Buyout Items</span>
-                <span class="buy-color">{{ buy_items|length }} items</span>
-            </div>
-            
-            {% for item in buy_items %}
-            <div class="cart-item">
-                <img src="{{ item.image_url }}" class="item-img">
-                <div class="item-details">
-                    <h3>{{ item.series }}</h3>
-                    <p>{{ item.style }}</p>
-                    <p style="margin-top:6px; font-weight:600;">Price: ${{ item.buyout_price }}</p>
-                </div>
-                <div class="controls">
-                    <div class="action-row">
-                        <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST">
-                            <button type="submit" name="action" value="set_rent" class="btn btn-switch">Switch to Rent</button>
-                        </form>
-                        <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST">
-                            <button type="submit" name="action" value="remove" class="btn btn-remove">Remove</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+    .controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+    .controls form { margin: 0; }
+    .term-form { display: flex; gap: 8px; align-items: center; }
+    .term-form select { padding: 7px 8px; border: 1px solid #ddd; border-radius: 6px; font: inherit; font-size: 14px; }
+    .controls .btn { flex: none; padding: 8px 12px; font-size: 13px; font-weight: 500; }
+    .controls .action-row { gap: 8px; }
 
-            <div class="summary-box">
-                <div class="total-price buy-color">${{ "%.2f"|format(buy_total) }}</div>
-                <form action="{{ url_for('checkout') }}" method="POST">
-                    <input type="hidden" name="cart_type" value="BUY">
-                    <button type="submit" class="checkout-btn">Checkout Buyout</button>
-                </form>
-            </div>
-        </div>
-        {% endif %}
+    .summary-box { background: #fafafa; border-radius: 12px; padding: 20px; text-align: right; margin-top: 16px; }
+    .summary-box .label { font-size: 14px; color: #666; }
+    .total-price { font-size: 24px; font-weight: 800; margin: 6px 0 10px; }
+    .checkout-btn { background: #111; color: white; border: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; font-family: inherit; cursor: pointer; width: 100%; margin-top: 10px; }
+    .checkout-btn:hover { background: #333; }
+    .empty-cart { text-align: center; padding: 60px; color: #888; background: #fff; border-radius: 16px; }
+    .empty-cart .btn { flex: none; display: inline-block; margin-top: 8px; }
+
+    @media (max-width: 640px) {
+        .cart-section { padding: 18px; }
+        .cart-item { grid-template-columns: 64px 1fr; gap: 14px; }
+        .item-img { width: 64px; height: 64px; }
+        .controls { grid-column: 1 / -1; align-items: stretch; }
+        .term-form { flex-wrap: wrap; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-head">
+        <h1>Shopping Cart</h1>
+        <a href="{{ url_for('index') }}#catalogue" class="back-link">← Continue Shopping</a>
     </div>
-</body>
-</html>
+
+    {% if not rent_items and not buy_items %}
+    <div class="empty-cart">
+        <p>Your cart is empty.</p>
+        <a href="{{ url_for('index') }}#catalogue" class="btn btn-secondary">Browse Collection</a>
+    </div>
+    {% endif %}
+
+    {% if rent_items %}
+    <div class="cart-section">
+        <div class="section-title">
+            <span>Rental Items</span>
+            <span class="rent-color">{{ rent_items|length|plural('item') }}</span>
+        </div>
+
+        {% for item in rent_items %}
+        <div class="cart-item">
+            <a href="{{ item.url }}"><img src="{{ item.image_url }}" class="item-img" alt=""></a>
+            <div class="item-details">
+                <h3><a href="{{ item.url }}">{{ item.name }}</a></h3>
+                <p>{{ item.style }} · {{ item.category }}</p>
+                <p class="line-price">{{ item.monthly_rent|money }}/mo × {{ item.term_label }} = {{ item.total_cost|money }}</p>
+            </div>
+            <div class="controls">
+                <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" class="term-form">
+                    <label for="term-{{ item.id }}" style="font-size:14px; color:#555;">Rental term</label>
+                    <select name="term" id="term-{{ item.id }}" onchange="this.form.submit()">
+                        {% for key, months, label in rental_terms %}
+                        <option value="{{ key }}" {% if key == item.term %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="hidden" name="action" value="update_term">
+                    <noscript><button type="submit" class="btn btn-secondary">Update</button></noscript>
+                </form>
+                <div class="action-row">
+                    <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST">
+                        <button type="submit" name="action" value="set_buy" class="btn btn-secondary">Switch to Buy</button>
+                    </form>
+                    <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST">
+                        <button type="submit" name="action" value="remove" class="btn btn-danger">Remove</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="summary-box">
+            <div class="label">{{ rent_monthly_total|money }}/mo · term total</div>
+            <div class="total-price rent-color">{{ rent_total|money }}</div>
+            <form action="{{ url_for('checkout') }}" method="POST">
+                <input type="hidden" name="cart_type" value="RENT">
+                <button type="submit" class="checkout-btn">Checkout Rentals</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if buy_items %}
+    <div class="cart-section">
+        <div class="section-title">
+            <span>Buyout Items</span>
+            <span class="buy-color">{{ buy_items|length|plural('item') }}</span>
+        </div>
+
+        {% for item in buy_items %}
+        <div class="cart-item">
+            <a href="{{ item.url }}"><img src="{{ item.image_url }}" class="item-img" alt=""></a>
+            <div class="item-details">
+                <h3><a href="{{ item.url }}">{{ item.name }}</a></h3>
+                <p>{{ item.style }} · {{ item.category }}</p>
+                <p class="line-price">Buyout price: {{ item.buyout_price|money }}</p>
+            </div>
+            <div class="controls">
+                <div class="action-row">
+                    <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST">
+                        <button type="submit" name="action" value="set_rent" class="btn btn-secondary">Switch to Rent</button>
+                    </form>
+                    <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST">
+                        <button type="submit" name="action" value="remove" class="btn btn-danger">Remove</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="summary-box">
+            <div class="label">Total</div>
+            <div class="total-price buy-color">{{ buy_total|money }}</div>
+            <form action="{{ url_for('checkout') }}" method="POST">
+                <input type="hidden" name="cart_type" value="BUY">
+                <button type="submit" class="checkout-btn">Checkout Buyout</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "Cabinet",
   "style": "Traditional",
-  "material": "Bent Plywood",
+  "material": "Lacquered Plywood",
   "color": "Navy Blue",
   "attributes": "Elegant",
   "location": "urban",
@@ -12,5 +12,22 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\96_storage_bent_plywood_navy_blue_urban_winter.png",
-  "json_file": "Pictures\\96_storage_bent_plywood_navy_blue_urban_winter.json"
+  "json_file": "Pictures\\96_storage_bent_plywood_navy_blue_urban_winter.json",
+  "name": "Low Cabinet — Navy",
+  "type": "sideboard",
+  "description": "A low navy lacquered cabinet with four doors. Traditional style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 67,
+    "d": 17,
+    "h": 29
+  },
+  "stock": 2,
+  "monthly_rent": 38,
+  "buyout_price": 799,
+  "crop": [
+    0.22,
+    0.38,
+    0.78,
+    0.8
+  ]
 }

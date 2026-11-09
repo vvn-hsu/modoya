@@ -3,7 +3,7 @@
   "category": "Lamp",
   "series": "PH Artichoke Lamp",
   "style": "Retro",
-  "material": "Linen shade",
+  "material": "Carved Wood & Linen",
   "color": "Walnut Brown",
   "attributes": "Vintage look",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\52_lamp_linen_shade_walnut_brown_rural_autumn.png",
-  "json_file": "Pictures\\52_lamp_linen_shade_walnut_brown_rural_autumn.json"
+  "json_file": "Pictures\\52_lamp_linen_shade_walnut_brown_rural_autumn.json",
+  "name": "Carved Artichoke Table Lamp",
+  "type": "table_lamp",
+  "description": "A hand-carved wooden artichoke base under a natural linen shade. Retro style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "dimensions": {
+    "w": 13,
+    "d": 14,
+    "h": 24
+  },
+  "stock": 6,
+  "monthly_rent": 22,
+  "buyout_price": 429
 }

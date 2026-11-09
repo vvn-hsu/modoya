@@ -3,7 +3,7 @@
   "category": "Storage",
   "series": "Cabinet",
   "style": "Industrial",
-  "material": "Matte Black Steel",
+  "material": "Steel",
   "color": "Charcoal Gray",
   "attributes": "Vintage look",
   "location": "rural",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\54_storage_matte_black_steel_charcoal_gray_rural_spring.png",
-  "json_file": "Pictures\\54_storage_matte_black_steel_charcoal_gray_rural_spring.json"
+  "json_file": "Pictures\\54_storage_matte_black_steel_charcoal_gray_rural_spring.json",
+  "name": "Riveted Steel Armoire — Charcoal",
+  "type": "armoire",
+  "description": "A tall riveted steel wardrobe with hanging space and two drawers. Industrial style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "dimensions": {
+    "w": 38,
+    "d": 23,
+    "h": 76
+  },
+  "stock": 6,
+  "monthly_rent": 32,
+  "buyout_price": 629
 }

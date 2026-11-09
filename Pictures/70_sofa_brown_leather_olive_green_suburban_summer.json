@@ -3,8 +3,8 @@
   "category": "Sofa",
   "series": "Chesterfield Sofa",
   "style": "Traditional",
-  "material": "Brown Leather",
-  "color": "Olive Green",
+  "material": "Leather",
+  "color": "Cognac Brown",
   "attributes": "Organic shape",
   "location": "suburban",
   "season": "summer",
@@ -12,5 +12,16 @@
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\70_sofa_brown_leather_olive_green_suburban_summer.png",
-  "json_file": "Pictures\\70_sofa_brown_leather_olive_green_suburban_summer.json"
+  "json_file": "Pictures\\70_sofa_brown_leather_olive_green_suburban_summer.json",
+  "name": "Chesterfield Sofa — Cognac Leather",
+  "type": "sofa",
+  "description": "A deeply tufted cognac leather Chesterfield with olive seat cushions. Traditional style. Removable cushion covers; frame arrives fully assembled.",
+  "dimensions": {
+    "w": 90,
+    "d": 34,
+    "h": 33
+  },
+  "stock": 8,
+  "monthly_rent": 62,
+  "buyout_price": 1189
 }
