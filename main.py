@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, jsonify
+from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, jsonify, make_response
 import sys
 import os
 import random
@@ -7,6 +7,7 @@ import base64
 import io
 import json
 from datetime import datetime
+from werkzeug.security import safe_join
 
 from module import get_all_items, filter_furniture, calculate_rent, calculate_buyout_price, get_item_by_id
 
@@ -66,9 +67,41 @@ FIXED_STYLE_RESULT = {
     ]
 }
 
+# Images are shrunk and converted to WebP when requested, so the originals in
+# Pictures/ can be replaced at any time without a separate compression step.
+# The banner is wider than it is tall, so it gets a larger limit.
+IMAGE_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.webp')
+PRODUCT_IMAGE_MAX = 640
+BANNER_IMAGE_MAX = 1600
+IMAGE_QUALITY = 80
+_compressed_cache = {}
+
+def compress_image(path, max_size):
+    from PIL import Image
+
+    with Image.open(path) as im:
+        im = im.convert('RGB')
+        im.thumbnail((max_size, max_size))
+        buf = io.BytesIO()
+        im.save(buf, 'WEBP', quality=IMAGE_QUALITY, method=4)
+    return buf.getvalue()
+
 @app.route('/Pictures/<path:filename>')
 def serve_pictures(filename):
-    return send_from_directory(FOLDER_PATH, filename)
+    path = safe_join(FOLDER_PATH, filename)
+    if not path or not filename.lower().endswith(IMAGE_EXTENSIONS) or not os.path.isfile(path):
+        return send_from_directory(FOLDER_PATH, filename)
+
+    max_size = BANNER_IMAGE_MAX if filename.startswith('banner') else PRODUCT_IMAGE_MAX
+    key = (path, os.path.getmtime(path), max_size)
+    if key not in _compressed_cache:
+        _compressed_cache[key] = compress_image(path, max_size)
+
+    response = make_response(_compressed_cache[key])
+    response.headers['Content-Type'] = 'image/webp'
+    # Browsers keep it for a day; Vercel's CDN keeps it until the next deploy.
+    response.headers['Cache-Control'] = 'public, max-age=86400, s-maxage=31536000'
+    return response
 
 @app.route('/')
 def index():
