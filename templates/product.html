@@ -3,7 +3,7 @@
 
 {% block styles %}
 <style>
-    .breadcrumb { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14px; color: #777; margin-bottom: 24px; }
+    .breadcrumb { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14px; color: #5c5c5c; margin-bottom: 24px; }
     .breadcrumb a { color: #333; text-decoration: none; font-weight: 500; }
     .breadcrumb a:hover { text-decoration: underline; }
     .back-link { margin-left: auto; font-weight: 600; }
@@ -24,7 +24,7 @@
     .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .thumb.zoom img { transform: scale(1.8); }
     .thumb[aria-pressed="true"] { border-color: #111; }
-    .thumb-label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.55); color: #fff; font-size: 10px; padding: 2px 0; text-align: center; }
+    .thumb-label { position: absolute; bottom: 0; left: 0; right: 0; background: #1f1f1f; color: #fff; font-size: 10px; padding: 2px 0; text-align: center; }
 
     /* Lamp light simulation (T7) */
     .light-glow { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.4s ease, background 0.4s ease; mix-blend-mode: screen; }
@@ -38,7 +38,7 @@
     .gallery-main.white .light-tint { background: #cfe2ff; }
 
     .light-controls {
-        display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 16px;
+        display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 12px;
         background: var(--bg-soft); border-radius: 12px; padding: 14px 16px;
     }
     .switch { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; cursor: pointer; }
@@ -51,7 +51,7 @@
     .segmented { display: inline-flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
     .segmented button { background: #fff; border: none; padding: 7px 14px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
     .segmented button[aria-pressed="true"] { background: #111; color: #fff; }
-    .segmented button:disabled { color: #aaa; cursor: not-allowed; }
+    .segmented button:disabled { color: #5c5c5c; cursor: not-allowed; }
     .light-size { font-size: 13px; color: #555; flex-basis: 100%; }
 
     .product-eyebrow { font-size: 14px; color: var(--text-secondary); margin-bottom: 8px; }
@@ -69,7 +69,7 @@
     .price-panel .btn { padding: 14px 0; font-size: 15px; }
 
     .spec-table { width: 100%; border-collapse: collapse; font-size: 15px; }
-    .spec-table th { text-align: left; color: #777; font-weight: 500; width: 130px; padding: 10px 0; vertical-align: top; }
+    .spec-table th { text-align: left; color: #5c5c5c; font-weight: 500; width: 130px; padding: 10px 0; vertical-align: top; }
     .spec-table td { padding: 10px 0; border-bottom: 1px solid var(--border); }
     .spec-table tr:first-child td, .spec-table tr:first-child th { padding-top: 0; }
 
@@ -84,7 +84,7 @@
     .related-card { text-decoration: none; }
     .related-card img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; background: #f3f3f3; display: block; }
     .related-card h3 { font-size: 15px; margin: 10px 0 4px; }
-    .related-card p { margin: 0; color: #777; font-size: 14px; }
+    .related-card p { margin: 0; color: #5c5c5c; font-size: 14px; }
 
     @media (max-width: 900px) {
         .product-layout { grid-template-columns: 1fr; gap: 28px; }
@@ -112,20 +112,6 @@
             <img src="{{ product.image_url }}" alt="{{ product.name }}" id="gallery-image">
             {% if is_lamp %}<div class="light-tint"></div><div class="light-glow"></div>{% endif %}
         </div>
-        <div class="gallery-thumbs" role="group" aria-label="Photos">
-            <button type="button" class="thumb" aria-pressed="true" data-src="{{ product.image_url }}" data-zoom="0">
-                <img src="{{ product.image_url }}" alt=""><span class="thumb-label">Full view</span>
-            </button>
-            <button type="button" class="thumb zoom" aria-pressed="false" data-src="{{ product.image_url }}" data-zoom="1">
-                <img src="{{ product.image_url }}" alt=""><span class="thumb-label">Close-up</span>
-            </button>
-            {% if product.full_image_url %}
-            <button type="button" class="thumb" aria-pressed="false" data-src="{{ product.full_image_url }}" data-zoom="0">
-                <img src="{{ product.full_image_url }}" alt="" loading="lazy"><span class="thumb-label">In a room</span>
-            </button>
-            {% endif %}
-        </div>
-
         {% if is_lamp %}
         <div class="light-controls">
             <label class="switch">
@@ -142,6 +128,20 @@
             {% endif %}
         </div>
         {% endif %}
+        <div class="gallery-thumbs" role="group" aria-label="Photos">
+            <button type="button" class="thumb" aria-pressed="true" data-src="{{ product.image_url }}" data-zoom="0">
+                <img src="{{ product.image_url }}" alt=""><span class="thumb-label">Full view</span>
+            </button>
+            <button type="button" class="thumb zoom" aria-pressed="false" data-src="{{ product.image_url }}" data-zoom="1">
+                <img src="{{ product.image_url }}" alt=""><span class="thumb-label">Close-up</span>
+            </button>
+            {% if product.full_image_url %}
+            <button type="button" class="thumb" aria-pressed="false" data-src="{{ product.full_image_url }}" data-zoom="0">
+                <img src="{{ product.full_image_url }}" alt="" loading="lazy"><span class="thumb-label">In a room</span>
+            </button>
+            {% endif %}
+        </div>
+
     </div>
 
     <div class="product-info">
@@ -259,12 +259,19 @@
     const lightSwitch = document.getElementById('light-switch');
     if (lightSwitch) {
         const colorButtons = document.querySelectorAll('[data-light]');
+        let lightColor = 'warm';
         lightSwitch.addEventListener('change', () => {
-            gallery.classList.toggle('light-on', lightSwitch.checked);
-            gallery.classList.toggle('light-off', !lightSwitch.checked);
-            colorButtons.forEach((b) => { b.disabled = !lightSwitch.checked; });
+            const on = lightSwitch.checked;
+            gallery.classList.toggle('light-on', on);
+            gallery.classList.toggle('light-off', !on);
+            // With the light off, neither colour is selected and both are disabled.
+            colorButtons.forEach((b) => {
+                b.disabled = !on;
+                b.setAttribute('aria-pressed', String(on && b.dataset.light === lightColor));
+            });
         });
         colorButtons.forEach((b) => b.addEventListener('click', () => {
+            lightColor = b.dataset.light;
             colorButtons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
             gallery.classList.toggle('warm', b.dataset.light === 'warm');
             gallery.classList.toggle('white', b.dataset.light === 'white');

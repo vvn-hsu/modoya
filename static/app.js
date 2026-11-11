@@ -169,7 +169,7 @@
         $('#calibrate-sliders').innerHTML = dna.map((s, i) => `
             <div class="slider-row">
                 <label for="style-slider-${i}">${escapeHtml(s.name)}</label>
-                <input type="range" id="style-slider-${i}" class="style-slider" data-style="${escapeHtml(s.name)}" min="0" max="100" step="5" value="${Number(s.percentage)}">
+                <input type="range" id="style-slider-${i}" class="style-slider" data-style="${escapeHtml(s.name)}" min="0" max="100" step="1" value="${Number(s.percentage)}">
                 <output>${Number(s.percentage)}%</output>
             </div>`).join('');
         $('#budget-slider').value = 80;

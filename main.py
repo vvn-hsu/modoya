@@ -373,6 +373,10 @@ def validate_checkout(form):
 
     earliest, latest = delivery_date_range()
     try:
+        # Typed as MM/DD/YYYY on the form; YYYY-MM-DD is accepted too.
+        typed = re.fullmatch(r'(\d{1,2})/(\d{1,2})/(\d{4})', values['delivery_date'])
+        if typed:
+            values['delivery_date'] = date(int(typed.group(3)), int(typed.group(1)), int(typed.group(2))).isoformat()
         chosen = date.fromisoformat(values['delivery_date'])
         if not earliest <= chosen <= latest:
             errors['delivery_date'] = f"Choose a date between {nice_date(earliest)} and {nice_date(latest)}."
@@ -413,6 +417,9 @@ def place_order():
     if errors:
         form = {k: v for k, v in values.items() if not k.startswith('card_')}
         form['card_name'] = values['card_name']
+        if re.fullmatch(r'\d{4}-\d{2}-\d{2}', form['delivery_date']):
+            y, m, d = form['delivery_date'].split('-')
+            form['delivery_date'] = f"{m}/{d}/{y}"  # show it back the way it is typed
         return checkout_review(cart_type.lower(), errors=errors, form=form), 400
 
     order_id = secrets.token_hex(4).upper()
@@ -651,8 +658,9 @@ def manage_order_item(order_id, index, action):
 # history, commit 0510b81).
 FIXED_STYLE_RESULT = {
     "confidence": 87,
-    "explanation": "Based on the warm wood tones, low furniture and uncluttered surfaces in your photos, "
-                   "your rooms lean Japandi, with Scandinavian brightness and a minimalist layout.",
+    "explanation": "Light wood, low furniture and bare surfaces appear in all three photos, which puts Japandi "
+                   "first (82%). Bright walls and pale textiles add Scandinavian (74%), and the open, "
+                   "uncluttered layout adds Minimalist (61%).",
     "styleDNA": [
         {"name": "Japandi", "percentage": 82},
         {"name": "Scandinavian", "percentage": 74},
