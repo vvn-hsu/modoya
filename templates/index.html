@@ -142,7 +142,7 @@
     </div>
 </section>
 
-<section class="section catalogue-list" id="catalogue">
+<section class="section" id="catalogue">
     <h2 class="section-heading">The collection</h2>
     <p class="section-sub">Every piece can be rented or bought.</p>
 
@@ -194,17 +194,17 @@
                 {% endfor %}
             </select>
             <div class="view-toggle" role="group" aria-label="View">
-                <button type="button" data-view="list" aria-pressed="true">
-                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect y="2" width="16" height="2"/><rect y="7" width="16" height="2"/><rect y="12" width="16" height="2"/></svg>List
-                </button>
-                <button type="button" data-view="grid" aria-pressed="false">
+                <button type="button" data-view="grid" aria-pressed="true">
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect width="7" height="7"/><rect x="9" width="7" height="7"/><rect y="9" width="7" height="7"/><rect x="9" y="9" width="7" height="7"/></svg>Grid
+                </button>
+                <button type="button" data-view="list" aria-pressed="false">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect y="2" width="16" height="2"/><rect y="7" width="16" height="2"/><rect y="12" width="16" height="2"/></svg>List
                 </button>
             </div>
         </div>
     </div>
 
-    <div class="furniture-grid list-view" id="main-grid">
+    <div class="furniture-grid" id="main-grid">
         {% for item in items %}
         <article class="item-card" data-index="{{ loop.index0 }}" data-name="{{ item.name|lower }}" data-search="{{ (item.name ~ ' ' ~ item.category)|lower }}"
                  data-category="{{ item.category }}" data-style="{{ item.style }}" data-rent="{{ item.monthly_rent }}">
@@ -354,7 +354,7 @@
     document.getElementById('clear-filters').addEventListener('click', clearFilters);
     document.getElementById('empty-clear').addEventListener('click', clearFilters);
 
-    // List view is the default; a viewer's own choice is remembered on this device.
+    // Grid view is the default; a viewer's own choice is remembered on this device.
     const viewButtons = document.querySelectorAll('.view-toggle button');
     const setView = (view) => {
         grid.classList.toggle('list-view', view === 'list');
@@ -363,7 +363,7 @@
         try { localStorage.setItem('modoya-view', view); } catch (e) {}
     };
     viewButtons.forEach((b) => b.addEventListener('click', () => setView(b.dataset.view)));
-    try { if (localStorage.getItem('modoya-view') === 'grid') setView('grid'); } catch (e) {}
+    try { if (localStorage.getItem('modoya-view') === 'list') setView('list'); } catch (e) {}
 })();
 </script>
 {% endblock %}
