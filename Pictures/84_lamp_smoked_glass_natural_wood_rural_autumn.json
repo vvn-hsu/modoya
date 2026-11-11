@@ -15,7 +15,7 @@
   "json_file": "Pictures\\84_lamp_smoked_glass_natural_wood_rural_autumn.json",
   "name": "Table Lamp — Smoked Glass Base",
   "type": "table_lamp",
-  "description": "A smoked-glass base under a linen shade. Shown on a side table, not included. Farmhouse style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "description": "A smoked-glass base under a linen shade. Side table not included. Farmhouse style. Ships with a fabric cord and in-line switch; LED bulb included.",
   "dimensions": {
     "w": 15,
     "d": 14,
@@ -23,5 +23,11 @@
   },
   "stock": 10,
   "monthly_rent": 18.5,
-  "buyout_price": 388
+  "buyout_price": 388,
+  "crop": [
+    0.46,
+    0.0,
+    0.96,
+    0.62
+  ]
 }
