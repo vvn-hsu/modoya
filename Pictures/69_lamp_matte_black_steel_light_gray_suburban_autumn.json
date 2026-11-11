@@ -22,8 +22,8 @@
     "h": 61
   },
   "stock": 10,
-  "monthly_rent": 17,
-  "buyout_price": 339,
+  "monthly_rent": 17.5,
+  "buyout_price": 328,
   "crop": [
     0.2,
     0.0,

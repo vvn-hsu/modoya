@@ -2,26 +2,26 @@
   "row_id": 56,
   "category": "Chair",
   "series": "Eames Lounge Chair",
-  "style": "Bohemian (Bojo)",
+  "style": "Bohemian (Boho)",
   "material": "Bouclé Fabric",
   "color": "Charcoal Gray",
   "attributes": "Plush",
   "location": "suburban",
   "season": "winter",
-  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Charcoal Gray Bouclé Fabric Eames Lounge Chair Chair, Bohemian (Bojo) style, featuring classic home-style finish with soft upholstery and comfortable proportions, cool desaturated tones and plush fabrics on seating surfaces, Plush. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Charcoal Gray Bouclé Fabric Eames Lounge Chair Chair, Bohemian (Boho) style, featuring classic home-style finish with soft upholstery and comfortable proportions, cool desaturated tones and plush fabrics on seating surfaces, Plush. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\56_chair_boucl_fabric_charcoal_gray_suburban_winter.png",
   "json_file": "Pictures\\56_chair_boucl_fabric_charcoal_gray_suburban_winter.json",
   "name": "Tufted Lounge Chair — Charcoal Bouclé",
   "type": "lounge_chair",
-  "description": "Pillowy charcoal bouclé cushions on a slim black frame. Bohemian (Bojo) style. Arrives assembled and ready to use.",
+  "description": "Pillowy charcoal bouclé cushions on a slim black frame. Bohemian (Boho) style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 31,
     "d": 35,
     "h": 35
   },
   "stock": 6,
-  "monthly_rent": 42,
-  "buyout_price": 839
+  "monthly_rent": 39,
+  "buyout_price": 743
 }

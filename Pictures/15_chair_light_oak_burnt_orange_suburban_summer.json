@@ -2,26 +2,26 @@
   "row_id": 15,
   "category": "Chair",
   "series": "Panton Chair",
-  "style": "Bohemian (Bojo)",
+  "style": "Bohemian (Boho)",
   "material": "Velvet & Light Oak",
   "color": "Burnt Orange",
   "attributes": "Statement piece",
   "location": "suburban",
   "season": "summer",
-  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Burnt Orange Light Oak Panton Chair Chair, Bohemian (Bojo) style, featuring classic home-style finish with soft upholstery and comfortable proportions, bright warm accents and breathable materials used on the furniture, Statement piece. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Burnt Orange Light Oak Panton Chair Chair, Bohemian (Boho) style, featuring classic home-style finish with soft upholstery and comfortable proportions, bright warm accents and breathable materials used on the furniture, Statement piece. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\15_chair_light_oak_burnt_orange_suburban_summer.png",
   "json_file": "Pictures\\15_chair_light_oak_burnt_orange_suburban_summer.json",
   "name": "Tufted Lounge Chair — Burnt Orange",
   "type": "accent_chair",
-  "description": "A button-tufted burnt-orange seat and back on a light oak frame. Bohemian (Bojo) style. Arrives assembled and ready to use.",
+  "description": "A button-tufted burnt-orange seat and back on a light oak frame. Bohemian (Boho) style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 28,
     "d": 30,
     "h": 32
   },
   "stock": 10,
-  "monthly_rent": 43,
-  "buyout_price": 849
+  "monthly_rent": 44,
+  "buyout_price": 885
 }

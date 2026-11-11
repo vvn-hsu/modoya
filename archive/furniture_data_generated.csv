@@ -14,7 +14,7 @@ Sofa,Loveseat,Mid-Century Modern,Bouclé Fabric,Navy Blue,Organic shape,urban,sp
 Table,Dining Table,Japandi,Teak,Warm Taupe,High-gloss,suburban,winter,12_table_teak_warm_taupe_suburban_winter.png
 Sofa,Sectional Sofa,Wabi-Sabi,Black Leather,White,Textured,rural,spring,13_sofa_black_leather_white_rural_spring.png
 Lamp,Desk Lamp,Japandi,Matte Black Steel,Natural Wood,Plush,rural,summer,14_lamp_matte_black_steel_natural_wood_rural_summer.png
-Chair,Panton Chair,Bohemian (Bojo),Light Oak,Burnt Orange,Statement piece,suburban,summer,15_chair_light_oak_burnt_orange_suburban_summer.png
+Chair,Panton Chair,Bohemian (Boho),Light Oak,Burnt Orange,Statement piece,suburban,summer,15_chair_light_oak_burnt_orange_suburban_summer.png
 Table,Parsons Table,Scandinavian,Bent Plywood,Charcoal Gray,Modular,suburban,winter,16_table_bent_plywood_charcoal_gray_suburban_winter.png
 Sofa,Noguchi Freeform Sofa,Rustic,Linen,Deep Teal,Playful,suburban,summer,17_sofa_linen_deep_teal_suburban_summer.png
 Sofa,LC2 Sofa,Scandinavian,Linen,Deep Teal,Geometric,suburban,winter,18_sofa_linen_deep_teal_suburban_winter.png
@@ -54,8 +54,8 @@ Lamp,Floor Lamp,Retro,Matte Black Steel,Light Gray,Distressed,urban,autumn,51_la
 Lamp,PH Artichoke Lamp,Retro,Linen shade,Walnut Brown,Vintage look,rural,autumn,52_lamp_linen_shade_walnut_brown_rural_autumn.png
 Sofa,LC2 Sofa,Traditional,Walnut Wood base,Burnt Orange,Organic shape,suburban,spring,53_sofa_walnut_wood_base_burnt_orange_suburban_spring.png
 Storage,Cabinet,Industrial,Matte Black Steel,Charcoal Gray,Vintage look,rural,spring,54_storage_matte_black_steel_charcoal_gray_rural_spring.png
-Chair,Eames Lounge Chair,Bohemian (Bojo),Linen,Black,Playful,rural,autumn,55_chair_linen_black_rural_autumn.png
-Chair,Eames Lounge Chair,Bohemian (Bojo),Bouclé Fabric,Charcoal Gray,Plush,suburban,winter,56_chair_boucl_fabric_charcoal_gray_suburban_winter.png
+Chair,Eames Lounge Chair,Bohemian (Boho),Linen,Black,Playful,rural,autumn,55_chair_linen_black_rural_autumn.png
+Chair,Eames Lounge Chair,Bohemian (Boho),Bouclé Fabric,Charcoal Gray,Plush,suburban,winter,56_chair_boucl_fabric_charcoal_gray_suburban_winter.png
 Sofa,Noguchi Freeform Sofa,Industrial,Black Leather,Black,Modular,rural,summer,57_sofa_black_leather_black_rural_summer.png
 Sofa,Loveseat,Retro,Bouclé Fabric,Burnt Orange,High-gloss,urban,winter,58_sofa_boucl_fabric_burnt_orange_urban_winter.png
 Lamp,PH Artichoke Lamp,Bauhaus,Matte Black Steel,Navy Blue,Textured,rural,summer,59_lamp_matte_black_steel_navy_blue_rural_summer.png
@@ -73,13 +73,13 @@ Sofa,Chesterfield Sofa,Traditional,Brown Leather,Olive Green,Organic shape,subur
 Chair,Eames Lounge Chair,Wabi-Sabi,Walnut Wood,Light Gray,Distressed,rural,winter,71_chair_walnut_wood_light_gray_rural_winter.png
 Table,Parsons Table,Retro,Polished Chrome,Terracotta,Textured,suburban,autumn,72_table_polished_chrome_terracotta_suburban_autumn.png
 Table,Dining Table,Minimalist,Smoked Glass,Black,Soft,rural,autumn,73_table_smoked_glass_black_rural_autumn.png
-Sofa,LC2 Sofa,Bohemian (Bojo),Tweed,Emerald Green,Textured,urban,summer,74_sofa_tweed_emerald_green_urban_summer.png
+Sofa,LC2 Sofa,Bohemian (Boho),Tweed,Emerald Green,Textured,urban,summer,74_sofa_tweed_emerald_green_urban_summer.png
 Table,Parsons Table,Minimalist,Teak,Natural Wood,Airy,urban,summer,75_table_teak_natural_wood_urban_summer.png
 Storage,Dresser,Japandi,Matte Black Steel,Charcoal Gray,Vintage look,urban,winter,76_storage_matte_black_steel_charcoal_gray_urban_winter.png
 Sofa,LC2 Sofa,Farmhouse,Vegan Leather,Light Gray,Modular,rural,autumn,77_sofa_vegan_leather_light_gray_rural_autumn.png
 Chair,Egg Chair,Traditional,Polished Chrome,Deep Teal,High-gloss,rural,summer,78_chair_polished_chrome_deep_teal_rural_summer.png
 Storage,Bookshelf,Retro,Walnut Wood,Charcoal Gray,Soft,urban,autumn,79_storage_walnut_wood_charcoal_gray_urban_autumn.png
-Sofa,Sectional Sofa,Bohemian (Bojo),Suede,Deep Teal,Distressed,suburban,summer,80_sofa_suede_deep_teal_suburban_summer.png
+Sofa,Sectional Sofa,Bohemian (Boho),Suede,Deep Teal,Distressed,suburban,summer,80_sofa_suede_deep_teal_suburban_summer.png
 Sofa,Togo Sofa,Mid-Century Modern,Linen,Natural Wood,Matte finish,urban,winter,81_sofa_linen_natural_wood_urban_winter.png
 Sofa,Loveseat,Japandi,Tweed,Deep Teal,Airy,rural,spring,82_sofa_tweed_deep_teal_rural_spring.png
 Chair,Barcelona Chair,Bauhaus,Tweed,Emerald Green,Plush,urban,winter,83_chair_tweed_emerald_green_urban_winter.png
@@ -88,7 +88,7 @@ Sofa,Loveseat,Coastal,Vegan Leather,Navy Blue,Elegant,urban,summer,85_sofa_vegan
 Storage,Bookshelf,Farmhouse,Matte Black Steel,Olive Green,Plush,suburban,summer,86_storage_matte_black_steel_olive_green_suburban_summer.png
 Table,Dining Table,Farmhouse,Smoked Glass,Deep Teal,Distressed,suburban,summer,87_table_smoked_glass_deep_teal_suburban_summer.png
 Sofa,Sectional Sofa,Scandinavian,Bouclé Fabric,Beige,Geometric,rural,summer,88_sofa_boucl_fabric_beige_rural_summer.png
-Storage,TV Stand,Bohemian (Bojo),Cane,Terracotta,Modular,suburban,spring,89_storage_cane_terracotta_suburban_spring.png
+Storage,TV Stand,Bohemian (Boho),Cane,Terracotta,Modular,suburban,spring,89_storage_cane_terracotta_suburban_spring.png
 Storage,Bookshelf,Rustic,Teak,Natural Wood,Playful,suburban,spring,90_storage_teak_natural_wood_suburban_spring.png
 Sofa,Noguchi Freeform Sofa,Traditional,Bouclé Fabric,Black,Soft,rural,spring,91_sofa_boucl_fabric_black_rural_spring.png
 Storage,Sideboard,Minimalist,Teak,Light Gray,Organic shape,rural,spring,92_storage_teak_light_gray_rural_spring.png

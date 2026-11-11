@@ -146,7 +146,7 @@ def generate_furniture_columns_with_validation(num_rows=100, max_attempts=10):
     
     styles = [
         'Mid-Century Modern', 'Minimalist', 'Scandinavian', 'Bauhaus', 'Traditional', 
-        'Farmhouse', 'Rustic', 'Art Deco', 'Bohemian (Bojo)', 'Japandi', 
+        'Farmhouse', 'Rustic', 'Art Deco', 'Bohemian (Boho)', 'Japandi', 
         'Wabi-Sabi', 'Coastal', 'Industrial', 'Retro'
     ]
     category_series_map = {

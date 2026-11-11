@@ -2,26 +2,26 @@
   "row_id": 74,
   "category": "Sofa",
   "series": "LC2 Sofa",
-  "style": "Bohemian (Bojo)",
+  "style": "Bohemian (Boho)",
   "material": "Velvet",
   "color": "Emerald Green",
   "attributes": "Textured",
   "location": "urban",
   "season": "summer",
-  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Emerald Green Tweed LC2 Sofa Sofa, Bohemian (Bojo) style, featuring sleek contemporary finish with matte metal or concrete-inspired details on the furniture, bright warm accents and breathable materials used on the furniture, Textured. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
+  "prompt": "You are a modern furniture product designer creating clean product photography. Create a product photography of a single piece of a Emerald Green Tweed LC2 Sofa Sofa, Bohemian (Boho) style, featuring sleek contemporary finish with matte metal or concrete-inspired details on the furniture, bright warm accents and breathable materials used on the furniture, Textured. Clean white studio background, professional lighting, high resolution, minimalist composition, no other furniture or props. Remove all text, remove all words, remove all letters, remove all typography, remove all branding items, remove all labels and graphic design elements completely from the image.IMPORTANT: Do not include any text, labels, words, letters, or typography in the image.",
   "size": "1024x1024",
   "model": "dall-e-3",
   "image_file": "Pictures\\74_sofa_tweed_emerald_green_urban_summer.png",
   "json_file": "Pictures\\74_sofa_tweed_emerald_green_urban_summer.json",
   "name": "Velvet Sofa — Emerald Green",
   "type": "sofa",
-  "description": "A long emerald velvet sofa with gold-patterned pillows on slim legs. Bohemian (Bojo) style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "A long emerald velvet sofa with gold-patterned pillows on slim legs. Bohemian (Boho) style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 78,
     "d": 37,
     "h": 34
   },
   "stock": 5,
-  "monthly_rent": 69,
-  "buyout_price": 1349
+  "monthly_rent": 62.5,
+  "buyout_price": 1283
 }
