@@ -67,6 +67,7 @@
     .buy-line { border-top: 1px solid var(--border); margin-top: 18px; padding-top: 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
     .buy-line strong { font-size: 20px; }
     .price-panel .btn { padding: 14px 0; font-size: 15px; }
+    .buyout-rule { font-size: 13px; color: #444; line-height: 1.5; margin: 12px 0 0; }
 
     .spec-table { width: 100%; border-collapse: collapse; font-size: 15px; }
     .spec-table th { text-align: left; color: #5c5c5c; font-weight: 500; width: 130px; padding: 10px 0; vertical-align: top; }
@@ -175,6 +176,7 @@
                 <button class="btn btn-buy ajax-add-to-cart" data-item-id="{{ product.id }}" data-type="BUY" style="flex:none; padding: 12px 28px;">Buy</button>
                 {% endif %}
             </div>
+            <p class="buyout-rule">Rent first and change your mind? Once monthly payments start, half of the rent you've paid comes off the buyout price.</p>
             {% if not product.in_stock %}
             <p class="form-error" style="margin-top:14px;">This item is out of stock right now. It can't be rented or bought until it's back.</p>
             {% endif %}

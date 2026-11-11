@@ -550,7 +550,8 @@ def build_order_view(order):
 
             active = line['state'] in ('scheduled', 'active')
             months_used = months_between(delivery, today) if delivered else 0
-            line['buyout_amount'] = max(buy - rent * months_used * 0.5, 0)
+            line['rent_paid'] = rent * months_used
+            line['buyout_amount'] = max(buy - line['rent_paid'] * 0.5, 0)
             line['actions'] = {
                 'extend': active,
                 'buyout': active,

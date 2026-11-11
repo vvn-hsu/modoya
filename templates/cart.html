@@ -31,6 +31,7 @@
 
     .summary-box { background: #fafafa; border-radius: 12px; padding: 20px; text-align: right; margin-top: 16px; }
     .summary-box .label { font-size: 14px; color: #5c5c5c; }
+    .buyout-rule { font-size: 13px; color: #444; text-align: left; margin: 0 0 12px; line-height: 1.5; }
     .total-price { font-size: 24px; font-weight: 800; margin: 6px 0 10px; }
     .checkout-btn { background: #111; color: white; border: none; padding: 14px 28px; border-radius: 8px; font-weight: 600; font-size: 16px; font-family: inherit; cursor: pointer; width: 100%; margin-top: 10px; }
     .checkout-btn:hover { background: #333; }
@@ -100,6 +101,7 @@
         {% endfor %}
 
         <div class="summary-box">
+            <p class="buyout-rule">Want to keep something later? Once monthly payments start, half of the rent you've paid comes off its buyout price.</p>
             <div class="label">{{ rent_monthly_total|money }}/mo · term total</div>
             <div class="total-price rent-color">{{ rent_total|money }}</div>
             <form action="{{ url_for('checkout') }}" method="POST">

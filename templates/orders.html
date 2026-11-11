@@ -138,7 +138,11 @@
                         <details class="action">
                             <summary class="btn btn-secondary">Buy</summary>
                             <form class="action-panel" method="POST" action="{{ url_for('manage_order_item', order_id=order.id, index=line.index, action='buyout') }}">
-                                <span>Keep it for <strong>{{ line.buyout_amount|money }}</strong> (buyout price {{ line.buy|money }} minus half the rent paid so far).</span>
+                                {% if line.rent_paid %}
+                                <span>Keep it for <strong>{{ line.buyout_amount|money }}</strong>: the buyout price {{ line.buy|money }} minus half of the {{ line.rent_paid|money }} rent you've paid.</span>
+                                {% else %}
+                                <span>Keep it for the buyout price, <strong>{{ line.buy|money }}</strong>. No rent has been paid yet; once monthly payments start, half of what you've paid comes off this price.</span>
+                                {% endif %}
                                 <button type="submit" class="btn btn-primary">Confirm and buy</button>
                             </form>
                         </details>

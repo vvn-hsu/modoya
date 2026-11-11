@@ -159,7 +159,7 @@
             <p class="missing-hint" id="missing-hint" aria-live="polite"></p>
             <button type="submit" class="place-btn" id="place-btn">Place order</button>
             <p class="fine-print">
-                {% if cart_type == 'RENT' %}Rentals are billed monthly from the delivery date. You can extend, buy or return early from the Orders page.{% else %}Purchases can be returned within 30 days of delivery.{% endif %}
+                {% if cart_type == 'RENT' %}Rentals are billed monthly from the delivery date. You can extend, buy or return early from the Orders page. If you buy a rented item, half of the rent you've paid comes off its buyout price.{% else %}Purchases can be returned within 30 days of delivery.{% endif %}
             </p>
         </aside>
     </form>
