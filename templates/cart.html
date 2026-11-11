@@ -113,7 +113,7 @@
     {% if buy_items %}
     <div class="cart-section">
         <div class="section-title">
-            <span>Buyout Items</span>
+            <span>Items to Buy</span>
             <span class="buy-color">{{ buy_items|length|plural('item') }}</span>
         </div>
 
@@ -143,7 +143,7 @@
             <div class="total-price buy-color">{{ buy_total|money }}</div>
             <form action="{{ url_for('checkout') }}" method="POST">
                 <input type="hidden" name="cart_type" value="BUY">
-                <button type="submit" class="checkout-btn">Checkout Buyout</button>
+                <button type="submit" class="checkout-btn">Checkout Items to Buy</button>
             </form>
         </div>
     </div>

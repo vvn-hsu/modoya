@@ -88,12 +88,12 @@
 {% block content %}
 <section class="hero">
     <div class="banner-container">
-        <img src="{{ url_for('serve_pictures', filename='banner.jpg') }}" alt="A wooden side table and teal armchair — rent-to-own or just buy it, with hassle-free delivery" class="banner-image">
+        <img src="{{ url_for('serve_pictures', filename='banner.jpg') }}" alt="A wooden side table and teal armchair in a living room" class="banner-image">
     </div>
     <div class="hero-cta">
         <div>
             <h1>Furnish your place by the month.</h1>
-            <p>Rent from 2 weeks to 24 months, buy it out any time, or send it back with free pickup.</p>
+            <p>Rent from 2 weeks to 24 months, buy it any time, or send it back with free pickup.</p>
         </div>
         <div class="hero-buttons">
             <button type="button" class="btn btn-accent open-analyzer">Find Your Style</button>
@@ -119,7 +119,7 @@
         <div class="step">
             <div class="step-num">3</div>
             <h3>Return, exchange or keep it</h3>
-            <p>When you're done, schedule a free pickup from <a href="{{ url_for('view_orders') }}">your orders</a>, swap for something new, or buy it out.</p>
+            <p>When you're done, schedule a free pickup from <a href="{{ url_for('view_orders') }}">your orders</a>, swap for something new, or buy it.</p>
         </div>
     </div>
     <p class="steps-note">Questions about returns? <a href="#faq">Read the returns &amp; FAQ</a>.</p>
@@ -248,7 +248,7 @@
         </details>
         <details>
             <summary>Can I keep something I'm renting?</summary>
-            <p>Yes. "Buy out" on the Orders page shows your price: the buyout price minus half of the rent you've already paid.</p>
+            <p>Yes. Choose "Buy" on the Orders page to see your price: the buyout price minus half of the rent you've already paid.</p>
         </details>
         <details>
             <summary>Can I extend my rental?</summary>

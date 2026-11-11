@@ -435,7 +435,7 @@ def place_order():
                 'buy': i['buyout_price'],
                 'ext': 0,             # months added with "Extend"
                 'return_date': None,  # set by "Schedule return"
-                'bought_out': None,   # {'date', 'amount'} set by "Buy out"
+                'bought_out': None,   # {'date', 'amount'} set by "Buy" on the orders page
             }
             for i in items
         ],
@@ -516,7 +516,7 @@ def build_order_view(order):
                 bought_on = date.fromisoformat(entry['bought_out']['date'])
                 rent_paid = entry['rent'] * months_between(delivery, bought_on) if bought_on > delivery else 0
                 line['total'] = rent_paid + entry['bought_out']['amount']
-                line['status'] = f"Bought out on {nice_date(bought_on)} — yours to keep"
+                line['status'] = f"Bought on {nice_date(bought_on)} — yours to keep"
                 line['state'] = 'owned'
             elif entry['return_date']:
                 pickup = date.fromisoformat(entry['return_date'])
@@ -575,7 +575,7 @@ def build_order_view(order):
     return {
         'id': order['id'],
         'type': order['type'],
-        'type_label': "Rental order" if is_rental else "Buyout order",
+        'type_label': "Rental order" if is_rental else "Buy order",
         'placed': order['placed'],
         'delivery': delivery,
         'window': order.get('window', ''),
@@ -622,7 +622,7 @@ def manage_order_item(order_id, index, action):
             message = f"{name} extended by {plural(months, 'month')}."
     elif action == 'buyout' and line['actions']['buyout']:
         entry['bought_out'] = {'date': date.today().isoformat(), 'amount': line['buyout_amount']}
-        message = f"You bought out {name} for {money(line['buyout_amount'])}."
+        message = f"You bought {name} for {money(line['buyout_amount'])}."
     elif action == 'return' and line['actions']['return']:
         try:
             pickup = date.fromisoformat(request.form.get('date', ''))

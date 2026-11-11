@@ -163,7 +163,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <p class="term-summary" id="term-summary">{{ (product.monthly_rent * 12)|money }} total for 12 months. Return or buy it out any time.</p>
+            <p class="term-summary" id="term-summary">{{ (product.monthly_rent * 12)|money }} total for 12 months. Return it or buy it any time.</p>
             {% if product.in_stock %}
             <div class="action-row">
                 <button class="btn btn-rent ajax-add-to-cart" data-item-id="{{ product.id }}" data-type="RENT" id="rent-button">Rent for 12 months</button>
@@ -251,7 +251,7 @@
     term.addEventListener('change', () => {
         const option = term.selectedOptions[0];
         const label = option.textContent.trim();
-        summary.textContent = `${window.modoyaMoney(monthly * Number(option.dataset.months))} total for ${label}. Return or buy it out any time.`;
+        summary.textContent = `${window.modoyaMoney(monthly * Number(option.dataset.months))} total for ${label}. Return it or buy it any time.`;
         if (rentButton) rentButton.textContent = `Rent for ${label}`;
     });
 

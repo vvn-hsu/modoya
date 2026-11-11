@@ -136,14 +136,14 @@
 
                         {% if line.actions.buyout %}
                         <details class="action">
-                            <summary class="btn btn-secondary">Buy out</summary>
+                            <summary class="btn btn-secondary">Buy</summary>
                             <form class="action-panel" method="POST" action="{{ url_for('manage_order_item', order_id=order.id, index=line.index, action='buyout') }}">
                                 <span>Keep it for <strong>{{ line.buyout_amount|money }}</strong> (buyout price {{ line.buy|money }} minus half the rent paid so far).</span>
-                                <button type="submit" class="btn btn-primary">Confirm buy out</button>
+                                <button type="submit" class="btn btn-primary">Confirm and buy</button>
                             </form>
                         </details>
                         {% else %}
-                        <button class="btn btn-secondary" disabled>Buy out</button>
+                        <button class="btn btn-secondary" disabled>Buy</button>
                         {% endif %}
                     {% endif %}
 
