@@ -30,7 +30,7 @@
         <div><strong>Items</strong>{% for line in order.lines %}{{ line.product.name }}{% if not loop.last %}, {% endif %}{% endfor %}</div>
         <div><strong>Delivery</strong>{{ order.delivery|nice_date }}, {{ order.window }}</div>
         <div><strong>Address</strong>{{ order.address.line1 }}{% if order.address.line2 %}, {{ order.address.line2 }}{% endif %}, {{ order.address.city }}, {{ order.address.state }} {{ order.address.zip }}</div>
-        <div><strong>Payment</strong>Card ending {{ order.card_last4 }} (demo, not charged)</div>
+        <div><strong>Payment</strong>Card ending {{ order.card_last4 }}</div>
     </div>
 
     <div class="confirm-actions">

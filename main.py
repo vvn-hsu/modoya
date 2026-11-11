@@ -689,11 +689,6 @@ FIXED_STYLE_RESULT = {
     "keyElements": [
         "Neutral Color Palette", "Natural Light", "Wood Accents", "Clean Lines", "Functional Decor"
     ],
-    "designRecommendations": [
-        "Consider adding textured elements like a plush rug or cushions to enhance warmth.",
-        "Introduce a statement floor lamp in a corner to create a focal point.",
-        "Balance the wood tones with cool, neutral-colored textiles like a gray sofa.",
-    ],
 }
 
 def analyze_photos(photos):

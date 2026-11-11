@@ -97,7 +97,7 @@
         <div class="delivery-info">
             <div><strong>Delivery</strong>{{ order.delivery|nice_date }}{% if order.window %}<br>{{ order.window }}{% endif %}</div>
             <div><strong>Address</strong>{{ order.address.name }}<br>{{ order.address.line1 }}{% if order.address.line2 %}, {{ order.address.line2 }}{% endif %}<br>{{ order.address.city }}, {{ order.address.state }} {{ order.address.zip }}</div>
-            <div><strong>Payment</strong>Card ending {{ order.card_last4 }}<br>(demo, not charged)</div>
+            <div><strong>Payment</strong>Card ending {{ order.card_last4 }}</div>
         </div>
 
         {% for line in order.lines %}

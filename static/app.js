@@ -226,7 +226,6 @@
             renderDna(data.styleDNA);
             renderSliders(data.styleDNA);
             $('#key-elements-results').innerHTML = data.keyElements.map((k) => `<span class="tag">${escapeHtml(k)}</span>`).join('');
-            $('#design-recommendations-results').innerHTML = data.designRecommendations.map((r) => `<li>${escapeHtml(r)}</li>`).join('');
             renderPicks($('#recommended-furniture-results'), data.recommendations, 'No matching products right now.');
             renderPicks($('#people-like-you-results'), data.peopleLikeYou, 'No suggestions yet.');
 

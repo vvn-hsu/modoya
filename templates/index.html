@@ -34,13 +34,6 @@
     .step a, .step .link-button { color: #111; font-weight: 600; }
     .steps-note { margin-top: 16px; font-size: 14px; color: #555; }
 
-    .analyzer-intro {
-        display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
-        background: #f6f0ff; border-radius: var(--border-radius); padding: 28px 32px;
-    }
-    .analyzer-intro h2 { margin: 0 0 6px; font-size: 22px; color: #2c006b; }
-    .analyzer-intro p { margin: 0; color: #4a3b66; max-width: 640px; line-height: 1.55; }
-    .analyzer-intro .btn { flex: none; padding: 14px 24px; font-size: 15px; }
 
     .catalogue-toolbar {
         display: grid; grid-template-columns: 2fr repeat(3, 1fr) auto; gap: 12px; align-items: end;
@@ -79,10 +72,7 @@
         .hero-buttons .btn { flex: 1; padding: 14px 10px; white-space: nowrap; }
         .steps, .faq { grid-template-columns: 1fr; }
         .section { margin-top: 48px; }
-        .analyzer-intro { padding: 22px; }
-        .analyzer-intro .btn { width: 100%; }
-    }
-</style>
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -109,30 +99,20 @@
         <div class="step">
             <div class="step-num">1</div>
             <h3>Find your style</h3>
-            <p>Browse the collection, or let the <button type="button" class="link-button open-analyzer">Style Analyzer</button> suggest pieces from photos of rooms you love.</p>
+            <p>Browse, or let the <button type="button" class="link-button open-analyzer">Style Analyzer</button> pick for you.</p>
         </div>
         <div class="step">
             <div class="step-num">2</div>
             <h3>Rent</h3>
-            <p>Pick a term from 2 weeks to 24 months and a delivery date. You pay monthly, and delivery and setup are free.</p>
+            <p>2 weeks to 24 months, paid monthly. Free delivery.</p>
         </div>
         <div class="step">
             <div class="step-num">3</div>
             <h3>Return, exchange or keep it</h3>
-            <p>When you're done, schedule a free pickup from <a href="{{ url_for('view_orders') }}">your orders</a>, swap for something new, or buy it.</p>
+            <p>Free pickup, swap or buy it from <a href="{{ url_for('view_orders') }}">Orders</a>.</p>
         </div>
     </div>
     <p class="steps-note">Questions about returns? <a href="#faq">Read the returns &amp; FAQ</a>.</p>
-</section>
-
-<section class="section" id="style-analyzer-intro">
-    <div class="analyzer-intro">
-        <div>
-            <h2>Not sure what fits your space?</h2>
-            <p>The Style Analyzer looks at 3 photos of rooms you like, describes your style, and picks furniture from our collection that matches it.</p>
-        </div>
-        <button type="button" class="btn btn-accent open-analyzer">Try the Style Analyzer</button>
-    </div>
 </section>
 
 <section class="section" id="catalogue">
