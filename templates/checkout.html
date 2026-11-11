@@ -29,6 +29,7 @@
     .summary-item .amt { font-weight: 600; font-size: 14px; text-align: right; }
     .totals { margin-top: 14px; font-size: 14px; }
     .totals div { display: flex; justify-content: space-between; padding: 5px 0; }
+    .totals .due-today-line { background: #f6f0ff; border-radius: 8px; padding: 10px 12px; margin-top: 10px; font-weight: 700; font-size: 15px; }
     .totals .grand { font-size: 18px; font-weight: 800; border-top: 1px solid #eee; margin-top: 8px; padding-top: 12px; }
     .place-btn { width: 100%; background: #111; color: #fff; border: none; border-radius: 10px; padding: 16px; font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 18px; }
     .place-btn:hover { background: #333; }
@@ -155,6 +156,7 @@
                 {% endif %}
                 <div><span>Delivery &amp; setup</span><span>Free</span></div>
                 <div class="grand"><span>{{ 'Term total' if cart_type == 'RENT' else 'Total' }}</span><span>{{ total|money }}</span></div>
+                <div class="due-today-line"><span>Due today{% if cart_type == 'RENT' %} (first month){% endif %}</span><span>{{ due_today|money }}</span></div>
             </div>
             <p class="missing-hint" id="missing-hint" aria-live="polite"></p>
             <button type="submit" class="place-btn" id="place-btn">Place order</button>

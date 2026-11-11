@@ -184,6 +184,7 @@ def get_full_cart_details():
     buy_items = []
     rent_total = 0
     rent_monthly_total = 0
+    rent_due_today = 0
     buy_total = 0
 
     if 'cart' not in session:
@@ -220,8 +221,11 @@ def get_full_cart_details():
             buy_items.append(details)
         else:
             details['total_cost'] = rental_total(item['metadata'], term)
+            # The first payment covers one month, or half a month for a two-week rental.
+            details['due_today'] = details['monthly_rent'] * min(term_months(term), 1)
             rent_total += details['total_cost']
             rent_monthly_total += details['monthly_rent']
+            rent_due_today += details['due_today']
             rent_items.append(details)
 
     return {
@@ -229,6 +233,7 @@ def get_full_cart_details():
         "buy_items": buy_items,
         "rent_total": rent_total,
         "rent_monthly_total": rent_monthly_total,
+        "rent_due_today": rent_due_today,
         "buy_total": buy_total,
     }
 
@@ -313,10 +318,10 @@ def checkout_items(cart_type):
     """The cart section being checked out, with its total."""
     data = get_full_cart_details()
     if cart_type == 'RENT':
-        return data['rent_items'], data['rent_total'], data['rent_monthly_total']
+        return data['rent_items'], data['rent_total'], data['rent_monthly_total'], data['rent_due_today']
     if cart_type == 'BUY':
-        return data['buy_items'], data['buy_total'], 0
-    return [], 0, 0
+        return data['buy_items'], data['buy_total'], 0, data['buy_total']
+    return [], 0, 0, 0
 
 def delivery_date_range():
     today = date.today()
@@ -335,7 +340,7 @@ def checkout():
 @app.route('/checkout/<cart_type>')
 def checkout_review(cart_type, errors=None, form=None):
     cart_type = cart_type.upper()
-    items, total, monthly_total = checkout_items(cart_type)
+    items, total, monthly_total, due_today = checkout_items(cart_type)
     if not items:
         return redirect(url_for('view_cart'))
 
@@ -346,6 +351,7 @@ def checkout_review(cart_type, errors=None, form=None):
         items=items,
         total=total,
         monthly_total=monthly_total,
+        due_today=due_today,
         earliest=earliest.isoformat(),
         latest=latest.isoformat(),
         windows=DELIVERY_WINDOWS,
@@ -407,7 +413,7 @@ def validate_checkout(form):
 def place_order():
     """The only route that creates an order."""
     cart_type = (request.form.get('cart_type') or '').upper()
-    items, total, _ = checkout_items(cart_type)
+    items, total, _, _ = checkout_items(cart_type)
     if not items:
         return redirect(url_for('view_cart'))
 
