@@ -2,7 +2,7 @@
   "row_id": 62,
   "category": "Table",
   "series": "Parsons Table",
-  "style": "Bauhaus",
+  "style": "Retro",
   "material": "Bent Plywood",
   "color": "Olive Green",
   "attributes": "Vintage look",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\62_table_bent_plywood_olive_green_suburban_winter.json",
   "name": "Bistro Table Set — Olive",
   "type": "dining_round",
-  "description": "A small square bistro table with two olive upholstered chairs. Bauhaus style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "description": "A small square bistro table with two olive upholstered chairs. Retro style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
   "dimensions": {
     "w": 54,
     "d": 44,

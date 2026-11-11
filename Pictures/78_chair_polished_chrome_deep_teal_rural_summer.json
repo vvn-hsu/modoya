@@ -2,7 +2,7 @@
   "row_id": 78,
   "category": "Chair",
   "series": "Egg Chair",
-  "style": "Traditional",
+  "style": "Mid-Century Modern",
   "material": "Leather & Chrome",
   "color": "Deep Teal",
   "attributes": "High-gloss",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\78_chair_polished_chrome_deep_teal_rural_summer.json",
   "name": "Egg Swivel Chair — Teal Leather",
   "type": "egg_chair",
-  "description": "A glossy teal leather egg shell on a four-star chrome swivel base. Traditional style. Arrives assembled and ready to use.",
+  "description": "A glossy teal leather egg shell on a four-star chrome swivel base. Mid-Century Modern style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 32,
     "d": 32,

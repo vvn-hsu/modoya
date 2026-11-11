@@ -2,7 +2,7 @@
   "row_id": 2,
   "category": "Lamp",
   "series": "Arco Floor Lamp",
-  "style": "Japandi",
+  "style": "Mid-Century Modern",
   "material": "Steel & Smoked Glass",
   "color": "Navy Blue",
   "attributes": "Playful",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\2_lamp_smoked_glass_navy_blue_suburban_spring.json",
   "name": "Arc Floor Lamp — Navy Glass Shade",
   "type": "arc_lamp",
-  "description": "A slender black arm curves over a seat and ends in a navy smoked-glass dome. Chair shown for styling only. Japandi style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "description": "A slender black arm curves over a seat and ends in a navy smoked-glass dome. Chair shown for styling only. Mid-Century Modern style. Ships with a fabric cord and in-line switch; LED bulb included.",
   "dimensions": {
     "w": 40,
     "d": 16,

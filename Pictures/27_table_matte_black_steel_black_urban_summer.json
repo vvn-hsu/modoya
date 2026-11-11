@@ -2,7 +2,7 @@
   "row_id": 27,
   "category": "Table",
   "series": "Dining Table",
-  "style": "Scandinavian",
+  "style": "Minimalist",
   "material": "Steel",
   "color": "Black",
   "attributes": "Airy",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\27_table_matte_black_steel_black_urban_summer.json",
   "name": "Dining Table — Black Steel",
   "type": "dining_table",
-  "description": "A thin black top on slender steel legs for a light, graphic look. Chairs not included. Scandinavian style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "description": "A thin black top on slender steel legs for a light, graphic look. Chairs not included. Minimalist style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
   "dimensions": {
     "w": 69,
     "d": 40,

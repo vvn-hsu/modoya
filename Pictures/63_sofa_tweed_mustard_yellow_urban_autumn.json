@@ -2,7 +2,7 @@
   "row_id": 63,
   "category": "Sofa",
   "series": "LC2 Sofa",
-  "style": "Bauhaus",
+  "style": "Retro",
   "material": "Tweed",
   "color": "Mustard Yellow",
   "attributes": "Organic shape",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\63_sofa_tweed_mustard_yellow_urban_autumn.json",
   "name": "Tufted Loveseat — Mustard Tweed",
   "type": "loveseat",
-  "description": "Box-tufted mustard tweed cushions on a polished steel frame. Bauhaus style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "Box-tufted mustard tweed cushions on a polished steel frame. Retro style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 65,
     "d": 36,

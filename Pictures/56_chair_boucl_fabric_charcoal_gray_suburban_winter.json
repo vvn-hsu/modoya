@@ -2,7 +2,7 @@
   "row_id": 56,
   "category": "Chair",
   "series": "Eames Lounge Chair",
-  "style": "Bohemian (Boho)",
+  "style": "Minimalist",
   "material": "Bouclé Fabric",
   "color": "Charcoal Gray",
   "attributes": "Plush",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\56_chair_boucl_fabric_charcoal_gray_suburban_winter.json",
   "name": "Tufted Lounge Chair — Charcoal Bouclé",
   "type": "lounge_chair",
-  "description": "Pillowy charcoal bouclé cushions on a slim black frame. Bohemian (Boho) style. Arrives assembled and ready to use.",
+  "description": "Pillowy charcoal bouclé cushions on a slim black frame. Minimalist style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 31,
     "d": 35,

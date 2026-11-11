@@ -2,7 +2,7 @@
   "row_id": 16,
   "category": "Table",
   "series": "Parsons Table",
-  "style": "Scandinavian",
+  "style": "Minimalist",
   "material": "Bent Plywood",
   "color": "Charcoal Gray",
   "attributes": "Modular",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\16_table_bent_plywood_charcoal_gray_suburban_winter.json",
   "name": "Desk with Bench Seats — Charcoal",
   "type": "desk",
-  "description": "A charcoal plywood work table with two built-in cushioned bench seats. Scandinavian style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "description": "A charcoal plywood work table with two built-in cushioned bench seats. Minimalist style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
   "dimensions": {
     "w": 49,
     "d": 25,

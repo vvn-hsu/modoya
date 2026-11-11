@@ -2,7 +2,7 @@
   "row_id": 24,
   "category": "Table",
   "series": "Dining Table",
-  "style": "Rustic",
+  "style": "Farmhouse",
   "material": "Reclaimed Wood",
   "color": "Walnut Brown",
   "attributes": "Airy",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\24_table_smoked_glass_walnut_brown_rural_winter.json",
   "name": "Farmhouse Dining Table — Walnut",
   "type": "dining_table",
-  "description": "A weathered walnut-toned farmhouse table on thick trestle legs. Chairs not included. Rustic style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "description": "A weathered walnut-toned farmhouse table on thick trestle legs. Chairs not included. Farmhouse style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
   "dimensions": {
     "w": 67,
     "d": 38,

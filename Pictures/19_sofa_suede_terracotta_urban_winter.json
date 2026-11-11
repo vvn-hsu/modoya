@@ -2,7 +2,7 @@
   "row_id": 19,
   "category": "Sofa",
   "series": "Chesterfield Sofa",
-  "style": "Retro",
+  "style": "Traditional",
   "material": "Suede",
   "color": "Terracotta",
   "attributes": "Plush",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\19_sofa_suede_terracotta_urban_winter.json",
   "name": "Chesterfield Sofa — Terracotta Suede",
   "type": "sofa",
-  "description": "Deep button tufting and rolled arms in terracotta suede on a dark metal base. Retro style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "Deep button tufting and rolled arms in terracotta suede on a dark metal base. Traditional style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 85,
     "d": 36,

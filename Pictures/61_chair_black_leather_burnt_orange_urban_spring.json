@@ -2,7 +2,7 @@
   "row_id": 61,
   "category": "Chair",
   "series": "Wishbone Chair (Y-Chair)",
-  "style": "Coastal",
+  "style": "Mid-Century Modern",
   "material": "Leather & Steel",
   "color": "Cognac Brown",
   "attributes": "Soft",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\61_chair_black_leather_burnt_orange_urban_spring.json",
   "name": "Sling Lounge Chair — Cognac Leather",
   "type": "accent_chair",
-  "description": "A cognac leather sling seat stretched over a black steel frame. Coastal style. Arrives assembled and ready to use.",
+  "description": "A cognac leather sling seat stretched over a black steel frame. Mid-Century Modern style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 27,
     "d": 27,

@@ -2,7 +2,7 @@
   "row_id": 94,
   "category": "Sofa",
   "series": "Chesterfield Sofa",
-  "style": "Retro",
+  "style": "Traditional",
   "material": "Vegan Leather",
   "color": "Walnut Brown",
   "attributes": "Matte finish",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\94_sofa_vegan_leather_walnut_brown_rural_winter.json",
   "name": "Chesterfield Sofa — Walnut Leather",
   "type": "sofa",
-  "description": "A tufted walnut-brown vegan leather Chesterfield with rolled arms. Retro style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "A tufted walnut-brown vegan leather Chesterfield with rolled arms. Traditional style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 82,
     "d": 35,

@@ -2,7 +2,7 @@
   "row_id": 81,
   "category": "Sofa",
   "series": "Togo Sofa",
-  "style": "Mid-Century Modern",
+  "style": "Scandinavian",
   "material": "Linen & Wood",
   "color": "Natural Linen",
   "attributes": "Matte finish",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\81_sofa_linen_natural_wood_urban_winter.json",
   "name": "Sofa — Natural Linen",
   "type": "sofa",
-  "description": "Cream linen cushions and pale blue pillows in a curved wooden frame. Mid-Century Modern style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "Cream linen cushions and pale blue pillows in a curved wooden frame. Scandinavian style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 80,
     "d": 38,

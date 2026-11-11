@@ -2,7 +2,7 @@
   "row_id": 59,
   "category": "Lamp",
   "series": "PH Artichoke Lamp",
-  "style": "Bauhaus",
+  "style": "Industrial",
   "material": "Steel & Copper",
   "color": "Navy Blue",
   "attributes": "Textured",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\59_lamp_matte_black_steel_navy_blue_rural_summer.json",
   "name": "Lantern Table Lamp — Navy & Copper",
   "type": "table_lamp",
-  "description": "A navy lantern with copper ribs hanging from a steel stand. Bauhaus style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "description": "A navy lantern with copper ribs hanging from a steel stand. Industrial style. Ships with a fabric cord and in-line switch; LED bulb included.",
   "dimensions": {
     "w": 14,
     "d": 14,

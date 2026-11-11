@@ -2,7 +2,7 @@
   "row_id": 49,
   "category": "Chair",
   "series": "Panton Chair",
-  "style": "Minimalist",
+  "style": "Art Deco",
   "material": "Velvet & Brushed Brass",
   "color": "Emerald Green",
   "attributes": "Plush",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\49_chair_brushed_brass_emerald_green_urban_winter.json",
   "name": "Velvet Accent Chair — Emerald",
   "type": "accent_chair",
-  "description": "A channel-tufted emerald velvet seat in a thin green frame with brass-tipped legs. Minimalist style. Arrives assembled and ready to use.",
+  "description": "A channel-tufted emerald velvet seat in a thin green frame with brass-tipped legs. Art Deco style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 27,
     "d": 28,

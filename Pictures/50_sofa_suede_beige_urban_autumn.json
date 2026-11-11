@@ -2,7 +2,7 @@
   "row_id": 50,
   "category": "Sofa",
   "series": "Sectional Sofa",
-  "style": "Bauhaus",
+  "style": "Minimalist",
   "material": "Suede",
   "color": "Beige",
   "attributes": "Textured",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\50_sofa_suede_beige_urban_autumn.json",
   "name": "L-Shaped Sectional — Beige Suede",
   "type": "sectional",
-  "description": "A low, square-armed beige suede sectional on a slim metal base. Bauhaus style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "A low, square-armed beige suede sectional on a slim metal base. Minimalist style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 117,
     "d": 81,

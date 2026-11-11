@@ -2,7 +2,7 @@
   "row_id": 82,
   "category": "Sofa",
   "series": "Loveseat",
-  "style": "Japandi",
+  "style": "Rustic",
   "material": "Tweed & Wood",
   "color": "Deep Teal",
   "attributes": "Airy",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\82_sofa_tweed_deep_teal_rural_spring.json",
   "name": "Loveseat — Deep Teal Tweed",
   "type": "loveseat",
-  "description": "A deep teal tweed loveseat on a rustic wood base. Japandi style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "A deep teal tweed loveseat on a rustic wood base. Rustic style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 58,
     "d": 32,

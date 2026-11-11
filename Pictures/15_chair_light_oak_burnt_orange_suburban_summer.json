@@ -2,7 +2,7 @@
   "row_id": 15,
   "category": "Chair",
   "series": "Panton Chair",
-  "style": "Bohemian (Boho)",
+  "style": "Retro",
   "material": "Velvet & Light Oak",
   "color": "Burnt Orange",
   "attributes": "Statement piece",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\15_chair_light_oak_burnt_orange_suburban_summer.json",
   "name": "Tufted Lounge Chair — Burnt Orange",
   "type": "accent_chair",
-  "description": "A button-tufted burnt-orange seat and back on a light oak frame. Bohemian (Boho) style. Arrives assembled and ready to use.",
+  "description": "A button-tufted burnt-orange seat and back on a light oak frame. Retro style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 28,
     "d": 30,

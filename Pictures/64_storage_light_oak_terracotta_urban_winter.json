@@ -2,7 +2,7 @@
   "row_id": 64,
   "category": "Storage",
   "series": "Bookshelf",
-  "style": "Coastal",
+  "style": "Scandinavian",
   "material": "Light Oak",
   "color": "Light Oak",
   "attributes": "Textured",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\64_storage_light_oak_terracotta_urban_winter.json",
   "name": "Bookshelf — Light Oak",
   "type": "bookshelf",
-  "description": "A tall light oak bookcase with open shelves and a closed lower cabinet. Coastal style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "description": "A tall light oak bookcase with open shelves and a closed lower cabinet. Scandinavian style. Delivered assembled; anti-tip kit included for wall mounting.",
   "dimensions": {
     "w": 34,
     "d": 13,

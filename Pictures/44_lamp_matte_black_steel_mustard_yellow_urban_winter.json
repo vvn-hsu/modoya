@@ -2,7 +2,7 @@
   "row_id": 44,
   "category": "Lamp",
   "series": "Desk Lamp",
-  "style": "Wabi-Sabi",
+  "style": "Bauhaus",
   "material": "Steel & Concrete",
   "color": "Mustard Yellow",
   "attributes": "Matte finish",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\44_lamp_matte_black_steel_mustard_yellow_urban_winter.json",
   "name": "Desk Lamp — Mustard & Black",
   "type": "desk_lamp",
-  "description": "A black steel task arm on a mustard-and-concrete base. Wabi-Sabi style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "description": "A black steel task arm on a mustard-and-concrete base. Bauhaus style. Ships with a fabric cord and in-line switch; LED bulb included.",
   "dimensions": {
     "w": 8,
     "d": 16,

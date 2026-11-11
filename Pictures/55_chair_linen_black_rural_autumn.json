@@ -2,7 +2,7 @@
   "row_id": 55,
   "category": "Chair",
   "series": "Eames Lounge Chair",
-  "style": "Bohemian (Boho)",
+  "style": "Mid-Century Modern",
   "material": "Leather & Walnut",
   "color": "Espresso Brown",
   "attributes": "Playful",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\55_chair_linen_black_rural_autumn.json",
   "name": "Molded Lounge Chair — Espresso Leather",
   "type": "lounge_chair",
-  "description": "Deep espresso leather cushions in a curved walnut shell on a swivel base. Bohemian (Boho) style. Arrives assembled and ready to use.",
+  "description": "Deep espresso leather cushions in a curved walnut shell on a swivel base. Mid-Century Modern style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 32,
     "d": 34,

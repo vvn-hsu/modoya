@@ -2,7 +2,7 @@
   "row_id": 48,
   "category": "Chair",
   "series": "Wishbone Chair (Y-Chair)",
-  "style": "Scandinavian",
+  "style": "Mid-Century Modern",
   "material": "Upholstered Shell & Steel",
   "color": "Mustard Yellow",
   "attributes": "Organic shape",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\48_chair_matte_black_steel_mustard_yellow_urban_summer.json",
   "name": "Shell Side Chair — Mustard",
   "type": "dining_chair",
-  "description": "A wing-shaped mustard shell seat on thin black steel legs. Scandinavian style. Arrives assembled and ready to use.",
+  "description": "A wing-shaped mustard shell seat on thin black steel legs. Mid-Century Modern style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 20,
     "d": 21,

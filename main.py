@@ -513,7 +513,11 @@ def build_order_view(order):
     for entry in order['items']:
         item = get_item_by_id(ALL_FURNITURE_ITEMS, entry['id'])
         card = product_card(item) if item else {'name': 'Item no longer listed', 'image_url': '', 'url': '#'}
-        line = {'index': len(lines), 'product': card, 'rent': entry['rent'], 'buy': entry['buy']}
+        # Prices come from the product data, so every page shows the same price for a product.
+        # The values stored with the order are only used if the product is no longer listed.
+        rent = card['monthly_rent'] if item else entry['rent']
+        buy = card['buyout_price'] if item else entry['buy']
+        line = {'index': len(lines), 'product': card, 'rent': rent, 'buy': buy}
 
         if is_rental:
             end = rental_end(delivery, entry['term'], entry['ext'])
@@ -523,18 +527,18 @@ def build_order_view(order):
             })
             if entry['bought_out']:
                 bought_on = date.fromisoformat(entry['bought_out']['date'])
-                rent_paid = entry['rent'] * months_between(delivery, bought_on) if bought_on > delivery else 0
+                rent_paid = rent * months_between(delivery, bought_on) if bought_on > delivery else 0
                 line['total'] = rent_paid + entry['bought_out']['amount']
                 line['status'] = f"Bought on {nice_date(bought_on)} — yours to keep"
                 line['state'] = 'owned'
             elif entry['return_date']:
                 pickup = date.fromisoformat(entry['return_date'])
                 line['end'] = pickup
-                line['total'] = entry['rent'] * months_between(delivery, pickup)
+                line['total'] = rent * months_between(delivery, pickup)
                 line['status'] = f"Return pickup scheduled for {nice_date(pickup)}"
                 line['state'] = 'returning'
             else:
-                line['total'] = entry['rent'] * (term_months(entry['term']) + entry['ext'])
+                line['total'] = rent * (term_months(entry['term']) + entry['ext'])
                 if order['cancelled']:
                     line['status'], line['state'] = "Cancelled", 'cancelled'
                 elif not delivered:
@@ -546,7 +550,7 @@ def build_order_view(order):
 
             active = line['state'] in ('scheduled', 'active')
             months_used = months_between(delivery, today) if delivered else 0
-            line['buyout_amount'] = max(entry['buy'] - entry['rent'] * months_used * 0.5, 0)
+            line['buyout_amount'] = max(buy - rent * months_used * 0.5, 0)
             line['actions'] = {
                 'extend': active,
                 'buyout': active,
@@ -555,7 +559,7 @@ def build_order_view(order):
                 'return_max': end.isoformat(),
             }
         else:
-            line['total'] = entry['buy']
+            line['total'] = buy
             return_deadline = delivery + timedelta(days=30)
             if order['cancelled']:
                 line['status'], line['state'] = "Cancelled", 'cancelled'

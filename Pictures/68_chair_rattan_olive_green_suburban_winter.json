@@ -2,7 +2,7 @@
   "row_id": 68,
   "category": "Chair",
   "series": "Eames Lounge Chair",
-  "style": "Minimalist",
+  "style": "Mid-Century Modern",
   "material": "Fabric & Walnut",
   "color": "Olive Green",
   "attributes": "Playful",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\68_chair_rattan_olive_green_suburban_winter.json",
   "name": "Tufted Lounge Chair — Olive",
   "type": "lounge_chair",
-  "description": "Olive button-tufted cushions in a walnut shell on black legs. Minimalist style. Arrives assembled and ready to use.",
+  "description": "Olive button-tufted cushions in a walnut shell on black legs. Mid-Century Modern style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 32,
     "d": 33,

@@ -2,7 +2,7 @@
   "row_id": 37,
   "category": "Table",
   "series": "Coffee Table",
-  "style": "Farmhouse",
+  "style": "Industrial",
   "material": "Carrara Marble & Steel",
   "color": "White Marble",
   "attributes": "Matte finish",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\37_table_carrara_marble_charcoal_gray_suburban_autumn.json",
   "name": "Marble Coffee Table — Black Steel",
   "type": "coffee_table",
-  "description": "A thick Carrara marble slab on an open black steel base. Sofa shown for styling only. Farmhouse style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
+  "description": "A thick Carrara marble slab on an open black steel base. Sofa shown for styling only. Industrial style. Sealed surface wipes clean with a damp cloth; light assembly (legs attach).",
   "dimensions": {
     "w": 41,
     "d": 23,

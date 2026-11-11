@@ -2,7 +2,7 @@
   "row_id": 69,
   "category": "Lamp",
   "series": "Arco Floor Lamp",
-  "style": "Farmhouse",
+  "style": "Scandinavian",
   "material": "Steel & Fabric",
   "color": "Beige",
   "attributes": "Geometric",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\69_lamp_matte_black_steel_light_gray_suburban_autumn.json",
   "name": "Tripod Dome Floor Lamp",
   "type": "floor_lamp",
-  "description": "A large beige dome shade on a black tripod. Armchair shown for styling only. Farmhouse style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "description": "A large beige dome shade on a black tripod. Armchair shown for styling only. Scandinavian style. Ships with a fabric cord and in-line switch; LED bulb included.",
   "dimensions": {
     "w": 19,
     "d": 17,

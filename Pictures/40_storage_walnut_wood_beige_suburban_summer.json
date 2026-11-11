@@ -2,7 +2,7 @@
   "row_id": 40,
   "category": "Storage",
   "series": "Cabinet",
-  "style": "Coastal",
+  "style": "Farmhouse",
   "material": "Pine",
   "color": "Light Natural Wood",
   "attributes": "Textured",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\40_storage_walnut_wood_beige_suburban_summer.json",
   "name": "Glass-Door Cabinet — Light Pine",
   "type": "cabinet",
-  "description": "A country-style pale wood cabinet with glass doors and three drawers below. Coastal style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "description": "A country-style pale wood cabinet with glass doors and three drawers below. Farmhouse style. Delivered assembled; anti-tip kit included for wall mounting.",
   "dimensions": {
     "w": 43,
     "d": 19,

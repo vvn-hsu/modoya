@@ -2,7 +2,7 @@
   "row_id": 0,
   "category": "Lamp",
   "series": "Floor Lamp",
-  "style": "Wabi-Sabi",
+  "style": "Retro",
   "material": "Amber Glass & Linen",
   "color": "Burnt Orange",
   "attributes": "Matte finish",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\0_lamp_acrylic_burnt_orange_suburban_summer.json",
   "name": "Glass Table Lamp — Burnt Orange",
   "type": "table_lamp",
-  "description": "A round amber-glass base under a matching burnt-orange drum shade that throws a warm, tinted glow. Wabi-Sabi style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "description": "A round amber-glass base under a matching burnt-orange drum shade that throws a warm, tinted glow. Retro style. Ships with a fabric cord and in-line switch; LED bulb included.",
   "dimensions": {
     "w": 13,
     "d": 13,

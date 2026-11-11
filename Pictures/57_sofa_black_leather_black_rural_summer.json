@@ -2,7 +2,7 @@
   "row_id": 57,
   "category": "Sofa",
   "series": "Noguchi Freeform Sofa",
-  "style": "Industrial",
+  "style": "Retro",
   "material": "Leather & Wood",
   "color": "Black",
   "attributes": "Modular",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\57_sofa_black_leather_black_rural_summer.json",
   "name": "Tufted Leather Sofa — Black",
   "type": "sofa",
-  "description": "Puffy channel-tufted black leather on a solid wood base. Industrial style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "Puffy channel-tufted black leather on a solid wood base. Retro style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 85,
     "d": 35,

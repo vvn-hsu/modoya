@@ -2,7 +2,7 @@
   "row_id": 53,
   "category": "Sofa",
   "series": "LC2 Sofa",
-  "style": "Traditional",
+  "style": "Mid-Century Modern",
   "material": "Fabric & Walnut",
   "color": "Burnt Orange",
   "attributes": "Organic shape",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\53_sofa_walnut_wood_base_burnt_orange_suburban_spring.json",
   "name": "Loveseat — Burnt Orange, Walnut Frame",
   "type": "loveseat",
-  "description": "Plush burnt-orange cushions set in an open walnut frame. Traditional style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "Plush burnt-orange cushions set in an open walnut frame. Mid-Century Modern style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 61,
     "d": 34,

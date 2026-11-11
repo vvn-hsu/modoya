@@ -2,7 +2,7 @@
   "row_id": 25,
   "category": "Storage",
   "series": "TV Stand",
-  "style": "Rustic",
+  "style": "Industrial",
   "material": "Reclaimed Wood & Steel",
   "color": "Burnt Orange",
   "attributes": "Plush",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\25_storage_matte_black_steel_burnt_orange_rural_winter.json",
   "name": "Industrial TV Stand — Burnt Orange",
   "type": "tv_stand",
-  "description": "Distressed orange-painted wood boxes riveted into a raw black steel frame. Rustic style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "description": "Distressed orange-painted wood boxes riveted into a raw black steel frame. Industrial style. Delivered assembled; anti-tip kit included for wall mounting.",
   "dimensions": {
     "w": 61,
     "d": 15,

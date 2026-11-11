@@ -2,7 +2,7 @@
   "row_id": 18,
   "category": "Sofa",
   "series": "LC2 Sofa",
-  "style": "Scandinavian",
+  "style": "Bauhaus",
   "material": "Linen",
   "color": "Deep Teal",
   "attributes": "Geometric",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\18_sofa_linen_deep_teal_suburban_winter.json",
   "name": "Box-Frame Sofa — Deep Teal",
   "type": "sofa",
-  "description": "Square, upright cushions held in a crisp box frame, upholstered in deep teal. Scandinavian style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "Square, upright cushions held in a crisp box frame, upholstered in deep teal. Bauhaus style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 82,
     "d": 37,

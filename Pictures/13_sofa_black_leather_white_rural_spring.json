@@ -2,7 +2,7 @@
   "row_id": 13,
   "category": "Sofa",
   "series": "Sectional Sofa",
-  "style": "Wabi-Sabi",
+  "style": "Rustic",
   "material": "Fabric & Reclaimed Wood",
   "color": "White",
   "attributes": "Textured",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\13_sofa_black_leather_white_rural_spring.json",
   "name": "Sectional Sofa — White & Black, Reclaimed Wood",
   "type": "sectional",
-  "description": "Thick white seat cushions and black-and-white throw pillows in a reclaimed wood frame. Wabi-Sabi style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "Thick white seat cushions and black-and-white throw pillows in a reclaimed wood frame. Rustic style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 111,
     "d": 79,

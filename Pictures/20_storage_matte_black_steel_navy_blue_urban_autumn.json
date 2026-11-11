@@ -2,7 +2,7 @@
   "row_id": 20,
   "category": "Storage",
   "series": "Cabinet",
-  "style": "Wabi-Sabi",
+  "style": "Industrial",
   "material": "Steel",
   "color": "Matte Black",
   "attributes": "Modular",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\20_storage_matte_black_steel_navy_blue_urban_autumn.json",
   "name": "Cabinet — Matte Black Steel",
   "type": "cabinet",
-  "description": "A tall paneled steel cabinet with three doors and a slim black frame. Wabi-Sabi style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "description": "A tall paneled steel cabinet with three doors and a slim black frame. Industrial style. Delivered assembled; anti-tip kit included for wall mounting.",
   "dimensions": {
     "w": 39,
     "d": 17,

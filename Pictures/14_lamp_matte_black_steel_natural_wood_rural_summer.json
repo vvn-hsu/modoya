@@ -2,7 +2,7 @@
   "row_id": 14,
   "category": "Lamp",
   "series": "Desk Lamp",
-  "style": "Japandi",
+  "style": "Industrial",
   "material": "Wood & Black Steel",
   "color": "Natural Wood",
   "attributes": "Plush",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\14_lamp_matte_black_steel_natural_wood_rural_summer.json",
   "name": "Spotlight Desk Lamp — Natural Wood",
   "type": "desk_lamp",
-  "description": "A barrel-shaped wooden spotlight on an adjustable black steel arm and solid wood base. Japandi style. Ships with a fabric cord and in-line switch; LED bulb included.",
+  "description": "A barrel-shaped wooden spotlight on an adjustable black steel arm and solid wood base. Industrial style. Ships with a fabric cord and in-line switch; LED bulb included.",
   "dimensions": {
     "w": 8,
     "d": 17,

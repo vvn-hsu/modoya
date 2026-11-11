@@ -2,7 +2,7 @@
   "row_id": 4,
   "category": "Storage",
   "series": "Bookshelf",
-  "style": "Industrial",
+  "style": "Coastal",
   "material": "Rattan",
   "color": "Off-white",
   "attributes": "High-gloss",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\4_storage_rattan_off_white_suburban_spring.json",
   "name": "Rattan Bookshelf — Off-White",
   "type": "bookshelf",
-  "description": "An airy grid of whitewashed rattan shelves with room for books, baskets and plants. Industrial style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "description": "An airy grid of whitewashed rattan shelves with room for books, baskets and plants. Coastal style. Delivered assembled; anti-tip kit included for wall mounting.",
   "dimensions": {
     "w": 37,
     "d": 15,

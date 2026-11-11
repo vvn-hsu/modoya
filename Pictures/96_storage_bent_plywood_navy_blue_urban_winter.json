@@ -2,7 +2,7 @@
   "row_id": 96,
   "category": "Storage",
   "series": "Cabinet",
-  "style": "Traditional",
+  "style": "Minimalist",
   "material": "Lacquered Plywood",
   "color": "Navy Blue",
   "attributes": "Elegant",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\96_storage_bent_plywood_navy_blue_urban_winter.json",
   "name": "Low Cabinet — Navy",
   "type": "sideboard",
-  "description": "A low navy lacquered cabinet with four doors. Traditional style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "description": "A low navy lacquered cabinet with four doors. Minimalist style. Delivered assembled; anti-tip kit included for wall mounting.",
   "dimensions": {
     "w": 67,
     "d": 17,

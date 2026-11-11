@@ -2,7 +2,7 @@
   "row_id": 90,
   "category": "Storage",
   "series": "Bookshelf",
-  "style": "Rustic",
+  "style": "Scandinavian",
   "material": "Teak",
   "color": "Natural Wood",
   "attributes": "Playful",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\90_storage_teak_natural_wood_suburban_spring.json",
   "name": "Bookshelf with Bench — Natural Wood",
   "type": "bookshelf",
-  "description": "A tall cubby bookshelf with a built-in cushioned bench. Rustic style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "description": "A tall cubby bookshelf with a built-in cushioned bench. Scandinavian style. Delivered assembled; anti-tip kit included for wall mounting.",
   "dimensions": {
     "w": 37,
     "d": 13,

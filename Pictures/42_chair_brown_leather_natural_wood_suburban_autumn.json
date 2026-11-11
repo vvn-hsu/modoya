@@ -2,7 +2,7 @@
   "row_id": 42,
   "category": "Chair",
   "series": "Womb Chair",
-  "style": "Art Deco",
+  "style": "Mid-Century Modern",
   "material": "Leather & Walnut",
   "color": "Cognac Brown",
   "attributes": "Modular",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\42_chair_brown_leather_natural_wood_suburban_autumn.json",
   "name": "Swivel Lounge Chair — Cognac Leather",
   "type": "accent_chair",
-  "description": "A tufted cognac leather seat in a walnut shell on a four-star swivel base. Art Deco style. Arrives assembled and ready to use.",
+  "description": "A tufted cognac leather seat in a walnut shell on a four-star swivel base. Mid-Century Modern style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 27,
     "d": 28,

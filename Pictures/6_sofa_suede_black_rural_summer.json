@@ -2,7 +2,7 @@
   "row_id": 6,
   "category": "Sofa",
   "series": "Loveseat",
-  "style": "Wabi-Sabi",
+  "style": "Minimalist",
   "material": "Suede",
   "color": "Black",
   "attributes": "Curvy",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\6_sofa_suede_black_rural_summer.json",
   "name": "Curved Loveseat — Black Suede",
   "type": "loveseat",
-  "description": "A rounded, channel-stitched loveseat in soft black suede on a wooden plinth base. Wabi-Sabi style. Removable cushion covers; frame arrives fully assembled.",
+  "description": "A rounded, channel-stitched loveseat in soft black suede on a wooden plinth base. Minimalist style. Removable cushion covers; frame arrives fully assembled.",
   "dimensions": {
     "w": 66,
     "d": 33,

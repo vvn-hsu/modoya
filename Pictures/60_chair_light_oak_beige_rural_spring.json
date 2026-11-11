@@ -2,7 +2,7 @@
   "row_id": 60,
   "category": "Chair",
   "series": "Egg Chair",
-  "style": "Minimalist",
+  "style": "Bohemian (Boho)",
   "material": "Rattan & Light Oak",
   "color": "Cream",
   "attributes": "Geometric",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\60_chair_light_oak_beige_rural_spring.json",
   "name": "Cocoon Chair — Natural Rattan",
   "type": "egg_chair",
-  "description": "A rounded rattan cocoon with cream cushions on light oak legs. Minimalist style. Arrives assembled and ready to use.",
+  "description": "A rounded rattan cocoon with cream cushions on light oak legs. Bohemian (Boho) style. Arrives assembled and ready to use.",
   "dimensions": {
     "w": 32,
     "d": 30,

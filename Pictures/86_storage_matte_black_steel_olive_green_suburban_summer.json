@@ -2,7 +2,7 @@
   "row_id": 86,
   "category": "Storage",
   "series": "Bookshelf",
-  "style": "Farmhouse",
+  "style": "Industrial",
   "material": "Steel",
   "color": "Olive Green",
   "attributes": "Plush",
@@ -15,7 +15,7 @@
   "json_file": "Pictures\\86_storage_matte_black_steel_olive_green_suburban_summer.json",
   "name": "Bookshelf — Olive & Black Steel",
   "type": "bookshelf",
-  "description": "Black steel shelving with olive storage bins along the bottom. Farmhouse style. Delivered assembled; anti-tip kit included for wall mounting.",
+  "description": "Black steel shelving with olive storage bins along the bottom. Industrial style. Delivered assembled; anti-tip kit included for wall mounting.",
   "dimensions": {
     "w": 38,
     "d": 14,
