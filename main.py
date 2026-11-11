@@ -374,7 +374,7 @@ def validate_checkout(form):
     earliest, latest = delivery_date_range()
     try:
         # Typed as MM/DD/YYYY on the form; YYYY-MM-DD is accepted too.
-        typed = re.fullmatch(r'(\d{1,2})/(\d{1,2})/(\d{4})', values['delivery_date'])
+        typed = re.fullmatch(r'(\d{1,2})/?(\d{1,2})/?(\d{4})', values['delivery_date'])
         if typed:
             values['delivery_date'] = date(int(typed.group(3)), int(typed.group(1)), int(typed.group(2))).isoformat()
         chosen = date.fromisoformat(values['delivery_date'])

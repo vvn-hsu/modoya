@@ -3,21 +3,21 @@
 
 {% block styles %}
 <style>
-    .hero {
-        display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; align-items: center;
+    .banner-container {
+        position: relative;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
     }
-    .hero-copy h1 { font-size: 46px; line-height: 1.1; letter-spacing: -0.5px; margin: 0 0 16px; font-weight: 800; }
-    .hero-sub { font-size: 18px; line-height: 1.55; color: #444; margin: 0 0 22px; max-width: 520px; }
-    .hero-points { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 10px; }
-    .hero-points li { display: flex; gap: 10px; align-items: baseline; font-size: 16px; color: #222; }
-    .hero-points li::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-purple); flex-shrink: 0; transform: translateY(-2px); }
+    .banner-image { width: 100%; height: auto; max-height: min(58vh, 560px); display: block; object-fit: cover; object-position: center 75%; }
+    .hero-cta {
+        display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+        margin: 28px 0 0;
+    }
+    .hero-cta h1 { font-family: 'Playfair Display', serif; font-size: 34px; margin: 0; line-height: 1.2; }
+    .hero-cta p { margin: 6px 0 0; color: var(--text-secondary); font-size: 16px; }
     .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
     .hero-buttons .btn { flex: none; padding: 14px 26px; font-size: 15px; }
-    .hero-image {
-        border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--card-shadow);
-        aspect-ratio: 4 / 3; background: #f3f3f3;
-    }
-    .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 60%; display: block; }
 
     .section { margin-top: 72px; scroll-margin-top: 24px; }
     .section-heading { font-size: 26px; margin: 0 0 8px; }
@@ -75,10 +75,7 @@
         .catalogue-toolbar .search-field { grid-column: 1 / -1; }
     }
     @media (max-width: 760px) {
-        .hero { grid-template-columns: 1fr; gap: 24px; }
-        .hero-image { order: -1; }
-        .hero-copy h1 { font-size: 32px; }
-        .hero-sub { font-size: 16px; }
+        .hero-cta h1 { font-size: 26px; }
         .hero-buttons .btn { flex: 1; padding: 14px 10px; white-space: nowrap; }
         .steps, .faq { grid-template-columns: 1fr; }
         .section { margin-top: 48px; }
@@ -90,22 +87,18 @@
 
 {% block content %}
 <section class="hero">
-    <div class="hero-copy">
-        <h1>Furnish your place by the month.</h1>
-        <p class="hero-sub">Rent furniture for as long as you need it, keep the pieces you love, and send the rest back when you move.</p>
-        <ul class="hero-points">
-            <li>Rental terms from 2 weeks to 24 months</li>
-            <li>Free delivery, setup and return pickup</li>
-            <li>Buy any piece at its buyout price, any time</li>
-        </ul>
+    <div class="banner-container">
+        <img src="{{ url_for('serve_pictures', filename='banner.jpg') }}" alt="A wooden side table and teal armchair in a living room" class="banner-image">
+    </div>
+    <div class="hero-cta">
+        <div>
+            <h1>Furnish your place by the month.</h1>
+            <p>Rent from 2 weeks to 24 months, buy it any time, or send it back with free pickup.</p>
+        </div>
         <div class="hero-buttons">
             <button type="button" class="btn btn-accent open-analyzer">Find Your Style</button>
             <a href="#catalogue" class="btn btn-primary">Browse Collection</a>
         </div>
-    </div>
-    <div class="hero-image">
-        <img src="{{ url_for('serve_pictures', filename='74_sofa_tweed_emerald_green_urban_summer.png', view='hero') }}"
-             alt="A living room with an emerald green velvet sofa, a floor lamp and plants" fetchpriority="high">
     </div>
 </section>
 
