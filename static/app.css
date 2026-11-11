@@ -28,7 +28,9 @@ body {
 body.soft-bg { background-color: var(--bg-soft); }
 body.modal-open { overflow: hidden; }
 
-main { max-width: 1400px; margin: 0 auto; min-height: 60vh; }
+/* Column layout: main grows so the footer sits at the bottom of short pages. */
+body { display: flex; flex-direction: column; min-height: 100vh; }
+main { max-width: 1400px; width: 100%; margin: 0 auto; flex: 1 0 auto; }
 
 a { color: inherit; }
 
@@ -41,6 +43,7 @@ a { color: inherit; }
     gap: 16px;
     margin: 0 auto 40px;
     max-width: 1400px;
+    width: 100%;
 }
 .logo {
     font-family: 'Playfair Display', serif;
@@ -169,17 +172,25 @@ a { color: inherit; }
 .term-total { display: none; }
 
 /* List view: one row per product */
-.furniture-grid.list-view { grid-template-columns: 1fr; gap: 12px; }
-.list-view .item-card { flex-direction: row; align-items: center; gap: 20px; padding: 12px 16px; }
+.furniture-grid.list-view { grid-template-columns: 1fr; gap: 10px; }
+/* In List view the whole catalogue (filters, bar, rows) shares one narrower column. */
+.catalogue-list { max-width: 1080px; margin-left: auto; margin-right: auto; }
+/* One row: thumbnail | name, style, dimensions | price | buttons */
+.list-view .item-card {
+    display: grid; grid-template-columns: 170px minmax(0, 1fr); align-items: center;
+    gap: 20px; padding: 10px 14px 10px 10px;
+}
 .list-view .item-card:hover { transform: none; }
-.list-view .img-container { width: 120px; height: 100px; flex-shrink: 0; margin: 0; }
-.list-view .card-content { flex-direction: row; align-items: center; gap: 20px; }
-.list-view .card-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+.list-view .img-container { width: 170px; height: 128px; margin: 0; }
+.list-view .card-content {
+    display: grid; grid-template-columns: minmax(0, 1fr) 150px 196px; align-items: center; gap: 20px;
+}
+.list-view .card-text { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
 .list-view .item-dims { display: block; }
 .list-view .item-title { font-size: 17px; }
-.list-view .item-price-block { margin: 0; padding: 0; text-align: right; min-width: 170px; }
+.list-view .item-price-block { margin: 0; padding: 0; }
 .list-view .term-total { display: block; }
-.list-view .action-row { margin: 0; width: 180px; flex-shrink: 0; }
+.list-view .action-row { margin: 0; }
 
 /* ---------- Toast ---------- */
 #mini-cart-overlay {
@@ -273,7 +284,7 @@ a { color: inherit; }
 .analyzer-reset { width: 100%; margin-top: 28px; padding: 12px; }
 
 /* ---------- Footer ---------- */
-.site-footer { margin: 80px -40px 0; padding: 48px 40px 24px; background: #111; color: #ddd; }
+.site-footer { margin: 56px -40px 0; padding: 48px 40px 24px; background: #111; color: #ddd; }
 .footer-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; }
 .footer-logo { color: #fff; font-size: 32px; }
 .footer-tagline { color: #aaa; max-width: 320px; line-height: 1.5; }
@@ -291,18 +302,16 @@ a { color: inherit; }
     .nav-item { font-size: 15px; }
     .header { margin-bottom: 24px; }
     .furniture-grid { gap: 16px; }
-    .list-view .item-card { flex-wrap: wrap; gap: 12px; }
-    .list-view .img-container { width: 96px; height: 84px; }
-    .list-view .card-content { flex-direction: column; align-items: stretch; gap: 10px; flex-basis: calc(100% - 120px); }
-    .list-view .item-price-block { text-align: left; min-width: 0; }
-    .list-view .action-row { width: 100%; }
+    .list-view .item-card { grid-template-columns: 120px minmax(0, 1fr); gap: 12px; align-items: start; }
+    .list-view .img-container { width: 120px; height: 104px; }
+    .list-view .card-content { grid-template-columns: 1fr; gap: 8px; }
     .analyzer-modal { padding: 28px 18px; width: 96%; }
     .upload-grid { gap: 8px; }
     .upload-box { height: 110px; }
     .analyzer-picks { grid-template-columns: 1fr; }
     .slider-row { grid-template-columns: 110px 1fr 64px; }
     .confidence-row { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .site-footer { margin: 60px -16px 0; padding: 32px 16px 20px; }
+    .site-footer { margin: 40px -16px 0; padding: 32px 16px 20px; }
     .footer-inner { grid-template-columns: 1fr 1fr; }
     .footer-inner > div:first-child { grid-column: 1 / -1; }
     #open-analyzer-btn { bottom: 16px; right: 16px; }

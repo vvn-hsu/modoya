@@ -135,7 +135,7 @@
     </div>
 </section>
 
-<section class="section" id="catalogue">
+<section class="section catalogue-list" id="catalogue">
     <h2 class="section-heading">The collection</h2>
     <p class="section-sub">Every piece can be rented or bought.</p>
 
@@ -351,6 +351,7 @@
     const viewButtons = document.querySelectorAll('.view-toggle button');
     const setView = (view) => {
         grid.classList.toggle('list-view', view === 'list');
+        document.getElementById('catalogue').classList.toggle('catalogue-list', view === 'list');
         viewButtons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
         try { localStorage.setItem('modoya-view', view); } catch (e) {}
     };
