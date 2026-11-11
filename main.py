@@ -175,6 +175,15 @@ def product_detail(item_id):
     ][:4]
     return render_template('product.html', product=product, related=related)
 
+# Paths people guess or type: send them to the real pages instead of a 404.
+@app.route('/products/<item_id>')
+def product_detail_plural(item_id):
+    return redirect(url_for('product_detail', item_id=item_id), 301)
+
+@app.route('/style-analyzer')
+def style_analyzer_redirect():
+    return redirect(url_for('index') + '#find-my-style')
+
 # ---------------------------------------------------------------------------
 # Cart
 # ---------------------------------------------------------------------------

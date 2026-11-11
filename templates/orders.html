@@ -5,7 +5,8 @@
 {% block styles %}
 <style>
     .container { max-width: 1000px; margin: 0 auto; }
-    .page-title { font-size: 26px; font-weight: 700; margin: 0 0 24px; }
+    .page-title { font-size: 26px; font-weight: 700; margin: 0 0 6px; }
+    .privacy-note { color: #444; font-size: 14px; margin: 0 0 24px; }
     .flash { background: #e7f6ef; color: #0b6b4a; border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; font-size: 14px; font-weight: 500; }
     .note { color: #5c5c5c; font-size: 13px; margin: -12px 0 20px; }
 
@@ -69,6 +70,7 @@
 {% block content %}
 <div class="container">
     <h1 class="page-title">My Orders</h1>
+    <p class="privacy-note">Orders are saved only in this browser. Nobody else can see them.</p>
     {% if message %}<div class="flash" role="status">{{ message }}</div>{% endif %}
     {% if orders|length >= max_orders %}<p class="note">Showing your {{ max_orders }} most recent orders.</p>{% endif %}
 
