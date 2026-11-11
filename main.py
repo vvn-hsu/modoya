@@ -134,8 +134,10 @@ def serve_pictures(filename):
     if not path or not filename.lower().endswith(IMAGE_EXTENSIONS) or not os.path.isfile(path):
         return send_from_directory(FOLDER_PATH, filename)
 
-    max_size = BANNER_IMAGE_MAX if filename.startswith('banner') else PRODUCT_IMAGE_MAX
-    crop = None if request.args.get('view') == 'full' else CROP_BY_FILENAME.get(filename)
+    view = request.args.get('view')
+    # The homepage hero shows a product photo larger and uncropped.
+    max_size = BANNER_IMAGE_MAX if filename.startswith('banner') or view == 'hero' else PRODUCT_IMAGE_MAX
+    crop = None if view in ('full', 'hero') else CROP_BY_FILENAME.get(filename)
     key = (path, os.path.getmtime(path), max_size, tuple(crop) if crop else None)
     if key not in _compressed_cache:
         _compressed_cache[key] = compress_image(path, max_size, crop)
