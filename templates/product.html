@@ -25,28 +25,11 @@
     .thumb[aria-pressed="true"] { border-color: #111; }
     .thumb-label { position: absolute; bottom: 0; left: 0; right: 0; background: #1f1f1f; color: #fff; font-size: 10px; padding: 2px 0; text-align: center; }
 
-    /* Lamp light simulation (T7) */
-    .light-glow { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.4s ease, background 0.4s ease; mix-blend-mode: screen; }
-    .light-tint { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.4s ease, background 0.4s ease; mix-blend-mode: soft-light; }
-    .gallery-main.light-on .light-glow { opacity: 1; }
-    .gallery-main.light-on .light-tint { opacity: 0.55; }
-    .gallery-main.light-off img { filter: brightness(0.55) saturate(0.8); }
-    .gallery-main.warm .light-glow { background: radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 35%), rgba(255, 196, 120, 0.75), rgba(255, 170, 90, 0.18) 38%, transparent 62%); }
-    .gallery-main.warm .light-tint { background: #ffb15c; }
-    .gallery-main.white .light-glow { background: radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 35%), rgba(235, 244, 255, 0.85), rgba(210, 228, 255, 0.2) 38%, transparent 62%); }
-    .gallery-main.white .light-tint { background: #cfe2ff; }
 
     .light-controls {
         display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; margin-top: 12px;
         background: var(--bg-soft); border-radius: 12px; padding: 14px 16px;
     }
-    .switch { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; cursor: pointer; }
-    .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-    .switch-track { width: 44px; height: 24px; border-radius: 12px; background: #ccc; position: relative; transition: background 0.2s; }
-    .switch-track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
-    .switch input:checked + .switch-track { background: #111; }
-    .switch input:checked + .switch-track::after { transform: translateX(20px); }
-    .switch input:focus-visible + .switch-track { outline: 2px solid var(--accent-purple); outline-offset: 2px; }
     .segmented { display: inline-flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
     .segmented button { background: #fff; border: none; padding: 7px 14px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
     .segmented button[aria-pressed="true"] { background: #111; color: #fff; }
@@ -107,27 +90,23 @@
 
 <div class="product-layout">
     <div class="gallery">
-        <div class="gallery-main {% if is_lamp %}light-on warm{% endif %}" id="gallery-main"
-             {% if product.type in ('arc_lamp', 'floor_lamp') %}style="--glow-y: 22%;"{% endif %}>
-            <img src="{{ product.image_url }}" alt="{{ product.name }}" id="gallery-image">
-            {% if is_lamp %}<div class="light-tint"></div><div class="light-glow"></div>{% endif %}
+        <div class="gallery-main lightable" id="gallery-main">
+            <img data-light-img src="{{ product.image_url }}" alt="{{ product.name }}" id="gallery-image">
         </div>
-        {% if is_lamp %}
         <div class="light-controls">
             <label class="switch">
-                <input type="checkbox" id="light-switch" checked>
+                <input type="checkbox" data-light-switch aria-label="Light on or off">
                 <span class="switch-track"></span>
-                <span>Light on/off</span>
+                <span data-light-label>Light Off</span>
             </label>
-            <div class="segmented" role="group" aria-label="Light color">
-                <button type="button" data-light="warm" aria-pressed="true">Warm</button>
-                <button type="button" data-light="white" aria-pressed="false">White</button>
+            <div class="segmented" role="group" aria-label="Light colour">
+                <button type="button" data-light-color="warm" aria-pressed="false">Warm</button>
+                <button type="button" data-light-color="white" aria-pressed="false">White</button>
             </div>
-            {% if product.dims %}
+            {% if is_lamp and product.dims %}
             <p class="light-size">Size: {{ product.dimensions }}. Height {{ product.dims.h }} in is {{ product.size_reference }}.</p>
             {% endif %}
         </div>
-        {% endif %}
         {% if product.full_image_url %}
         <div class="gallery-thumbs" role="group" aria-label="Photos">
             <button type="button" class="thumb" aria-pressed="true" data-src="{{ product.image_url }}" data-zoom="0">
@@ -221,7 +200,7 @@
     <div class="related-grid">
         {% for r in related %}
         <a href="{{ r.url }}" class="related-card">
-            <img src="{{ r.image_url }}" alt="" loading="lazy">
+            <span class="lightable" style="display:block; border-radius:12px;"><img data-light-img src="{{ r.image_url }}" alt="" loading="lazy"></span>
             <h3>{{ r.name }}</h3>
             <p>{{ r.monthly_rent|money }}/mo</p>
         </a>
@@ -239,7 +218,8 @@
         thumb.addEventListener('click', () => {
             document.querySelectorAll('.thumb').forEach((t) => t.setAttribute('aria-pressed', 'false'));
             thumb.setAttribute('aria-pressed', 'true');
-            image.src = thumb.dataset.src;
+            image.dataset.baseSrc = thumb.dataset.src;
+            window.modoyaApplyLight();
             image.classList.toggle('zoomed', thumb.dataset.zoom === '1');
         });
     });
@@ -255,28 +235,6 @@
         if (rentButton) rentButton.textContent = `Rent for ${label}`;
     });
 
-    const gallery = document.getElementById('gallery-main');
-    const lightSwitch = document.getElementById('light-switch');
-    if (lightSwitch) {
-        const colorButtons = document.querySelectorAll('[data-light]');
-        let lightColor = 'warm';
-        lightSwitch.addEventListener('change', () => {
-            const on = lightSwitch.checked;
-            gallery.classList.toggle('light-on', on);
-            gallery.classList.toggle('light-off', !on);
-            // With the light off, neither colour is selected and both are disabled.
-            colorButtons.forEach((b) => {
-                b.disabled = !on;
-                b.setAttribute('aria-pressed', String(on && b.dataset.light === lightColor));
-            });
-        });
-        colorButtons.forEach((b) => b.addEventListener('click', () => {
-            lightColor = b.dataset.light;
-            colorButtons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-            gallery.classList.toggle('warm', b.dataset.light === 'warm');
-            gallery.classList.toggle('white', b.dataset.light === 'white');
-        }));
-    }
 })();
 </script>
 {% endblock %}

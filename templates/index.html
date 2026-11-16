@@ -49,6 +49,7 @@
     .result-count { font-weight: 700; font-size: 16px; }
     .bar-controls { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
     .bar-controls label { font-size: 13px; color: #555; font-weight: 600; }
+    .bar-controls .light-switch { font-size: 15px; color: #111; margin-right: 12px; }
     .view-toggle { display: inline-flex; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
     .view-toggle button {
         background: #fff; border: none; padding: 9px 16px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; color: #555;
@@ -152,6 +153,11 @@
     <div class="catalogue-bar">
         <div class="result-count" id="result-count" aria-live="polite">{{ items|length }} products</div>
         <div class="bar-controls">
+            <label class="switch light-switch">
+                <span data-light-label>Light Off</span>
+                <input type="checkbox" data-light-switch aria-label="Light on or off for all photos">
+                <span class="switch-track"></span>
+            </label>
             <label for="sort-select">Sort</label>
             <select id="sort-select" class="input">
                 <option value="featured">Featured</option>
@@ -181,8 +187,8 @@
         {% for item in items %}
         <article class="item-card" data-index="{{ loop.index0 }}" data-name="{{ item.name|lower }}" data-search="{{ (item.name ~ ' ' ~ item.category)|lower }}"
                  data-category="{{ item.category }}" data-style="{{ item.style }}" data-rent="{{ item.monthly_rent }}">
-            <a href="{{ item.url }}" class="img-container" tabindex="-1" aria-hidden="true">
-                <img src="{{ item.image_url }}" alt="" loading="lazy" decoding="async">
+            <a href="{{ item.url }}" class="img-container lightable" tabindex="-1" aria-hidden="true">
+                <img data-light-img src="{{ item.image_url }}" alt="" loading="lazy" decoding="async">
             </a>
             <div class="card-content">
                 <div class="card-text">

@@ -23,5 +23,10 @@
   },
   "stock": 5,
   "monthly_rent": 20,
-  "buyout_price": 379
+  "buyout_price": 379,
+  "glow": [
+    40,
+    24,
+    30
+  ]
 }

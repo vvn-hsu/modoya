@@ -245,6 +245,20 @@ a { color: inherit; }
     font: inherit; font-weight: 600; cursor: pointer;
 }
 
+/* ---------- Light Off / Light On (whole site) ---------- */
+/* Light On swaps each product photo for a dark-room version lit by a warm or white light
+   (rendered by the server: /Pictures/<file>?light=warm|white). */
+img[data-light-img] { transition: opacity 0.25s ease; }
+body.lights-on .img-container, body.lights-on .pick-img, body.lights-on .related-card .lightable { background-color: #1b1b1b; }
+
+.switch { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; cursor: pointer; user-select: none; }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.switch-track { width: 46px; height: 26px; border-radius: 13px; background: #d6d6d6; position: relative; transition: background 0.2s; flex-shrink: 0; }
+.switch-track::after { content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+.switch input:checked + .switch-track { background: #b8860b; }
+.switch input:checked + .switch-track::after { transform: translateX(20px); }
+.switch input:focus-visible + .switch-track { outline: 2px solid var(--accent-purple); outline-offset: 2px; }
+
 /* ---------- Style Analyzer ---------- */
 #open-analyzer-btn {
     position: fixed; bottom: 30px; right: 30px; background: #111; color: white; border: none;

@@ -115,7 +115,39 @@ CROP_BY_FILENAME = {
     for item in ALL_FURNITURE_ITEMS if item['metadata'].get('crop')
 }
 
-def compress_image(path, max_size, crop=None):
+GLOW_BY_FILENAME = {
+    item['image_path'].replace('\\', '/').split('/')[-1]: item['metadata'].get('glow')
+    for item in ALL_FURNITURE_ITEMS
+}
+DEFAULT_GLOW = (50, 40, 44)  # furniture: a pool of light from above, centred on the piece
+LIGHT_TINT = {'warm': (255, 212, 160), 'white': (232, 240, 255)}
+GLOW_COLOR = {'warm': (255, 170, 80), 'white': (200, 218, 255)}
+
+def soft_ellipse(size, cx, cy, rx, ry, blur, strength=255):
+    """A blurred ellipse mask, so light fades out with no hard edge."""
+    from PIL import Image, ImageDraw, ImageFilter
+    mask = Image.new('L', size, 0)
+    ImageDraw.Draw(mask).ellipse([cx - rx, cy - ry, cx + rx, cy + ry], fill=strength)
+    return mask.filter(ImageFilter.GaussianBlur(max(1, blur)))
+
+def light_on(im, glow, color):
+    """The Light On view: the room goes dark; the area the light reaches keeps its colour."""
+    from PIL import Image, ImageChops, ImageEnhance
+    w, h = im.size
+    x, y, r = glow
+    cx, cy, rad = w * x / 100, h * y / 100, max(w, h) * r / 100
+    dark = ImageEnhance.Color(ImageEnhance.Brightness(im).enhance(0.2)).enhance(0.7)
+    lit = ImageChops.multiply(ImageEnhance.Brightness(im).enhance(1.06), Image.new('RGB', im.size, LIGHT_TINT[color]))
+    mask = ImageChops.lighter(
+        soft_ellipse(im.size, cx, cy, rad * 0.62, rad * 0.62, rad * 0.42),
+        soft_ellipse(im.size, cx, h * 0.88, w * 0.3, h * 0.07, h * 0.06, strength=150),
+    )
+    out = Image.composite(lit, dark, mask)
+    halo_mask = soft_ellipse(im.size, cx, cy, rad * 0.16, rad * 0.16, rad * 0.22, strength=150)
+    halo = Image.composite(Image.new('RGB', im.size, GLOW_COLOR[color]), Image.new('RGB', im.size, 0), halo_mask)
+    return ImageChops.screen(out, halo)
+
+def compress_image(path, max_size, crop=None, light=None, glow=None):
     from PIL import Image
 
     with Image.open(path) as im:
@@ -124,6 +156,8 @@ def compress_image(path, max_size, crop=None):
             w, h = im.size
             im = im.crop((int(crop[0] * w), int(crop[1] * h), int(crop[2] * w), int(crop[3] * h)))
         im.thumbnail((max_size, max_size))
+        if light in LIGHT_TINT:
+            im = light_on(im, glow or DEFAULT_GLOW, light)
         buf = io.BytesIO()
         im.save(buf, 'WEBP', quality=IMAGE_QUALITY, method=4)
     return buf.getvalue()
@@ -138,9 +172,13 @@ def serve_pictures(filename):
     # The homepage hero shows a product photo larger and uncropped.
     max_size = BANNER_IMAGE_MAX if filename.startswith('banner') or view == 'hero' else PRODUCT_IMAGE_MAX
     crop = None if view in ('full', 'hero') else CROP_BY_FILENAME.get(filename)
-    key = (path, os.path.getmtime(path), max_size, tuple(crop) if crop else None)
+    # ?light=warm|white returns the Light On version (not for the banner or uncropped room photos)
+    light = request.args.get('light')
+    light = light if light in LIGHT_TINT and not filename.startswith('banner') else None
+    glow = GLOW_BY_FILENAME.get(filename) if view is None else None
+    key = (path, os.path.getmtime(path), max_size, tuple(crop) if crop else None, light)
     if key not in _compressed_cache:
-        _compressed_cache[key] = compress_image(path, max_size, crop)
+        _compressed_cache[key] = compress_image(path, max_size, crop, light, glow)
 
     response = make_response(_compressed_cache[key])
     response.headers['Content-Type'] = 'image/webp'

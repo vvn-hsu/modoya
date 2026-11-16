@@ -151,6 +151,51 @@
     });
 
     // ------------------------------------------------------------------
+    // Light Off / Light On (every product photo, every page)
+    // ------------------------------------------------------------------
+    const lightState = { on: false, color: 'warm' };
+    try {
+        lightState.on = localStorage.getItem('modoya-light') === 'on';
+        lightState.color = localStorage.getItem('modoya-light-color') === 'white' ? 'white' : 'warm';
+    } catch (e) { /* storage unavailable: start with the light off */ }
+
+    const lightSrc = (img) => {
+        const base = img.dataset.baseSrc || img.getAttribute('src');
+        img.dataset.baseSrc = base;
+        return lightState.on ? `${base}${base.includes('?') ? '&' : '?'}light=${lightState.color}` : base;
+    };
+    const applyLight = () => {
+        $$('img[data-light-img]').forEach((img) => {
+            const src = lightSrc(img);
+            if (img.getAttribute('src') !== src) img.setAttribute('src', src);
+        });
+        document.body.classList.toggle('lights-on', lightState.on);
+        document.body.classList.toggle('light-white', lightState.color === 'white');
+        $$('[data-light-switch]').forEach((input) => {
+            input.checked = lightState.on;
+            const label = input.closest('.switch').querySelector('[data-light-label]');
+            if (label) label.textContent = lightState.on ? 'Light On' : 'Light Off';
+        });
+        // With the light off, neither colour is selected and both are disabled.
+        $$('[data-light-color]').forEach((b) => {
+            b.disabled = !lightState.on;
+            b.setAttribute('aria-pressed', String(lightState.on && b.dataset.lightColor === lightState.color));
+        });
+        try {
+            localStorage.setItem('modoya-light', lightState.on ? 'on' : 'off');
+            localStorage.setItem('modoya-light-color', lightState.color);
+        } catch (e) { /* not saved; the page still works */ }
+    };
+    $$('[data-light-switch]').forEach((input) => input.addEventListener('change', () => {
+        lightState.on = input.checked; applyLight();
+    }));
+    $$('[data-light-color]').forEach((b) => b.addEventListener('click', () => {
+        lightState.color = b.dataset.lightColor; applyLight();
+    }));
+    applyLight();
+    window.modoyaApplyLight = applyLight;
+
+    // ------------------------------------------------------------------
     // Style Analyzer
     // ------------------------------------------------------------------
     const overlay = $('#analyzer-overlay');
@@ -218,7 +263,7 @@
 
     const pickCard = (item) => `
         <div class="pick-card">
-            <a href="${escapeHtml(item.url)}" class="pick-img"><img src="${escapeHtml(item.image_url)}" alt="" loading="lazy"></a>
+            <a href="${escapeHtml(item.url)}" class="pick-img lightable"><img data-light-img src="${escapeHtml(item.image_url)}" alt="" loading="lazy"></a>
             <div class="pick-body">
                 <a href="${escapeHtml(item.url)}" class="pick-name">${escapeHtml(item.name)}</a>
                 <div class="pick-meta">${escapeHtml(item.style)} · ${money(item.monthly_rent)}/mo</div>
@@ -231,6 +276,7 @@
 
     const renderPicks = (container, items, emptyText) => {
         container.innerHTML = items.length ? items.map(pickCard).join('') : `<p class="calibrate-help">${escapeHtml(emptyText)}</p>`;
+        applyLight();
     };
 
     const renderDna = (dna) => {
