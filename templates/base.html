@@ -22,7 +22,7 @@
             </button>
             <a href="{{ url_for('index') }}#how-it-works" class="nav-item">How it works</a>
             <a href="{{ url_for('view_orders') }}" class="nav-item {% if request.endpoint == 'view_orders' %}nav-current{% endif %}">Orders</a>
-            <a href="{{ url_for('view_cart') }}" class="cart-badge">Cart ({{ cart_item_count }})</a>
+            <a href="{{ url_for('view_cart') }}" class="cart-badge" data-open-cart>Cart ({{ cart_item_count }})</a>
         </nav>
     </header>
 
@@ -54,20 +54,24 @@
 
     {% include '_analyzer.html' %}
 
-    <div id="mini-cart-overlay" role="status" aria-live="polite">
-        <div class="mini-cart-content">
-            <button type="button" class="mini-cart-close" aria-label="Close">&times;</button>
-            <span class="success-msg">Added to cart</span>
-            <div id="mini-cart-list"></div>
-            <div class="mini-cart-actions">
-                <button type="button" class="keep-shopping-btn">Keep Shopping</button>
-                <a href="{{ url_for('view_cart') }}" class="view-cart-btn">Checkout</a>
-            </div>
+    <div id="cart-drawer-backdrop" hidden></div>
+    <aside id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title" aria-hidden="true">
+        <button type="button" class="drawer-close" aria-label="Close cart">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
+        </button>
+        <h2 id="cart-drawer-title" class="drawer-title">Your Cart</h2>
+        <p class="drawer-message" id="drawer-message" role="status" aria-live="polite"></p>
+        <div class="drawer-items" id="drawer-items"></div>
+        <div class="drawer-footer" id="drawer-footer">
+            <p class="drawer-summary" id="drawer-summary"></p>
+            <a href="{{ url_for('view_cart') }}" class="drawer-checkout" id="drawer-checkout">Proceed to check out</a>
         </div>
-    </div>
+    </aside>
 
     <script>
         window.MODOYA = {
+            cartUrl: "{{ url_for('api_cart') }}",
+            rentalTerms: {{ rental_terms|map('list')|list|tojson }},
             analyzeUrl: "{{ url_for('analyze_style') }}",
             recommendUrl: "{{ url_for('api_style_recommendations') }}",
             samplePhotos: [

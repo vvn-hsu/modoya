@@ -14,34 +14,111 @@
     window.modoyaMoney = money;
 
     // ------------------------------------------------------------------
-    // Added-to-cart toast
+    // Cart drawer (slides in from the right)
     // ------------------------------------------------------------------
-    const toast = $('#mini-cart-overlay');
-    let toastTimer = null;
+    const drawer = $('#cart-drawer');
+    const backdrop = $('#cart-drawer-backdrop');
+    let lastFocus = null;
 
-    const hideToast = () => {
-        clearTimeout(toastTimer);
-        toast.style.display = 'none';
-    };
-    const scheduleHide = () => {
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(hideToast, 4000);
-    };
-    const showToast = (data) => {
-        $('.success-msg', toast).textContent = data.message;
-        $('#mini-cart-list').innerHTML = data.cart_preview.map((p) => `
-            <div class="mini-cart-item">
-                <img src="${escapeHtml(p.image_url)}" class="mini-cart-img" alt="">
-                <div class="mini-cart-info"><p>${escapeHtml(p.name)}</p><span>${escapeHtml(p.label)}</span></div>
-            </div>`).join('');
-        toast.style.display = 'block';
-        scheduleHide();
+    const updateBadges = (count) => $$('.cart-badge').forEach((b) => { b.textContent = `Cart (${count})`; });
+
+    const termOptions = (selected) => window.MODOYA.rentalTerms
+        .map(([key, , label]) => `<option value="${key}" ${key === selected ? 'selected' : ''}>${escapeHtml(label)}</option>`).join('');
+    const qtyOptions = (qty, max) => Array.from({ length: max }, (_, k) => k + 1)
+        .map((n) => `<option value="${n}" ${n === qty ? 'selected' : ''}>${n}</option>`).join('');
+
+    const renderDrawer = (data) => {
+        updateBadges(data.cart_item_count);
+        $('#drawer-message').textContent = data.message || '';
+        const list = $('#drawer-items');
+        if (!data.items.length) {
+            list.innerHTML = `<div class="drawer-empty"><p>Your cart is empty.</p>
+                <button type="button" class="drawer-keep-shopping">Keep shopping</button></div>`;
+            $('#drawer-footer').hidden = true;
+            return;
+        }
+        $('#drawer-footer').hidden = false;
+        list.innerHTML = data.items.map((it) => {
+            const id = escapeHtml(it.id);
+            const rent = it.order_type === 'RENT';
+            return `
+            <div class="drawer-item" data-id="${id}">
+                <div class="drawer-item-media">
+                    <a href="${escapeHtml(it.url)}"><img src="${escapeHtml(it.image_url)}" alt="${escapeHtml(it.name)}"></a>
+                    <button type="button" class="drawer-remove">Remove</button>
+                </div>
+                <div class="drawer-item-info">
+                    <a href="${escapeHtml(it.url)}" class="drawer-item-name">${escapeHtml(it.name)}</a>
+                    <label class="drawer-label" for="dq-${id}">Quantity</label>
+                    <select id="dq-${id}" class="drawer-select" data-field="qty">${qtyOptions(it.qty, it.max_qty)}</select>
+                    ${rent ? `
+                    <label class="drawer-label" for="dt-${id}">Rental length</label>
+                    <select id="dt-${id}" class="drawer-select drawer-select-wide" data-field="term">${termOptions(it.term)}</select>
+                    <p class="drawer-price">${money(it.monthly_rent)}/mo · ${money(it.total_cost)} total</p>` : `
+                    <p class="drawer-label">Buy</p>
+                    <p class="drawer-price">Buyout price ${money(it.buyout_price)}${it.qty > 1 ? ` × ${it.qty} = ${money(it.total_cost)}` : ''}</p>`}
+                </div>
+            </div>`;
+        }).join('');
+        $('#drawer-summary').textContent = `Due today: ${money(data.due_today)}`
+            + (data.rent_total ? ` · Rental term total: ${money(data.rent_total)}` : '')
+            + (data.both_types ? '. Rentals and purchases check out separately.' : '');
+        $('#drawer-checkout').href = data.checkout_url;
     };
 
-    $('.mini-cart-close', toast).addEventListener('click', hideToast);
-    $('.keep-shopping-btn', toast).addEventListener('click', hideToast);
-    toast.addEventListener('mouseenter', () => clearTimeout(toastTimer));
-    toast.addEventListener('mouseleave', scheduleHide);
+    const openDrawer = (data) => {
+        if (data) renderDrawer(data);
+        if (!drawer.classList.contains('open')) lastFocus = document.activeElement;
+        backdrop.hidden = false;
+        drawer.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(() => { drawer.classList.add('open'); backdrop.classList.add('open'); });
+        document.body.classList.add('modal-open');
+        $('.drawer-close', drawer).focus();
+    };
+    const closeDrawer = () => {
+        drawer.classList.remove('open');
+        backdrop.classList.remove('open');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        setTimeout(() => { backdrop.hidden = true; }, 250);
+        if (lastFocus) lastFocus.focus();
+    };
+
+    const updateLine = async (id, body) => {
+        const res = await fetch(`/api/cart/${encodeURIComponent(id)}`, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+        });
+        renderDrawer(await res.json());
+    };
+
+    $('.drawer-close', drawer).addEventListener('click', closeDrawer);
+    backdrop.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+    });
+    $$('[data-open-cart]').forEach((link) => link.addEventListener('click', async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch(window.MODOYA.cartUrl);
+            openDrawer(await res.json());
+        } catch (err) {
+            location.href = link.href;
+        }
+    }));
+    drawer.addEventListener('click', async (e) => {
+        if (e.target.closest('.drawer-keep-shopping')) { closeDrawer(); return; }
+        const remove = e.target.closest('.drawer-remove');
+        if (remove) await updateLine(remove.closest('.drawer-item').dataset.id, { remove: true });
+    });
+    drawer.addEventListener('change', async (e) => {
+        const select = e.target.closest('.drawer-select');
+        if (!select) return;
+        const id = select.closest('.drawer-item').dataset.id;
+        const field = select.dataset.field;
+        await updateLine(id, { [field]: field === 'qty' ? Number(select.value) : select.value });
+        const again = $(`.drawer-item[data-id="${CSS.escape(id)}"] [data-field="${field}"]`);
+        if (again) again.focus();
+    });
 
     // The rental term comes from the button itself, or from the page's term picker.
     const termFor = (btn) => btn.dataset.term || ($('[data-page-term]') ? $('[data-page-term]').value : '12m');
@@ -61,8 +138,7 @@
             const res = await fetch(`/api/add_to_cart/${encodeURIComponent(btn.dataset.itemId)}?${params}`, { method: 'POST' });
             const data = await res.json();
             if (data.success) {
-                $$('.cart-badge').forEach((b) => { b.textContent = `Cart (${data.cart_item_count})`; });
-                showToast(data);
+                openDrawer(data);
             } else {
                 alert(data.error || 'Could not add this item.');
             }

@@ -58,7 +58,7 @@ def nice_date(value):
 def inject_globals():
     cart = session.get('cart', {})
     return {
-        'cart_item_count': len(cart) if isinstance(cart, dict) else 0,
+        'cart_item_count': sum(int(v.get('qty', 1)) for v in cart.values() if isinstance(v, dict)) if isinstance(cart, dict) else 0,
         'rental_terms': RENTAL_TERMS,
         'default_term': DEFAULT_TERM,
     }
@@ -188,6 +188,13 @@ def style_analyzer_redirect():
 # Cart
 # ---------------------------------------------------------------------------
 
+MAX_QTY = 5
+
+def max_quantity(meta):
+    """How many of one product can go in the cart: up to 5, and no more than the stock."""
+    stock = meta.get('stock')
+    return MAX_QTY if stock is None else max(1, min(MAX_QTY, stock))
+
 def get_full_cart_details():
     rent_items = []
     buy_items = []
@@ -218,22 +225,27 @@ def get_full_cart_details():
         order_type = cart_item_data.get('order_type', 'RENT')
 
         details = product_card(item)
+        max_qty = max_quantity(item['metadata'])
+        qty = max(1, min(int(cart_item_data.get('qty', 1) or 1), max_qty))
         details.update({
             'term': term,
             'term_label': term_label(term),
             'order_type': order_type,
+            'qty': qty,
+            'max_qty': max_qty,
         })
 
         if order_type == 'BUY':
-            details['total_cost'] = details['buyout_price']
+            details['total_cost'] = details['buyout_price'] * qty
             buy_total += details['total_cost']
             buy_items.append(details)
         else:
-            details['total_cost'] = rental_total(item['metadata'], term)
+            details['total_cost'] = rental_total(item['metadata'], term) * qty
+            details['line_monthly'] = details['monthly_rent'] * qty
             # The first payment covers one month, or half a month for a two-week rental.
-            details['due_today'] = details['monthly_rent'] * min(term_months(term), 1)
+            details['due_today'] = details['line_monthly'] * min(term_months(term), 1)
             rent_total += details['total_cost']
-            rent_monthly_total += details['monthly_rent']
+            rent_monthly_total += details['line_monthly']
             rent_due_today += details['due_today']
             rent_items.append(details)
 
@@ -250,6 +262,32 @@ def get_full_cart_details():
 def view_cart():
     return render_template('cart.html', **get_full_cart_details())
 
+def cart_json(message=None):
+    """The cart as the drawer needs it."""
+    data = get_full_cart_details()
+    lines = data['rent_items'] + data['buy_items']
+    keys = ('id', 'name', 'url', 'image_url', 'order_type', 'qty', 'max_qty', 'term', 'term_label',
+            'monthly_rent', 'buyout_price', 'total_cost', 'in_stock')
+    if data['rent_items'] and data['buy_items']:
+        checkout_url = url_for('view_cart')  # rentals and purchases check out separately
+    elif data['rent_items']:
+        checkout_url = url_for('checkout_review', cart_type='rent')
+    elif data['buy_items']:
+        checkout_url = url_for('checkout_review', cart_type='buy')
+    else:
+        checkout_url = None
+    return {
+        "success": True,
+        "message": message,
+        "cart_item_count": sum(l['qty'] for l in lines),
+        "items": [{k: l[k] for k in keys} for l in lines],
+        "rent_total": data['rent_total'],
+        "due_today": data['rent_due_today'] + data['buy_total'],
+        "buy_total": data['buy_total'],
+        "checkout_url": checkout_url,
+        "both_types": bool(data['rent_items'] and data['buy_items']),
+    }
+
 @app.route('/api/add_to_cart/<item_id>', methods=['POST'])
 def api_add_to_cart(item_id):
     item = get_item_by_id(ALL_FURNITURE_ITEMS, item_id)
@@ -265,32 +303,45 @@ def api_add_to_cart(item_id):
 
     if 'cart' not in session:
         session['cart'] = {}
-    session['cart'][str(item_id)] = {'term': term, 'order_type': order_type}
+    key = str(item_id)
+    existing = session['cart'].get(key)
+    qty = 1
+    if isinstance(existing, dict) and existing.get('order_type', 'RENT') == order_type:
+        # Adding the same product again adds one more.
+        qty = min(int(existing.get('qty', 1)) + 1, max_quantity(item['metadata']))
+    session['cart'][key] = {'term': term, 'order_type': order_type, 'qty': qty}
     session.modified = True
 
-    cart_data = get_full_cart_details()
-    all_items = cart_data['rent_items'] + cart_data['buy_items']
-    cart_preview = [
-        {
-            'name': i['name'],
-            'image_url': i['image_url'],
-            'label': f"Rent · {i['term_label']}" if i['order_type'] == 'RENT' else "Buy",
-        }
-        for i in all_items[:3]
-    ]
-
     name = product_name(item['metadata'])
-    if order_type == 'BUY':
-        message = f"Added {name} to your cart (Buy)."
-    else:
-        message = f"Added {name} to your cart (Rent, {term_label(term)})."
+    message = f"Added {name} (Buy)." if order_type == 'BUY' else f"Added {name} (Rent, {term_label(term)})."
+    return jsonify(cart_json(message))
 
-    return jsonify({
-        "success": True,
-        "message": message,
-        "cart_item_count": len(all_items),
-        "cart_preview": cart_preview,
-    })
+@app.route('/api/cart')
+def api_cart():
+    return jsonify(cart_json())
+
+@app.route('/api/cart/<item_id>', methods=['POST'])
+def api_update_cart(item_id):
+    """Change quantity or rental length, or remove a line, from the cart drawer."""
+    cart = session.get('cart', {})
+    if item_id in cart and isinstance(cart[item_id], dict):
+        data = request.get_json(silent=True) or {}
+        entry = cart[item_id]
+        if data.get('remove'):
+            del cart[item_id]
+        else:
+            if 'qty' in data:
+                item = get_item_by_id(ALL_FURNITURE_ITEMS, item_id)
+                try:
+                    entry['qty'] = max(1, min(int(data['qty']), max_quantity(item['metadata'])))
+                except (TypeError, ValueError):
+                    pass
+            if 'term' in data:
+                entry['term'] = normalize_term(data['term'])
+                entry.pop('duration', None)
+        session['cart'] = cart
+        session.modified = True
+    return jsonify(cart_json())
 
 @app.route('/update_cart/<item_id>', methods=['POST'])
 def update_cart(item_id):
@@ -302,6 +353,12 @@ def update_cart(item_id):
 
     if action == 'remove':
         del session['cart'][item_id]
+    elif action == 'update_qty':
+        item = get_item_by_id(ALL_FURNITURE_ITEMS, item_id)
+        try:
+            entry['qty'] = max(1, min(int(request.form.get('qty')), max_quantity(item['metadata'])))
+        except (TypeError, ValueError):
+            pass
     elif action == 'update_term':
         entry['term'] = normalize_term(request.form.get('term'))
         entry.pop('duration', None)
@@ -454,6 +511,7 @@ def place_order():
         'items': [
             {
                 'id': i['id'],
+                'qty': i['qty'],
                 'term': i['term'] if cart_type == 'RENT' else None,
                 'rent': i['monthly_rent'],
                 'buy': i['buyout_price'],
@@ -530,9 +588,11 @@ def build_order_view(order):
         card = product_card(item) if item else {'name': 'Item no longer listed', 'image_url': '', 'url': '#'}
         # Prices come from the product data, so every page shows the same price for a product.
         # The values stored with the order are only used if the product is no longer listed.
-        rent = card['monthly_rent'] if item else entry['rent']
-        buy = card['buyout_price'] if item else entry['buy']
-        line = {'index': len(lines), 'product': card, 'rent': rent, 'buy': buy}
+        qty = int(entry.get('qty', 1))
+        # rent and buy are for the whole line (unit price x quantity).
+        rent = (card['monthly_rent'] if item else entry['rent']) * qty
+        buy = (card['buyout_price'] if item else entry['buy']) * qty
+        line = {'index': len(lines), 'product': card, 'rent': rent, 'buy': buy, 'qty': qty}
 
         if is_rental:
             end = rental_end(delivery, entry['term'], entry['ext'])

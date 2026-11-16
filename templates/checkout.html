@@ -140,7 +140,7 @@
             <div class="summary-item">
                 <img src="{{ item.image_url }}" alt="">
                 <div>
-                    <div class="name">{{ item.name }}</div>
+                    <div class="name">{{ item.name }}{% if item.qty > 1 %} × {{ item.qty }}{% endif %}</div>
                     {% if cart_type == 'RENT' %}
                     <div class="sub">{{ item.monthly_rent|money }}/mo · {{ item.term_label }}</div>
                     {% else %}

@@ -29,6 +29,7 @@
     .order-line img { width: 88px; height: 88px; border-radius: 10px; object-fit: contain; background: #f0f0f0; border: 1px solid #eee; display: block; }
     .line-name { font-weight: 700; font-size: 16px; text-decoration: none; }
     .line-name:hover { text-decoration: underline; }
+    .line-qty { font-weight: 600; color: #444; }
     .line-facts { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; gap: 6px 28px; font-size: 14px; margin: 10px 0; }
     .line-facts span { color: #5c5c5c; display: block; font-size: 12px; }
     .line-status { font-size: 14px; font-weight: 600; }
@@ -104,7 +105,7 @@
         <div class="order-line">
             <a href="{{ line.product.url }}"><img src="{{ line.product.image_url }}" alt=""></a>
             <div>
-                <a href="{{ line.product.url }}" class="line-name">{{ line.product.name }}</a>
+                <a href="{{ line.product.url }}" class="line-name">{{ line.product.name }}</a>{% if line.qty > 1 %} <span class="line-qty">× {{ line.qty }}</span>{% endif %}
                 <div class="line-facts">
                     {% if order.type == 'RENT' %}
                     <div><span>Term</span>{{ line.term_label }}</div>

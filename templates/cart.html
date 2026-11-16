@@ -76,9 +76,16 @@
             <div class="item-details">
                 <h3><a href="{{ item.url }}">{{ item.name }}</a></h3>
                 <p>{{ item.style }} · {{ item.category }}</p>
-                <p class="line-price">{{ item.monthly_rent|money }}/mo × {{ item.term_label }} = {{ item.total_cost|money }}</p>
+                <p class="line-price">{{ item.monthly_rent|money }}/mo × {{ item.term_label }}{% if item.qty > 1 %} × {{ item.qty }}{% endif %} = {{ item.total_cost|money }}</p>
             </div>
             <div class="controls">
+                <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" class="term-form">
+                    <label for="qty-{{ item.id }}" style="font-size:14px; color:#444;">Quantity</label>
+                    <select name="qty" id="qty-{{ item.id }}" onchange="this.form.submit()">
+                        {% for n in range(1, item.max_qty + 1) %}<option value="{{ n }}" {% if n == item.qty %}selected{% endif %}>{{ n }}</option>{% endfor %}
+                    </select>
+                    <input type="hidden" name="action" value="update_qty">
+                </form>
                 <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" class="term-form">
                     <label for="term-{{ item.id }}" style="font-size:14px; color:#555;">Rental term</label>
                     <select name="term" id="term-{{ item.id }}" onchange="this.form.submit()">
@@ -127,9 +134,16 @@
             <div class="item-details">
                 <h3><a href="{{ item.url }}">{{ item.name }}</a></h3>
                 <p>{{ item.style }} · {{ item.category }}</p>
-                <p class="line-price">Buyout price: {{ item.buyout_price|money }}</p>
+                <p class="line-price">Buyout price: {{ item.buyout_price|money }}{% if item.qty > 1 %} × {{ item.qty }} = {{ item.total_cost|money }}{% endif %}</p>
             </div>
             <div class="controls">
+                <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST" class="term-form">
+                    <label for="qty-{{ item.id }}" style="font-size:14px; color:#444;">Quantity</label>
+                    <select name="qty" id="qty-{{ item.id }}" onchange="this.form.submit()">
+                        {% for n in range(1, item.max_qty + 1) %}<option value="{{ n }}" {% if n == item.qty %}selected{% endif %}>{{ n }}</option>{% endfor %}
+                    </select>
+                    <input type="hidden" name="action" value="update_qty">
+                </form>
                 <div class="action-row">
                     <form action="{{ url_for('update_cart', item_id=item.id) }}" method="POST">
                         <button type="submit" name="action" value="set_rent" class="btn btn-secondary">Switch to Rent</button>
