@@ -147,7 +147,16 @@ def light_on(im, glow, color):
     halo = Image.composite(Image.new('RGB', im.size, GLOW_COLOR[color]), Image.new('RGB', im.size, 0), halo_mask)
     return ImageChops.screen(out, halo)
 
-def compress_image(path, max_size, crop=None, light=None, glow=None):
+def night_photo(path):
+    """The real Light On photo for a product, saved next to it as <name>-night.png/.jpg/.webp."""
+    stem = os.path.splitext(path)[0]
+    for ext in IMAGE_EXTENSIONS:
+        candidate = f"{stem}-night{ext}"
+        if os.path.isfile(candidate):
+            return candidate
+    return None
+
+def compress_image(path, max_size, crop=None, light=None, glow=None, cool=False):
     from PIL import Image
 
     with Image.open(path) as im:
@@ -158,6 +167,10 @@ def compress_image(path, max_size, crop=None, light=None, glow=None):
         im.thumbnail((max_size, max_size))
         if light in LIGHT_TINT:
             im = light_on(im, glow or DEFAULT_GLOW, light)
+        if cool:
+            # White light on a real night photo: shift its warm light towards neutral white.
+            from PIL import ImageChops
+            im = ImageChops.multiply(im, Image.new('RGB', im.size, (225, 236, 255)))
         buf = io.BytesIO()
         im.save(buf, 'WEBP', quality=IMAGE_QUALITY, method=4)
     return buf.getvalue()
@@ -176,9 +189,16 @@ def serve_pictures(filename):
     light = request.args.get('light')
     light = light if light in LIGHT_TINT and not filename.startswith('banner') else None
     glow = GLOW_BY_FILENAME.get(filename) if view is None else None
-    key = (path, os.path.getmtime(path), max_size, tuple(crop) if crop else None, light)
-    if key not in _compressed_cache:
-        _compressed_cache[key] = compress_image(path, max_size, crop, light, glow)
+    night = night_photo(path) if light else None
+    if night:
+        # A real night photo exists: use it (same crop) instead of the simulated light.
+        key = (night, os.path.getmtime(night), max_size, tuple(crop) if crop else None, 'night', light)
+        if key not in _compressed_cache:
+            _compressed_cache[key] = compress_image(night, max_size, crop, cool=(light == 'white'))
+    else:
+        key = (path, os.path.getmtime(path), max_size, tuple(crop) if crop else None, light)
+        if key not in _compressed_cache:
+            _compressed_cache[key] = compress_image(path, max_size, crop, light, glow)
 
     response = make_response(_compressed_cache[key])
     response.headers['Content-Type'] = 'image/webp'
