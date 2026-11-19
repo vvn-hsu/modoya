@@ -18,7 +18,7 @@
             <a href="{{ url_for('index') }}#catalogue" class="nav-item">Shop</a>
             <button type="button" class="nav-item nav-style-link open-analyzer">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"/></svg>
-                Find My Style
+                Style Analyzer
             </button>
             <a href="{{ url_for('index') }}#how-it-works" class="nav-item">How it works</a>
             <a href="{{ url_for('view_orders') }}" class="nav-item {% if request.endpoint == 'view_orders' %}nav-current{% endif %}">Orders</a>
@@ -39,7 +39,7 @@
             <div class="footer-col">
                 <h4>Shop</h4>
                 <a href="{{ url_for('index') }}#catalogue">Browse collection</a>
-                <button type="button" class="link-button open-analyzer">Find My Style</button>
+                <button type="button" class="link-button open-analyzer">Style Analyzer</button>
                 <a href="{{ url_for('view_cart') }}">Cart</a>
             </div>
             <div class="footer-col">

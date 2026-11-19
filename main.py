@@ -240,7 +240,7 @@ def product_detail_plural(item_id):
 
 @app.route('/style-analyzer')
 def style_analyzer_redirect():
-    return redirect(url_for('index') + '#find-my-style')
+    return redirect(url_for('index') + '#style-analyzer')
 
 # ---------------------------------------------------------------------------
 # Cart

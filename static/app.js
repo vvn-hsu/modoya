@@ -221,7 +221,7 @@
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && overlay.style.display === 'flex') closeAnalyzer();
     });
-    if (location.hash === '#find-my-style') openAnalyzer();
+    if (location.hash === '#style-analyzer' || location.hash === '#find-my-style') openAnalyzer();
 
     const refreshAnalyzeButton = () => {
         const count = Object.values(files).filter(Boolean).length;
