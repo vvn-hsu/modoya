@@ -215,15 +215,51 @@ def serve_pictures(filename):
 # Catalogue and product pages
 # ---------------------------------------------------------------------------
 
+# Curated groups shown as homepage slides; the slide button filters the catalogue to the group.
+COLLECTIONS = [
+    {
+        'key': 'thanksgiving', 'eyebrow': 'Thanksgiving',
+        'title': 'Host the whole table.',
+        'text': 'Dining tables, extra chairs and sideboards for the holiday meal. Rent for a month, send them back after.',
+        'cta': 'Shop Thanksgiving picks',
+        'ids': [97, 24, 12, 87, 95, 45, 73, 31, 48, 10, 92], 'cover': [97, 31, 10],
+    },
+    {
+        'key': 'christmas', 'eyebrow': 'Christmas',
+        'title': 'A warm room for winter.',
+        'text': 'Velvet and leather sofas, cosy armchairs and warm lamps for the holidays.',
+        'cta': 'Shop Christmas picks',
+        'ids': [74, 19, 70, 88, 80, 93, 49, 0, 52, 84, 8], 'cover': [74, 0, 93],
+    },
+    {
+        'key': 'budget', 'eyebrow': 'Under $22/mo',
+        'title': 'Small prices, real pieces.',
+        'text': 'Our lowest monthly rents: lamps and tables from $17 a month.',
+        'cta': 'Shop under $22/mo',
+        'max_rent': 22, 'cover': [45, 52, 27],
+    },
+]
+
+def collections_for(meta):
+    keys = []
+    for c in COLLECTIONS:
+        if meta['row_id'] in c.get('ids', []) or ('max_rent' in c and calculate_rent(meta) <= c['max_rent']):
+            keys.append(c['key'])
+    return ' '.join(keys)
+
 @app.route('/')
 def index():
     if 'cart' not in session:
         session['cart'] = {}
 
-    items = [product_card(item) for item in ALL_FURNITURE_ITEMS]
+    items = [dict(product_card(item), collections=collections_for(item['metadata'])) for item in ALL_FURNITURE_ITEMS]
     categories = sorted({i['category'] for i in items})
     styles = sorted({i['style'] for i in items})
-    return render_template('index.html', items=items, categories=categories, styles=styles)
+    slides = [
+        dict(c, cover_images=[image_url(get_item_by_id(ALL_FURNITURE_ITEMS, i)) for i in c['cover']])
+        for c in COLLECTIONS
+    ]
+    return render_template('index.html', items=items, categories=categories, styles=styles, slides=slides)
 
 @app.route('/product/<item_id>')
 def product_detail(item_id):

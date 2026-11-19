@@ -3,27 +3,60 @@
 
 {% block styles %}
 <style>
-    /* Text on the left, the whole banner on the right: nothing is cropped and the hero stays short. */
-    .hero {
-        display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.6fr); gap: 44px; align-items: center;
+    /* Homepage carousel: each slide is text on the left, a picture on the right. */
+    .hero-carousel { position: relative; }
+    .carousel-track {
+        display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+        scrollbar-width: none; border-radius: var(--border-radius);
     }
-    .hero .banner-container { order: 2; }
-    .banner-container {
-        position: relative;
-        border-radius: var(--border-radius);
-        overflow: hidden;
-        box-shadow: var(--card-shadow);
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .slide {
+        flex: 0 0 100%; scroll-snap-align: start; display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.6fr); gap: 44px; align-items: center;
+        padding: 4px 64px 4px 4px; box-sizing: border-box;
     }
-    .banner-image { width: 100%; height: auto; display: block; }
-    .hero-cta {
-        display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
+    .slide-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; padding-left: 4px; }
+    .slide-eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-purple); }
+    .slide-title { font-size: 34px; line-height: 1.15; margin: 0; font-weight: 800; }
+    .slide-title-serif { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; }
+    .slide-text { margin: 0; color: var(--text-secondary); font-size: 16px; line-height: 1.5; }
+    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+    .hero-buttons .btn { flex: none; padding: 13px 24px; font-size: 15px; }
+    .slide-visual { border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--card-shadow); aspect-ratio: 1280 / 686; background: #f3f1ee; }
+    .banner-image { width: 100%; height: 100%; display: block; object-fit: contain; }
+    .slide-collage { display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; padding: 8px; }
+    .slide-collage img { width: 100%; height: 100%; object-fit: contain; background: #fff; border-radius: 10px; display: block; min-height: 0; }
+    .slide-collage img:first-child { grid-row: span 2; }
+    .carousel-arrow {
+        position: absolute; top: calc(50% - 26px); width: 40px; height: 40px; border-radius: 50%;
+        border: 1px solid #ddd; background: rgba(255, 255, 255, 0.95); font-size: 24px; line-height: 1;
+        cursor: pointer; color: #111; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
-    .hero-cta h1 { font-family: 'Playfair Display', serif; font-size: 40px; margin: 0; line-height: 1.15; }
-    .hero-cta p { margin: 12px 0 0; color: var(--text-secondary); font-size: 17px; line-height: 1.5; }
-    .hero-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
-    .hero-buttons .btn { flex: none; padding: 14px 26px; font-size: 15px; }
+    .carousel-arrow:hover { background: #fff; border-color: #bbb; }
+    .carousel-arrow.prev { right: 0; top: calc(50% - 72px); }
+    .carousel-arrow.next { right: 0; top: calc(50% - 20px); }
+    .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+    .carousel-dot { width: 9px; height: 9px; border-radius: 50%; border: none; background: #cfcfcf; padding: 0; cursor: pointer; }
+    .carousel-dot[aria-selected="true"] { background: #111; width: 24px; border-radius: 5px; }
+    .result-line { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .collection-chip {
+        background: #f6f0ff; color: #4a00b4; border: 1px solid #e2d4ff; border-radius: 20px; padding: 5px 12px;
+        font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .collection-chip:hover { background: #ece0ff; }
+    @media (max-width: 960px) {
+        .slide { grid-template-columns: 1fr; gap: 16px; padding: 4px; }
+        .slide-visual { order: -1; }
+        .carousel-arrow { display: none; }
+    }
+    @media (max-width: 760px) {
+        .slide-title { font-size: 26px; }
+        .slide-title-serif { font-size: 28px; }
+        .hero-buttons { width: 100%; }
+        .hero-buttons .btn { flex: 1; padding: 13px 10px; white-space: nowrap; }
+    }
 
-    .section { margin-top: 72px; scroll-margin-top: 24px; }
+    .section { margin-top: 56px; scroll-margin-top: 24px; }
     .section-heading { font-size: 26px; margin: 0 0 8px; }
     .section-sub { color: var(--text-secondary); margin: 0 0 24px; }
 
@@ -69,61 +102,54 @@
     .faq p { color: #555; line-height: 1.6; margin: 10px 0 0; }
 
     @media (max-width: 960px) {
-        .hero { grid-template-columns: 1fr; gap: 24px; }
-        .hero .banner-container { order: 0; }
         .catalogue-toolbar { grid-template-columns: 1fr 1fr; }
         .catalogue-toolbar .search-field { grid-column: 1 / -1; }
     }
     @media (max-width: 760px) {
-        .hero { grid-template-columns: 1fr; gap: 20px; }
-        .hero .banner-container { order: 0; }
-        .hero-cta { gap: 18px; }
-        .hero-cta h1 { font-size: 28px; }
-        .hero-buttons { width: 100%; }
-        .hero-buttons .btn { flex: 1; padding: 14px 10px; white-space: nowrap; }
         .steps, .faq { grid-template-columns: 1fr; }
         .section { margin-top: 48px; }
     </style>
 {% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="banner-container">
-        <img src="{{ url_for('serve_pictures', filename='banner.jpg') }}" alt="A wooden side table and teal armchair in a living room" class="banner-image">
+<section class="hero-carousel" aria-roledescription="carousel" aria-label="Featured">
+    <div class="carousel-track" id="carousel-track">
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="1 of {{ slides|length + 1 }}">
+            <div class="slide-copy">
+                <h1 class="slide-title slide-title-serif">Furnish your place by the month.</h1>
+                <p class="slide-text">Rent from 2 weeks to 24 months, buy it any time, or send it back with free pickup.</p>
+                <div class="hero-buttons">
+                    <button type="button" class="btn btn-accent open-analyzer">Style Analyzer</button>
+                    <a href="#catalogue" class="btn btn-primary">Browse Collection</a>
+                </div>
+            </div>
+            <div class="slide-visual">
+                <img src="{{ url_for('serve_pictures', filename='banner.jpg') }}" alt="A wooden side table and teal armchair in a living room" class="banner-image">
+            </div>
+        </div>
+        {% for s in slides %}
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="{{ loop.index + 1 }} of {{ slides|length + 1 }}">
+            <div class="slide-copy">
+                <div class="slide-eyebrow">{{ s.eyebrow }}</div>
+                <h2 class="slide-title">{{ s.title }}</h2>
+                <p class="slide-text">{{ s.text }}</p>
+                <div class="hero-buttons">
+                    <a href="{{ url_for('index', collection=s.key) }}#catalogue" class="btn btn-primary" data-collection-link="{{ s.key }}">{{ s.cta }}</a>
+                </div>
+            </div>
+            <div class="slide-visual slide-collage">
+                {% for img in s.cover_images %}<img src="{{ img }}" alt="" loading="lazy" data-light-img>{% endfor %}
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    <div class="hero-cta">
-        <div>
-            <h1>Furnish your place by the month.</h1>
-            <p>Rent from 2 weeks to 24 months, buy it any time, or send it back with free pickup.</p>
-        </div>
-        <div class="hero-buttons">
-            <button type="button" class="btn btn-accent open-analyzer">Style Analyzer</button>
-            <a href="#catalogue" class="btn btn-primary">Browse Collection</a>
-        </div>
+    <button type="button" class="carousel-arrow prev" aria-label="Previous slide">&#8249;</button>
+    <button type="button" class="carousel-arrow next" aria-label="Next slide">&#8250;</button>
+    <div class="carousel-dots" role="tablist" aria-label="Choose a slide">
+        {% for n in range(slides|length + 1) %}
+        <button type="button" class="carousel-dot" role="tab" aria-label="Slide {{ n + 1 }}" aria-selected="{{ 'true' if n == 0 else 'false' }}" data-slide="{{ n }}"></button>
+        {% endfor %}
     </div>
-</section>
-
-<section class="section" id="how-it-works">
-    <h2 class="section-heading">How renting works</h2>
-    <p class="section-sub">Three steps, no long-term commitment.</p>
-    <div class="steps">
-        <div class="step">
-            <div class="step-num">1</div>
-            <h3>Find your style</h3>
-            <p>Browse, or let the <button type="button" class="link-button open-analyzer">Style Analyzer</button> pick for you.</p>
-        </div>
-        <div class="step">
-            <div class="step-num">2</div>
-            <h3>Rent</h3>
-            <p>2 weeks to 24 months, paid monthly. Free delivery.</p>
-        </div>
-        <div class="step">
-            <div class="step-num">3</div>
-            <h3>Return, exchange or keep it</h3>
-            <p>Free pickup, swap or buy it from <a href="{{ url_for('view_orders') }}">Orders</a>.</p>
-        </div>
-    </div>
-    <p class="steps-note">Questions about returns? <a href="#faq">Read the returns &amp; FAQ</a>.</p>
 </section>
 
 <section class="section" id="catalogue">
@@ -161,7 +187,12 @@
     </form>
 
     <div class="catalogue-bar">
-        <div class="result-count" id="result-count" aria-live="polite">{{ items|length }} products</div>
+        <div class="result-line">
+            <div class="result-count" id="result-count" aria-live="polite">{{ items|length }} products</div>
+            <button type="button" class="collection-chip" id="collection-chip" hidden>
+                <span id="collection-chip-label"></span> <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <div class="bar-controls">
             <label class="switch light-switch">
                 <span data-light-label>Light Off</span>
@@ -196,7 +227,7 @@
     <div class="furniture-grid" id="main-grid">
         {% for item in items %}
         <article class="item-card" data-index="{{ loop.index0 }}" data-name="{{ item.name|lower }}" data-search="{{ (item.name ~ ' ' ~ item.category)|lower }}"
-                 data-category="{{ item.category }}" data-style="{{ item.style }}" data-rent="{{ item.monthly_rent }}">
+                 data-category="{{ item.category }}" data-style="{{ item.style }}" data-collections="{{ item.collections }}" data-rent="{{ item.monthly_rent }}">
             <a href="{{ item.url }}" class="img-container lightable" tabindex="-1" aria-hidden="true">
                 <img data-light-img src="{{ item.image_url }}" alt="" loading="lazy" decoding="async">
             </a>
@@ -228,6 +259,29 @@
         <p>No products match these filters.</p>
         <button type="button" class="btn btn-secondary" id="empty-clear">Clear filters</button>
     </div>
+</section>
+
+<section class="section" id="how-it-works">
+    <h2 class="section-heading">How renting works</h2>
+    <p class="section-sub">Three steps, no long-term commitment.</p>
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <h3>Find your style</h3>
+            <p>Browse, or let the <button type="button" class="link-button open-analyzer">Style Analyzer</button> pick for you.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <h3>Rent</h3>
+            <p>2 weeks to 24 months, paid monthly. Free delivery.</p>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <h3>Return, exchange or keep it</h3>
+            <p>Free pickup, swap or buy it from <a href="{{ url_for('view_orders') }}">Orders</a>.</p>
+        </div>
+    </div>
+    <p class="steps-note">Questions about returns? <a href="#faq">Read the returns &amp; FAQ</a>.</p>
 </section>
 
 <section class="section" id="faq">
@@ -294,6 +348,11 @@
         empty: document.getElementById('empty-results'),
     };
 
+    const collectionNames = {{ slides|map(attribute='eyebrow')|list|tojson }};
+    const collectionKeys = {{ slides|map(attribute='key')|list|tojson }};
+    let activeCollection = '';
+    const chip = document.getElementById('collection-chip');
+
     const apply = () => {
         const q = els.search.value.trim().toLowerCase();
         const min = els.min.value === '' ? -Infinity : Number(els.min.value);
@@ -305,7 +364,8 @@
             const match = (!q || card.dataset.search.includes(q))
                 && (!els.category.value || card.dataset.category === els.category.value)
                 && (!els.style.value || card.dataset.style === els.style.value)
-                && rent >= min && rent <= max;
+                && rent >= min && rent <= max
+                && (!activeCollection || card.dataset.collections.split(' ').includes(activeCollection));
             card.hidden = !match;
             if (match) shown += 1;
         });
@@ -319,6 +379,10 @@
         sorted.forEach((card) => grid.appendChild(card));
 
         els.count.textContent = `${shown} product${shown === 1 ? '' : 's'}`;
+        chip.hidden = !activeCollection;
+        if (activeCollection) {
+            document.getElementById('collection-chip-label').textContent = collectionNames[collectionKeys.indexOf(activeCollection)];
+        }
         els.empty.hidden = shown !== 0;
     };
 
@@ -332,12 +396,23 @@
     };
 
     const clearFilters = () => {
+        activeCollection = '';
         els.search.value = ''; els.category.value = ''; els.style.value = '';
         els.min.value = ''; els.max.value = ''; els.sort.value = 'featured';
         apply();
     };
 
     [els.search, els.min, els.max].forEach((el) => el.addEventListener('input', apply));
+    chip.addEventListener('click', () => { activeCollection = ''; apply(); });
+    // Slide buttons show one collection in the catalogue
+    document.querySelectorAll('[data-collection-link]').forEach((a) => a.addEventListener('click', (e) => {
+        e.preventDefault();
+        activeCollection = a.dataset.collectionLink;
+        apply();
+        document.getElementById('catalogue').scrollIntoView({ behavior: 'smooth' });
+    }));
+    const fromUrl = new URLSearchParams(location.search).get('collection');
+    if (collectionKeys.includes(fromUrl)) { activeCollection = fromUrl; }
     [els.category, els.style, els.sort].forEach((el) => el.addEventListener('change', apply));
     els.term.addEventListener('change', updateTermTotals);
     document.getElementById('clear-filters').addEventListener('click', clearFilters);
@@ -353,6 +428,36 @@
     };
     viewButtons.forEach((b) => b.addEventListener('click', () => setView(b.dataset.view)));
     try { if (localStorage.getItem('modoya-view') === 'list') setView('list'); } catch (e) {}
+    apply();
 })();
+// Homepage carousel: arrows, dots, swipe (native scroll-snap) and a gentle autoplay
+// that pauses on hover/focus and is off for people who prefer reduced motion.
+(() => {
+    const track = document.getElementById('carousel-track');
+    if (!track) return;
+    const slides = Array.from(track.children);
+    const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+    let current = 0;
+    const go = (n) => {
+        current = (n + slides.length) % slides.length;
+        track.scrollTo({ left: slides[current].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+    };
+    const sync = () => {
+        current = Math.round(track.scrollLeft / track.clientWidth);
+        dots.forEach((d, i) => d.setAttribute('aria-selected', String(i === current)));
+    };
+    track.addEventListener('scroll', () => { window.requestAnimationFrame(sync); });
+    document.querySelector('.carousel-arrow.prev').addEventListener('click', () => go(current - 1));
+    document.querySelector('.carousel-arrow.next').addEventListener('click', () => go(current + 1));
+    dots.forEach((d) => d.addEventListener('click', () => go(Number(d.dataset.slide))));
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let paused = false;
+    const box = document.querySelector('.hero-carousel');
+    ['mouseenter', 'focusin', 'touchstart'].forEach((ev) => box.addEventListener(ev, () => { paused = true; }, { passive: true }));
+    ['mouseleave', 'focusout'].forEach((ev) => box.addEventListener(ev, () => { paused = false; }));
+    if (!reduce) setInterval(() => { if (!paused && !document.hidden) go(current + 1); }, 6000);
+})();
+
 </script>
 {% endblock %}
