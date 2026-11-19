@@ -14,6 +14,17 @@
     window.modoyaMoney = money;
 
     // ------------------------------------------------------------------
+    // Keyboard focus stays inside an open dialog (Style Analyzer, cart drawer).
+    const trapFocus = (container) => (e) => {
+        if (e.key !== 'Tab') return;
+        const items = $$('a[href], button:not([disabled]), input:not([disabled]):not([type=hidden]), select:not([disabled]), [tabindex]:not([tabindex="-1"])', container)
+            .filter((el) => el.offsetParent !== null || el.classList.contains('visually-hidden-input'));
+        if (!items.length) return;
+        const first = items[0], last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+
     // Cart drawer (slides in from the right)
     // ------------------------------------------------------------------
     const drawer = $('#cart-drawer');
@@ -66,14 +77,18 @@
         $('#drawer-checkout').href = data.checkout_url;
     };
 
-    const openDrawer = (data) => {
+    // returnTo: where keyboard focus goes back to when the drawer closes.
+    const openDrawer = (data, returnTo) => {
         if (data) renderDrawer(data);
-        if (!drawer.classList.contains('open')) lastFocus = document.activeElement;
+        if (!drawer.classList.contains('open')) lastFocus = returnTo || document.activeElement;
         backdrop.hidden = false;
         drawer.setAttribute('aria-hidden', 'false');
-        requestAnimationFrame(() => { drawer.classList.add('open'); backdrop.classList.add('open'); });
         document.body.classList.add('modal-open');
-        $('.drawer-close', drawer).focus();
+        requestAnimationFrame(() => {
+            drawer.classList.add('open'); backdrop.classList.add('open');
+            // Focus once the drawer is visible, otherwise the browser ignores it.
+            $('.drawer-close', drawer).focus();
+        });
     };
     const closeDrawer = () => {
         drawer.classList.remove('open');
@@ -81,7 +96,8 @@
         drawer.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('modal-open');
         setTimeout(() => { backdrop.hidden = true; }, 250);
-        if (lastFocus) lastFocus.focus();
+        // The add button is re-enabled by then; focus it (or the link that opened the drawer).
+        if (lastFocus) setTimeout(() => lastFocus.focus(), 0);
     };
 
     const updateLine = async (id, body) => {
@@ -91,6 +107,7 @@
         renderDrawer(await res.json());
     };
 
+    drawer.addEventListener('keydown', trapFocus(drawer));
     $('.drawer-close', drawer).addEventListener('click', closeDrawer);
     backdrop.addEventListener('click', closeDrawer);
     document.addEventListener('keydown', (e) => {
@@ -100,7 +117,7 @@
         e.preventDefault();
         try {
             const res = await fetch(window.MODOYA.cartUrl);
-            openDrawer(await res.json());
+            openDrawer(await res.json(), link);
         } catch (err) {
             location.href = link.href;
         }
@@ -138,7 +155,7 @@
             const res = await fetch(`/api/add_to_cart/${encodeURIComponent(btn.dataset.itemId)}?${params}`, { method: 'POST' });
             const data = await res.json();
             if (data.success) {
-                openDrawer(data);
+                openDrawer(data, btn);
             } else {
                 alert(data.error || 'Could not add this item.');
             }
@@ -148,6 +165,19 @@
             btn.textContent = originalText;
             btn.disabled = false;
         }
+    });
+
+    // ------------------------------------------------------------------
+    // Back to top: shows after scrolling down; goes to the top and puts focus on the logo.
+    // ------------------------------------------------------------------
+    const toTop = $('#back-to-top');
+    const showToTop = () => { toTop.hidden = window.scrollY < 600; };
+    window.addEventListener('scroll', showToTop, { passive: true });
+    showToTop();
+    toTop.addEventListener('click', () => {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        $('.logo').focus({ preventScroll: true });
     });
 
     // ------------------------------------------------------------------
@@ -205,7 +235,10 @@
     const errorBox = $('#analyzer-error');
     const files = { 1: null, 2: null, 3: null };
 
+    let analyzerReturnFocus = null;
+    overlay.addEventListener('keydown', trapFocus($('.analyzer-modal')));
     const openAnalyzer = () => {
+        analyzerReturnFocus = document.activeElement;
         overlay.style.display = 'flex';
         document.body.classList.add('modal-open');
         $('#close-analyzer-btn').focus();
@@ -213,6 +246,7 @@
     const closeAnalyzer = () => {
         overlay.style.display = 'none';
         document.body.classList.remove('modal-open');
+        if (analyzerReturnFocus) analyzerReturnFocus.focus();
     };
 
     $$('.open-analyzer').forEach((el) => el.addEventListener('click', openAnalyzer));

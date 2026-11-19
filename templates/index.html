@@ -35,9 +35,18 @@
     .carousel-arrow:hover { background: #fff; border-color: #bbb; }
     .carousel-arrow.prev { right: 0; top: calc(50% - 72px); }
     .carousel-arrow.next { right: 0; top: calc(50% - 20px); }
-    .carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
-    .carousel-dot { width: 9px; height: 9px; border-radius: 50%; border: none; background: #cfcfcf; padding: 0; cursor: pointer; }
-    .carousel-dot[aria-selected="true"] { background: #111; width: 24px; border-radius: 5px; }
+    .carousel-controls { display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 10px; }
+    .carousel-dots { display: flex; gap: 2px; }
+    /* Each dot is a 28px button (a big enough target) with a small visible mark inside. */
+    .carousel-dot { width: 28px; height: 28px; border: none; background: none; padding: 0; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+    .carousel-dot-mark { width: 9px; height: 9px; border-radius: 50%; background: #8c8c8c; transition: width 0.2s; }
+    .carousel-dot[aria-current="true"] .carousel-dot-mark { background: #111; width: 24px; border-radius: 5px; }
+    .carousel-pause {
+        display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 12px; border-radius: 16px;
+        border: 1px solid #ccc; background: #fff; font: inherit; font-size: 13px; font-weight: 600; color: #222; cursor: pointer;
+    }
+    .carousel-pause:hover { border-color: #888; }
+    .carousel-pause-icon { font-size: 10px; letter-spacing: -1px; }
     .result-line { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
     .collection-chip {
         background: #f6f0ff; color: #4a00b4; border: 1px solid #e2d4ff; border-radius: 20px; padding: 5px 12px;
@@ -113,7 +122,8 @@
 
 {% block content %}
 <section class="hero-carousel" aria-roledescription="carousel" aria-label="Featured">
-    <div class="carousel-track" id="carousel-track">
+    <p class="visually-hidden" id="carousel-status" aria-live="polite"></p>
+    <div class="carousel-track" id="carousel-track" tabindex="0" role="region" aria-label="Featured slides. Use the left and right arrow keys to move between slides.">
         <div class="slide" role="group" aria-roledescription="slide" aria-label="1 of {{ slides|length + 1 }}">
             <div class="slide-copy">
                 <h1 class="slide-title slide-title-serif">Furnish your place by the month.</h1>
@@ -145,10 +155,16 @@
     </div>
     <button type="button" class="carousel-arrow prev" aria-label="Previous slide">&#8249;</button>
     <button type="button" class="carousel-arrow next" aria-label="Next slide">&#8250;</button>
-    <div class="carousel-dots" role="tablist" aria-label="Choose a slide">
+    <div class="carousel-controls">
+    <button type="button" class="carousel-pause" id="carousel-pause" aria-pressed="false">
+        <span class="carousel-pause-icon" aria-hidden="true">&#10074;&#10074;</span>
+        <span class="carousel-pause-label">Pause</span>
+    </button>
+    <div class="carousel-dots" role="group" aria-label="Choose a slide">
         {% for n in range(slides|length + 1) %}
-        <button type="button" class="carousel-dot" role="tab" aria-label="Slide {{ n + 1 }}" aria-selected="{{ 'true' if n == 0 else 'false' }}" data-slide="{{ n }}"></button>
+        <button type="button" class="carousel-dot" aria-label="Show slide {{ n + 1 }}" aria-current="{{ 'true' if n == 0 else 'false' }}" data-slide="{{ n }}"><span class="carousel-dot-mark" aria-hidden="true"></span></button>
         {% endfor %}
+    </div>
     </div>
 </section>
 
@@ -430,33 +446,64 @@
     try { if (localStorage.getItem('modoya-view') === 'list') setView('list'); } catch (e) {}
     apply();
 })();
-// Homepage carousel: arrows, dots, swipe (native scroll-snap) and a gentle autoplay
-// that pauses on hover/focus and is off for people who prefer reduced motion.
+// Homepage carousel: arrows, dots, swipe, keyboard arrows, and an autoplay that can be paused.
+// Autoplay is off when the visitor asks for reduced motion; hidden slides are inert so keyboard
+// and screen-reader users only meet the slide on screen.
 (() => {
     const track = document.getElementById('carousel-track');
     if (!track) return;
     const slides = Array.from(track.children);
     const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+    const status = document.getElementById('carousel-status');
+    const pauseBtn = document.getElementById('carousel-pause');
     let current = 0;
-    const go = (n) => {
+
+    const markCurrent = (announce) => {
+        slides.forEach((slide, i) => {
+            const on = i === current;
+            slide.inert = !on;
+            slide.setAttribute('aria-hidden', String(!on));
+        });
+        dots.forEach((d, i) => d.setAttribute('aria-current', String(i === current)));
+        if (announce) status.textContent = `Slide ${current + 1} of ${slides.length}`;
+    };
+    const go = (n, announce = true) => {
         current = (n + slides.length) % slides.length;
         track.scrollTo({ left: slides[current].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+        markCurrent(announce);
     };
-    const sync = () => {
-        current = Math.round(track.scrollLeft / track.clientWidth);
-        dots.forEach((d, i) => d.setAttribute('aria-selected', String(i === current)));
-    };
-    track.addEventListener('scroll', () => { window.requestAnimationFrame(sync); });
+    track.addEventListener('scroll', () => window.requestAnimationFrame(() => {
+        const seen = Math.round(track.scrollLeft / track.clientWidth);
+        if (seen !== current) { current = seen; markCurrent(false); }
+    }));
     document.querySelector('.carousel-arrow.prev').addEventListener('click', () => go(current - 1));
     document.querySelector('.carousel-arrow.next').addEventListener('click', () => go(current + 1));
     dots.forEach((d) => d.addEventListener('click', () => go(Number(d.dataset.slide))));
+    track.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+    });
 
+    // Pause / play (WCAG 2.2.2). Hover and keyboard focus also pause it for a moment.
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let paused = false;
+    let stopped = reduce;
+    let hovering = false;
+    const showState = () => {
+        pauseBtn.setAttribute('aria-pressed', String(stopped));
+        pauseBtn.querySelector('.carousel-pause-label').textContent = stopped ? 'Play' : 'Pause';
+        pauseBtn.querySelector('.carousel-pause-icon').innerHTML = stopped ? '&#9654;' : '&#10074;&#10074;';
+        pauseBtn.setAttribute('aria-label', stopped ? 'Play slideshow' : 'Pause slideshow');
+    };
+    pauseBtn.addEventListener('click', () => { stopped = !stopped; showState(); });
     const box = document.querySelector('.hero-carousel');
-    ['mouseenter', 'focusin', 'touchstart'].forEach((ev) => box.addEventListener(ev, () => { paused = true; }, { passive: true }));
-    ['mouseleave', 'focusout'].forEach((ev) => box.addEventListener(ev, () => { paused = false; }));
-    if (!reduce) setInterval(() => { if (!paused && !document.hidden) go(current + 1); }, 6000);
+    box.addEventListener('mouseenter', () => { hovering = true; });
+    box.addEventListener('mouseleave', () => { hovering = false; });
+    box.addEventListener('focusin', (e) => { if (e.target !== pauseBtn) hovering = true; });
+    box.addEventListener('focusout', () => { hovering = false; });
+    box.addEventListener('touchstart', () => { stopped = true; showState(); }, { passive: true });
+    setInterval(() => { if (!stopped && !hovering && !document.hidden) go(current + 1, false); }, 6000);
+    markCurrent(false);
+    showState();
 })();
 
 </script>

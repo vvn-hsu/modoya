@@ -115,7 +115,7 @@
 
         {% for line in order.lines %}
         <div class="order-line">
-            <a href="{{ line.product.url }}"><img src="{{ line.product.image_url }}" alt=""></a>
+            <a href="{{ line.product.url }}" tabindex="-1" aria-hidden="true"><img src="{{ line.product.image_url }}" alt=""></a>
             <div>
                 <a href="{{ line.product.url }}" class="line-name">{{ line.product.name }}</a>{% if line.qty > 1 %} <span class="line-qty">× {{ line.qty }}</span>{% endif %}
                 <div class="line-facts">

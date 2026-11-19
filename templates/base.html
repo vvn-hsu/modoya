@@ -12,6 +12,7 @@
     {% block styles %}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="header">
         <a href="{{ url_for('index') }}" class="logo">modoya</a>
         <nav class="nav-links" aria-label="Main">
@@ -26,7 +27,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
         {% block content %}{% endblock %}
     </main>
 
@@ -37,13 +38,13 @@
                 <p class="footer-tagline">Rent furniture by the month, keep what you love, return the rest.</p>
             </div>
             <div class="footer-col">
-                <h4>Shop</h4>
+                <h2 class="footer-heading">Shop</h2>
                 <a href="{{ url_for('index') }}#catalogue">Browse collection</a>
                 <button type="button" class="link-button open-analyzer">Style Analyzer</button>
                 <a href="{{ url_for('view_cart') }}">Cart</a>
             </div>
             <div class="footer-col">
-                <h4>Renting</h4>
+                <h2 class="footer-heading">Renting</h2>
                 <a href="{{ url_for('index') }}#how-it-works">How renting works</a>
                 <a href="{{ url_for('index') }}#faq">Returns &amp; FAQ</a>
                 <a href="{{ url_for('view_orders') }}">Manage orders</a>
@@ -54,8 +55,12 @@
 
     {% include '_analyzer.html' %}
 
+    <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top" hidden>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+
     <div id="cart-drawer-backdrop" hidden></div>
-    <aside id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title" aria-hidden="true">
+    <div id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-drawer-title" aria-hidden="true">
         <button type="button" class="drawer-close" aria-label="Close cart">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>
         </button>
@@ -66,7 +71,7 @@
             <p class="drawer-summary" id="drawer-summary"></p>
             <a href="{{ url_for('view_cart') }}" class="drawer-checkout" id="drawer-checkout">Proceed to check out</a>
         </div>
-    </aside>
+    </div>
 
     <script>
         window.MODOYA = {

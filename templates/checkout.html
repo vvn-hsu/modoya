@@ -58,9 +58,10 @@
 <div class="field span-{{ span }} {% if errors[name] %}has-error{% endif %}">
     <label for="{{ name }}">{{ label }}</label>
     <input type="{{ type }}" id="{{ name }}" name="{{ name }}" value="{{ form.get(name, '') }}"
+           {% if errors[name] %}aria-invalid="true" aria-describedby="{{ name }}-error"{% endif %}
            {% if autocomplete %}autocomplete="{{ autocomplete }}"{% endif %}
            {% if placeholder %}placeholder="{{ placeholder }}"{% endif %} {{ extra|safe }}>
-    {% if errors[name] %}<p class="form-error">{{ errors[name] }}</p>{% endif %}
+    {% if errors[name] %}<p class="form-error" id="{{ name }}-error">{{ errors[name] }}</p>{% endif %}
 </div>
 {%- endmacro %}
 
