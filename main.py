@@ -119,9 +119,9 @@ GLOW_BY_FILENAME = {
     item['image_path'].replace('\\', '/').split('/')[-1]: item['metadata'].get('glow')
     for item in ALL_FURNITURE_ITEMS
 }
-DEFAULT_GLOW = (50, 40, 44)  # furniture: a pool of light from above, centred on the piece
-LIGHT_TINT = {'warm': (255, 212, 160), 'white': (232, 240, 255)}
-GLOW_COLOR = {'warm': (255, 170, 80), 'white': (200, 218, 255)}
+DEFAULT_GLOW = None  # furniture: no visible light source; soft light from a lamp off to the side
+LIGHT_TINT = {'warm': (255, 236, 214), 'white': (238, 244, 255)}
+GLOW_COLOR = {'warm': (255, 206, 150), 'white': (215, 228, 255)}
 
 def soft_ellipse(size, cx, cy, rx, ry, blur, strength=255):
     """A blurred ellipse mask, so light fades out with no hard edge."""
@@ -131,22 +131,26 @@ def soft_ellipse(size, cx, cy, rx, ry, blur, strength=255):
     return mask.filter(ImageFilter.GaussianBlur(max(1, blur)))
 
 def light_on(im, glow, color):
-    """The Light On view: the room goes dark; the area the light reaches keeps its colour."""
+    """The Light On view: the room dims and the light falls off naturally.
+    Lamps glow softly at their shade or bulb; other furniture is lit from one side,
+    as if by a lamp just outside the photo, with no spotlight in the middle."""
     from PIL import Image, ImageChops, ImageEnhance
     w, h = im.size
-    x, y, r = glow
-    cx, cy, rad = w * x / 100, h * y / 100, max(w, h) * r / 100
-    # Darkened, not blacked out: the room keeps some of its detail.
-    dark = ImageEnhance.Color(ImageEnhance.Brightness(im).enhance(0.45)).enhance(0.85)
-    lit = ImageChops.multiply(ImageEnhance.Brightness(im).enhance(1.06), Image.new('RGB', im.size, LIGHT_TINT[color]))
-    mask = ImageChops.lighter(
-        soft_ellipse(im.size, cx, cy, rad * 0.62, rad * 0.62, rad * 0.42),
-        soft_ellipse(im.size, cx, h * 0.88, w * 0.3, h * 0.07, h * 0.06, strength=150),
-    )
-    out = Image.composite(lit, dark, mask)
-    halo_mask = soft_ellipse(im.size, cx, cy, rad * 0.16, rad * 0.16, rad * 0.22, strength=150)
-    halo = Image.composite(Image.new('RGB', im.size, GLOW_COLOR[color]), Image.new('RGB', im.size, 0), halo_mask)
-    return ImageChops.screen(out, halo)
+    dim = ImageEnhance.Color(ImageEnhance.Brightness(im).enhance(0.5)).enhance(0.9)
+    lit = ImageChops.multiply(im, Image.new('RGB', im.size, LIGHT_TINT[color]))
+    # Light from the upper left, fading gently across the room
+    mask = soft_ellipse(im.size, -0.1 * w, 0.05 * h, 0.95 * w, 0.9 * h, 0.35 * w, strength=210)
+    if glow:
+        x, y, r = glow
+        cx, cy, rad = w * x / 100, h * y / 100, max(w, h) * r / 100
+        mask = ImageChops.lighter(mask.point(lambda v: int(v * 0.6)),
+                                  soft_ellipse(im.size, cx, cy, rad * 0.55, rad * 0.55, rad * 0.45))
+    out = Image.composite(lit, dim, mask)
+    if glow:
+        halo_mask = soft_ellipse(im.size, cx, cy, rad * 0.12, rad * 0.12, rad * 0.18, strength=110)
+        halo = Image.composite(Image.new('RGB', im.size, GLOW_COLOR[color]), Image.new('RGB', im.size, 0), halo_mask)
+        out = ImageChops.screen(out, halo)
+    return out
 
 def night_photo(path):
     """The real Light On photo for a product, saved next to it as <name>-night.png/.jpg/.webp."""
@@ -167,7 +171,7 @@ def compress_image(path, max_size, crop=None, light=None, glow=None, cool=False)
             im = im.crop((int(crop[0] * w), int(crop[1] * h), int(crop[2] * w), int(crop[3] * h)))
         im.thumbnail((max_size, max_size))
         if light in LIGHT_TINT:
-            im = light_on(im, glow or DEFAULT_GLOW, light)
+            im = light_on(im, glow, light)
         if cool:
             # White light on a real night photo: shift its warm light towards neutral white.
             from PIL import ImageChops
