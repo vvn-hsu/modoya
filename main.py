@@ -136,7 +136,8 @@ def light_on(im, glow, color):
     w, h = im.size
     x, y, r = glow
     cx, cy, rad = w * x / 100, h * y / 100, max(w, h) * r / 100
-    dark = ImageEnhance.Color(ImageEnhance.Brightness(im).enhance(0.2)).enhance(0.7)
+    # Darkened, not blacked out: the room keeps some of its detail.
+    dark = ImageEnhance.Color(ImageEnhance.Brightness(im).enhance(0.45)).enhance(0.85)
     lit = ImageChops.multiply(ImageEnhance.Brightness(im).enhance(1.06), Image.new('RGB', im.size, LIGHT_TINT[color]))
     mask = ImageChops.lighter(
         soft_ellipse(im.size, cx, cy, rad * 0.62, rad * 0.62, rad * 0.42),

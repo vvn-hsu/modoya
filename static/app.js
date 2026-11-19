@@ -162,7 +162,7 @@
     const lightSrc = (img) => {
         const base = img.dataset.baseSrc || img.getAttribute('src');
         img.dataset.baseSrc = base;
-        return lightState.on ? `${base}${base.includes('?') ? '&' : '?'}light=${lightState.color}` : base;
+        return lightState.on ? `${base}${base.includes('?') ? '&' : '?'}light=${lightState.color}&v=2` : base;
     };
     const applyLight = () => {
         $$('img[data-light-img]').forEach((img) => {
