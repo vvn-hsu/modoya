@@ -21,6 +21,10 @@
     .pill-buy { background: #fff4e0; color: var(--buy-color); }
     .pill-status { background: #eef2ff; color: #3949ab; }
     .pill-cancelled { background: #f1f1f1; color: #5c5c5c; }
+    .pill-sample { background: #f6f0ff; color: #4a00b4; vertical-align: middle; }
+    .state-exchanged { color: #5c5c5c; }
+    .reset-samples { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: -12px 0 24px; font-size: 14px; color: #444; }
+    .reset-samples form { margin: 0; }
 
     .delivery-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 14px; padding: 14px 0; border-bottom: 1px solid #eee; color: #444; }
     .delivery-info strong { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #5c5c5c; margin-bottom: 2px; }
@@ -72,6 +76,14 @@
 <div class="container">
     <h1 class="page-title">My Orders</h1>
     <p class="privacy-note">Orders are saved only in this browser. Nobody else can see them.</p>
+    {% if orders|selectattr('sample')|list %}
+    <div class="reset-samples">
+        <span>Orders marked Sample are made-up examples. Try extending, buying, returning or exchanging them.</span>
+        <form method="POST" action="{{ url_for('reset_sample_orders') }}">
+            <button type="submit" class="link-button">Reset sample orders</button>
+        </form>
+    </div>
+    {% endif %}
     {% if message %}<div class="flash" role="status">{{ message }}</div>{% endif %}
     {% if orders|length >= max_orders %}<p class="note">Showing your {{ max_orders }} most recent orders.</p>{% endif %}
 
@@ -86,7 +98,7 @@
     <article class="order-card" id="order-{{ order.id }}">
         <div class="order-header">
             <div>
-                <div class="order-id">Order #{{ order.id }}</div>
+                <div class="order-id">Order #{{ order.id }}{% if order.sample %} <span class="pill pill-sample">Sample</span>{% endif %}</div>
                 <div class="order-date">Placed {{ order.placed }} · {{ order.lines|length|plural('item') }}</div>
             </div>
             <div class="order-badges">
@@ -154,6 +166,26 @@
                         {% endif %}
                     {% endif %}
 
+                    {% if order.type == 'RENT' %}
+                        {% if line.actions.exchange %}
+                        <details class="action">
+                            <summary class="btn btn-secondary">Exchange</summary>
+                            <form class="action-panel" method="POST" action="{{ url_for('manage_order_item', order_id=order.id, index=line.index, action='exchange') }}">
+                                <label for="swap-{{ order.id }}-{{ line.index }}">Swap for</label>
+                                <select name="item_id" id="swap-{{ order.id }}-{{ line.index }}" required>
+                                    {% for o in line.actions.exchange_options %}<option value="{{ o.id }}">{{ o.name }} ({{ o.rent|money }}/mo)</option>{% endfor %}
+                                </select>
+                                <label for="swapdate-{{ order.id }}-{{ line.index }}">on</label>
+                                <input type="date" name="date" id="swapdate-{{ order.id }}-{{ line.index }}" min="{{ line.actions.return_min }}" max="{{ line.actions.return_max }}" value="{{ line.actions.return_min }}" required>
+                                <button type="submit" class="btn btn-primary">Confirm exchange</button>
+                                <span class="action-note">We pick up this item and deliver the new one on the same visit. The new piece starts a fresh {{ line.term_label.split(' + ')[0] }} rental.</span>
+                            </form>
+                        </details>
+                        {% else %}
+                        <button class="btn btn-secondary" disabled>Exchange</button>
+                        {% endif %}
+                    {% endif %}
+
                     {% if line.actions['return'] %}
                     <details class="action">
                         <summary class="btn btn-secondary">Schedule return</summary>
@@ -171,6 +203,10 @@
                     <p class="action-note">You own this item now, so rental actions are closed.</p>
                     {% elif line.state == 'returning' %}
                     <p class="action-note">A pickup is already scheduled for this item.</p>
+                    {% elif line.state == 'exchanged' %}
+                    <p class="action-note">This item is being swapped, so its actions are closed.</p>
+                    {% elif line.state == 'scheduled' and order.type == 'RENT' %}
+                    <p class="action-note">Exchange opens once the item has been delivered.</p>
                     {% elif line.state == 'ended' %}
                     <p class="action-note">This rental has ended.</p>
                     {% elif order.type == 'BUY' and not line.actions['return'] %}

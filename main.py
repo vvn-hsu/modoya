@@ -583,7 +583,9 @@ def place_order():
 
     orders = session.get('orders', [])
     orders.append(new_order)
-    session['orders'] = orders[-MAX_ORDERS:]
+    samples = [o for o in orders if isinstance(o, dict) and o.get('sample')]
+    real = [o for o in orders if isinstance(o, dict) and not o.get('sample')]
+    session['orders'] = samples + real[-MAX_ORDERS:]
 
     checked_out = {i['id'] for i in items}
     session['cart'] = {k: v for k, v in session['cart'].items() if k not in checked_out}
@@ -653,43 +655,60 @@ def build_order_view(order):
         line = {'index': len(lines), 'product': card, 'rent': rent, 'buy': buy, 'qty': qty}
 
         if is_rental:
-            end = rental_end(delivery, entry['term'], entry['ext'])
+            # Each line has its own start: the order's delivery date, or the exchange date
+            # for an item that replaced another one.
+            start = date.fromisoformat(entry['start']) if entry.get('start') else delivery
+            started = today >= start
+            end = rental_end(start, entry['term'], entry['ext'])
             line.update({
                 'term_label': term_label(entry['term']) + (f" + {plural(entry['ext'], 'month')}" if entry['ext'] else ''),
-                'start': delivery, 'end': end,
+                'start': start, 'end': end,
             })
-            if entry['bought_out']:
+            replaced = get_item_by_id(ALL_FURNITURE_ITEMS, entry['exchanged_from']) if entry.get('exchanged_from') else None
+            if entry.get('exchanged_for'):
+                swap_on = date.fromisoformat(entry['return_date'])
+                new_item = get_item_by_id(ALL_FURNITURE_ITEMS, entry['exchanged_for'])
+                line['end'] = swap_on
+                line['total'] = rent * months_between(start, swap_on)
+                line['status'] = f"Exchanged for {product_name(new_item['metadata']) if new_item else 'another item'} — swapped on {nice_date(swap_on)}"
+                line['state'] = 'exchanged'
+            elif entry['bought_out']:
                 bought_on = date.fromisoformat(entry['bought_out']['date'])
-                rent_paid = rent * months_between(delivery, bought_on) if bought_on > delivery else 0
+                rent_paid = rent * months_between(start, bought_on) if bought_on > start else 0
                 line['total'] = rent_paid + entry['bought_out']['amount']
                 line['status'] = f"Bought on {nice_date(bought_on)} — yours to keep"
                 line['state'] = 'owned'
             elif entry['return_date']:
                 pickup = date.fromisoformat(entry['return_date'])
                 line['end'] = pickup
-                line['total'] = rent * months_between(delivery, pickup)
+                line['total'] = rent * months_between(start, pickup)
                 line['status'] = f"Return pickup scheduled for {nice_date(pickup)}"
                 line['state'] = 'returning'
             else:
                 line['total'] = rent * (term_months(entry['term']) + entry['ext'])
                 if order['cancelled']:
                     line['status'], line['state'] = "Cancelled", 'cancelled'
-                elif not delivered:
-                    line['status'], line['state'] = f"Delivery on {nice_date(delivery)}", 'scheduled'
+                elif not started:
+                    line['status'], line['state'] = f"Delivery on {nice_date(start)}", 'scheduled'
                 elif today > end:
                     line['status'], line['state'] = "Rental ended", 'ended'
                 else:
                     line['status'], line['state'] = f"Active until {nice_date(end)}", 'active'
 
+            if replaced and line['state'] in ('scheduled', 'active'):
+                line['status'] += f" (replaces {product_name(replaced['metadata'])})"
             active = line['state'] in ('scheduled', 'active')
-            months_used = months_between(delivery, today) if delivered else 0
+            months_used = months_between(start, today) if started else 0
             line['rent_paid'] = rent * months_used
             line['buyout_amount'] = max(buy - line['rent_paid'] * 0.5, 0)
             line['actions'] = {
                 'extend': active,
                 'buyout': active,
                 'return': active,
-                'return_min': max(today + timedelta(days=1), delivery + timedelta(days=1)).isoformat(),
+                # Exchange: only once the item has arrived; swap for another piece in the same category.
+                'exchange': line['state'] == 'active',
+                'exchange_options': exchange_options(entry['id']) if line['state'] == 'active' else [],
+                'return_min': max(today + timedelta(days=1), start + timedelta(days=1)).isoformat(),
                 'return_max': end.isoformat(),
             }
         else:
@@ -705,7 +724,7 @@ def build_order_view(order):
                 line['status'], line['state'] = "Delivered", 'owned'
             can_return = line['state'] in ('scheduled', 'owned') and today <= return_deadline
             line['actions'] = {
-                'extend': False, 'buyout': False,
+                'extend': False, 'buyout': False, 'exchange': False, 'exchange_options': [],
                 'return': can_return,
                 'return_min': max(today + timedelta(days=1), delivery + timedelta(days=1)).isoformat(),
                 'return_max': return_deadline.isoformat(),
@@ -728,6 +747,7 @@ def build_order_view(order):
         'window': order.get('window', ''),
         'address': order['address'],
         'card_last4': order.get('card_last4', ''),
+        'sample': order.get('sample', False),
         'status': status,
         'cancelled': order['cancelled'],
         'can_cancel': not order['cancelled'] and not delivered,
@@ -735,6 +755,65 @@ def build_order_view(order):
         'total': 0 if order['cancelled'] else sum(l['total'] for l in lines),
         'monthly_total': sum(l['rent'] for l in lines if l.get('state') in ('scheduled', 'active', 'returning')) if is_rental else 0,
     }
+
+def exchange_options(item_id):
+    """In-stock pieces in the same category that a rented item can be swapped for."""
+    item = get_item_by_id(ALL_FURNITURE_ITEMS, item_id)
+    if not item:
+        return []
+    category = item['metadata'].get('category')
+    return [
+        {'id': str(i['metadata']['row_id']), 'name': product_name(i['metadata']), 'rent': calculate_rent(i['metadata'])}
+        for i in ALL_FURNITURE_ITEMS
+        if i['metadata'].get('category') == category and str(i['metadata']['row_id']) != str(item_id)
+        and stock_status(i['metadata'])[0] != 'out'
+    ]
+
+SAMPLE_ADDRESS = {'name': 'Sample Customer', 'phone': '515-555-0100', 'line1': '100 Sample Street', 'line2': '',
+                  'city': 'Ames', 'state': 'IA', 'zip': '50010'}
+
+def sample_orders():
+    """Orders every new visitor starts with, so the order actions can be tried right away.
+    The name and address are made up."""
+    today = date.today()
+    def order(order_id, kind, delivered_days_ago, items):
+        delivery = today - timedelta(days=delivered_days_ago)
+        return {
+            'id': order_id, 'type': kind, 'sample': True,
+            'placed': min(delivery - timedelta(days=4), today - timedelta(days=1)).strftime('%Y-%m-%d 10:30'),
+            'delivery': delivery.isoformat(), 'window': DELIVERY_WINDOWS[0],
+            'address': dict(SAMPLE_ADDRESS), 'card_last4': '4242', 'cancelled': False,
+            'items': [
+                {'id': str(i), 'qty': qty, 'term': term,
+                 'rent': calculate_rent(get_item_by_id(ALL_FURNITURE_ITEMS, i)['metadata']),
+                 'buy': calculate_buyout_price(get_item_by_id(ALL_FURNITURE_ITEMS, i)['metadata']),
+                 'ext': 0, 'return_date': None, 'bought_out': None}
+                for i, qty, term in items
+            ],
+        }
+    return [
+        # Bought 12 days ago: can still be returned (30-day window).
+        order('SAMPLE03', 'BUY', 12, [(64, 1, None)]),
+        # Starts in 5 days: can be cancelled.
+        order('SAMPLE02', 'RENT', -5, [(31, 2, '6m')]),
+        # Delivered about 2.5 months ago and active: extend, buy, return, exchange.
+        order('SAMPLE01', 'RENT', 75, [(74, 1, '12m'), (0, 1, '12m')]),
+    ]
+
+@app.before_request
+def add_sample_orders():
+    """First visit: start the account with the sample orders."""
+    if request.endpoint in ('static', 'serve_pictures') or session.get('samples_added'):
+        return
+    session['orders'] = session.get('orders', []) + sample_orders()
+    session['samples_added'] = True
+
+@app.route('/orders/reset-samples', methods=['POST'])
+def reset_sample_orders():
+    orders = [o for o in session.get('orders', []) if isinstance(o, dict) and not o.get('sample')]
+    session['orders'] = orders + sample_orders()
+    session['order_message'] = "Sample orders were reset."
+    return redirect(url_for('view_orders'))
 
 @app.route('/orders')
 def view_orders():
@@ -770,6 +849,29 @@ def manage_order_item(order_id, index, action):
     elif action == 'buyout' and line['actions']['buyout']:
         entry['bought_out'] = {'date': date.today().isoformat(), 'amount': line['buyout_amount']}
         message = f"You bought {name} for {money(line['buyout_amount'])}."
+    elif action == 'exchange' and line['actions']['exchange']:
+        new_id = request.form.get('item_id', '')
+        new_item = get_item_by_id(ALL_FURNITURE_ITEMS, new_id)
+        try:
+            swap_on = date.fromisoformat(request.form.get('date', ''))
+        except ValueError:
+            swap_on = None
+        valid_ids = {o['id'] for o in line['actions']['exchange_options']}
+        if new_item and new_id in valid_ids and swap_on and \
+                line['actions']['return_min'] <= swap_on.isoformat() <= line['actions']['return_max']:
+            # The old item is picked up and the new one delivered on the same visit;
+            # the new item starts a fresh rental of the same length.
+            entry['return_date'] = swap_on.isoformat()
+            entry['exchanged_for'] = new_id
+            order['items'].append({
+                'id': new_id, 'qty': entry.get('qty', 1), 'term': entry['term'],
+                'rent': calculate_rent(new_item['metadata']), 'buy': calculate_buyout_price(new_item['metadata']),
+                'ext': 0, 'return_date': None, 'bought_out': None,
+                'start': swap_on.isoformat(), 'exchanged_from': entry['id'],
+            })
+            message = f"{name} will be swapped for {product_name(new_item['metadata'])} on {nice_date(swap_on)}."
+        else:
+            message = "Choose a replacement and a swap date within the allowed range."
     elif action == 'return' and line['actions']['return']:
         try:
             pickup = date.fromisoformat(request.form.get('date', ''))
