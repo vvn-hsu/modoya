@@ -168,6 +168,23 @@
     });
 
     // ------------------------------------------------------------------
+    // Day / night theme (the initial theme is set in <head>)
+    // ------------------------------------------------------------------
+    const themeBtn = $('#theme-toggle');
+    const showTheme = () => {
+        const dark = document.documentElement.dataset.theme === 'dark';
+        themeBtn.setAttribute('aria-pressed', String(dark));
+        themeBtn.setAttribute('title', dark ? 'Switch to day mode' : 'Switch to night mode');
+    };
+    themeBtn.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('modoya-theme', next); } catch (e) { /* not remembered; still switches */ }
+        showTheme();
+    });
+    showTheme();
+
+    // ------------------------------------------------------------------
     // Back to top: shows after scrolling down; goes to the top and puts focus on the logo.
     // ------------------------------------------------------------------
     const toTop = $('#back-to-top');
